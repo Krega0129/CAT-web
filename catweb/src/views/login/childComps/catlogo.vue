@@ -7,6 +7,17 @@
           <div class="cat">C.A.T</div>
       </div>
     </div>
+    <div class="sentence">
+      <div class="aside1">Do you want to be stronger?</div>
+      <div class="aside2">It's a wise choice for you to come here</div>
+      <div class="show">SHOW OUR YOU</div>
+      <div class="code">
+        <div class="letterC">C</div>
+        <div class="letterO">O</div>
+        <div class="letterD">D</div>
+        <div class="letterE">E</div>
+      </div>
+    </div>
     <img src="@/assets/img/plane.png" alt class="logoplane" />
   </div>
 </template>
@@ -99,7 +110,7 @@ export default {
 } 
 .welcome{
   font-weight: bolder;
-  font-size: 5vh;
+  font-size: 6vh;
   color: #69739a;
 }
 .tocat{
@@ -109,6 +120,39 @@ export default {
   color: #69739a;
 }
 .to{
-  margin-right: 3vh;
+  margin: 0 3vh 0 1.5vh;
+}
+.sentence{
+  position: absolute;
+  bottom: 12vh;
+  left: 3.5vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2.2vh;
+  color: #ffffff;
+  line-height: 3vh;
+}
+.show{
+  font-size: 2.5vh;
+}
+.code{
+  display: flex;
+  font-size: 6vh;
+  font-weight: bolder;
+  margin-top: 3vh;
+}
+.code div{
+  margin-right: 1vh;
+}
+.letterC{
+  color: #ea3834;
+}
+.letterO{
+  color: #fbff04;
+}
+.letterD{
+  color: #4fc47e;
+}
+.letterE{
+  color: #43a9e7;
 }
 </style>
