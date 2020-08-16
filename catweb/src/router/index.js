@@ -2,19 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 /* import { component } from 'vue/types/umd' */
 
-const Entry = () =>
-    import ('@/views/Wuchanghui/Entry')
-const Home = () =>
-    import ('@/views/Wuchanghui/home/Home')
-const Intro = () =>
-    import ('@/views/Intro')
-const Profile = () =>
-    import ('@/views/Profile')
-const FrontEnd = () =>
-    import ('@/views/Front-end')
-const BackEnd = () =>
-    import ('@/views/Back-end')
-
 const Entry = () => import('@/views/Wuchanghui/Entry')
 const Home = () => import('@/views/Wuchanghui/home/Home')
 const Intro = () => import('@/views/Intro')
