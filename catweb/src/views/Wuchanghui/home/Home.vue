@@ -1,19 +1,19 @@
 <template>
   <div class="home full pos-ab">
     <!-- 引入模块，L,T,R,B分别为绝对定位的位置，cL,cH,cR,cB分别为svg圆形的位置，cX,cY,cr分别是圆心位置和半径，fillColor为圆的填充颜色 -->
-    <homeMod L="150px" T="80px" cL="-560px" cT="-780px" class="t-al-cent pos-re" fillColor="#89e1d3">
+    <homeMod L="10vw" T="13vh" cL="-44vw" cT="-133vh" class="t-al-cent pos-re" fillColor="#89e1d3">
       <img src="../../../assets/images/cat.webp" slot="pic" alt="" @click="picClick($event, '/intro')">
       <p slot="title">工作室介绍</p>
     </homeMod>
-    <homeMod R="150px" T="80px" cL="-330px" cT="-790px" class="t-al-cent" fillColor="#fbaf51">
+    <homeMod R="12vw" T="13vh" cL="-25vw" cT="-134vh" class="t-al-cent" fillColor="#fbaf51">
       <img src="../../../assets/images/profile.gif" slot="pic" alt="" @click="picClick($event, '/profile')" class="special">
       <p slot="title">个人中心</p>
     </homeMod>
-    <homeMod L="150px" B="80px" cL="-570px" cT="-110px" class="t-al-cent" fillColor="#31b9f7">
+    <homeMod L="10vw" B="13vh" cL="-44vw" cT="-20vh" class="t-al-cent" fillColor="#31b9f7">
       <img src="../../../assets/images/front-end.webp" slot="pic" alt="" @click="picClick($event, '/front-end')" class="special">
       <p slot="title">前端</p>
     </homeMod>
-    <homeMod R="150px" B="80px" cL="-320px" cT="-100px" class="t-al-cent" fillColor="lightcoral">
+    <homeMod R="12vw" B="14vh " cL="-24vw" cT="-20vh" class="t-al-cent" fillColor="lightcoral">
       <img src="../../../assets/images/back-end.gif" slot="pic" alt="" @click="picClick($event, '/back-end')">
       <p slot="title">后台</p>
     </homeMod>
@@ -30,6 +30,7 @@
         <ball fillColor="#89e1d3"></ball>
       </div>
     </div>
+    <div @click="loginClick" class="login pos-ab">登录</div>
   </div>
 </template>
 
@@ -63,6 +64,9 @@
         setTimeout(() => {
           this.$router.push(path)
         }, 2000)
+      },
+      loginClick() {
+        this.$router.push('/loginReg')
       }
     }
   }
@@ -76,12 +80,13 @@
     background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
+    font-size: 2.7vh;
   }
 
   /* 四个模块图片的样式 */
   .home img {
-    width: 120px;
-    height: 120px;
+    width: 10vw;
+    height: 10vw;
     border-radius: 50% 20%;
   }
   
@@ -92,15 +97,15 @@
 
   /* 工作室logo */
   .home .logo {
-    width: 500px;
-    height: 500px;
+    width: 85vh;
+    height: 85vh;
     border-radius: 50%;
-    border: 25px solid lightblue;
+    border: 4vh solid lightblue;
     overflow: hidden;
     left: 50%;
     top: 50%;
-    margin-top: -275px;
-    margin-left: -275px;
+    margin-top: -42.5vh;
+    margin-left: -42.5vh;
     background: url(../../../assets/images/logo.png);
     background-size: 100% 100%;
   }
@@ -112,11 +117,11 @@
 
   /* 跳动的小球 */
   .balls {
-    width: 180px;
-    height: 20px;
+    width: 30vh;
+    height: 9vh;
     left: 50%;
-    margin-left: -90px;
-    bottom: 60px;
+    margin-left: -15vh;
+    bottom: 5vh;
   }
 
   .ball{
@@ -151,5 +156,10 @@
     100% {
       transform: translateY(0);
     }
+  }
+
+  .home .login {
+    left: 50%;
+    bottom: 20px;
   }
 </style>>
