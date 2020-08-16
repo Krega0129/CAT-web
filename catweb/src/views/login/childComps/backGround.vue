@@ -56,6 +56,7 @@ export default {
   height: 75vh;
   margin: 15vh auto;
   border-radius: 1vw;
+  box-shadow: -1vh 1.5vh 1vh   rgba(0, 0, 0, 0.205);
   /* background-image: linear-gradient(to top, #e14fad 0%, #f9d423 100%); */
 }
 .moveAni {
