@@ -7,7 +7,7 @@
       <slot name="title"></slot>
     </div>
     <!-- 背景圆 -->
-    <svg xmln="http://www.w3.org/2000/svg" width="40vw" height="40vw" class="pos-ab" :style="{left: cL, top: cT, right: cR, bottom: cB, opacity: opc}">
+    <svg xmln="http://www.w3.org/2000/svg" width="500px" height="500px" class="pos-ab" :style="{left: cL, top: cT, right: cR, bottom: cB, opacity: opc}">
       <circle :cx="cX" :cy="cY" :r="cr" :fill="fillColor" class="circle" :style="{'transform-origin': cX}"></circle>
     </svg>
   </div>
@@ -30,15 +30,15 @@
       /* svg圆形的圆心坐标和半径 */
       cX: {
         type: String,
-        default: '40vw'
+        default: '500px'
       },
       cY: {
         type: String,
-        default: '40vw'
+        default: '500px'
       },
       cr: {
         type: String,
-        default: '40vw'
+        default: '500'
       },
       /* svg圆的填充色 */
       fillColor: String,
@@ -56,14 +56,14 @@
   @import url(../../../assets/css/base.css);
 
   .homeMod {
-    width: 9.6vw;
-    height: 9.6vw;
+    width: 120px;
+    height: 120px;
     z-index: 1;
   }
 
   .homeMod svg {
-    width: 80vw;
-    height: 80vw;
+    width: 1000px;
+    height: 1000px;
     z-index: -1;
   }
 

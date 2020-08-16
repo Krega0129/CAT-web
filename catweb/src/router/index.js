@@ -1,5 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+/* import { component } from 'vue/types/umd' */
+
+const Entry = () =>
+    import ('@/views/Wuchanghui/Entry')
+const Home = () =>
+    import ('@/views/Wuchanghui/home/Home')
+const Intro = () =>
+    import ('@/views/Intro')
+const Profile = () =>
+    import ('@/views/Profile')
+const FrontEnd = () =>
+    import ('@/views/Front-end')
+const BackEnd = () =>
+    import ('@/views/Back-end')
 
 const Entry = () => import('@/views/Wuchanghui/Entry')
 const Home = () => import('@/views/Wuchanghui/home/Home')
@@ -10,39 +24,44 @@ const BackEnd = () => import('@/views/Back-end')
 
 Vue.use(VueRouter)
 
-  const routes = [
-    {
-      path: '/',
-      redirect: '/start'
+const routes = [{
+        path: '/',
+        redirect: '/start'
     },
     {
-      path: '/start',
-      component: Entry
+        path: '/start',
+        component: Entry
     },
     {
-      path: '/home',
-      component: Home
+        path: '/home',
+        component: Home
     },
     {
-      path: '/intro',
-      component: Intro
+        path: '/intro',
+        component: Intro
     },
     {
-      path: '/profile',
-      component: Profile
+        path: '/profile',
+        component: Profile
     },
     {
-      path: '/front-end',
-      component: FrontEnd
+        path: '/front-end',
+        component: FrontEnd
     },
     {
-      path: '/back-end',
-      component: BackEnd
+        path: '/back-end',
+        component: BackEnd
     },
-  ]
+    {
+        path: '/loginReg',
+        name: 'loginReg',
+        component: resolve => (require(["../views/login/loginReg.vue"], resolve)),
+    }
+]
 
 const router = new VueRouter({
-  routes
+    mode: 'history',
+    routes
 })
 
 export default router
