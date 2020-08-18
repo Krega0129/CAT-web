@@ -49,6 +49,36 @@ const routes = [{
         path: '/loginReg',
         name: 'loginReg',
         component: resolve => (require(["../views/login/loginReg.vue"], resolve)),
+    },
+    {
+        path: '/backEnd',
+        name: 'backEnd',
+        component: resolve => (require(["../views/backEndMGT/backEndMGT.vue"], resolve)),
+        children: [{
+                path: '/',
+                redirect: 'home'
+            },
+            {
+                path: 'home',
+                name: 'home',
+                component: resolve => (require(["../views/backEndMGT/home/home.vue"], resolve))
+            },
+            {
+                path: 'info',
+                name: 'info',
+                component: resolve => (require(["../views/backEndMGT/info/info.vue"], resolve))
+            },
+            {
+                path: 'setTime',
+                name: 'setTime',
+                component: resolve => (require(["../views/backEndMGT/setTime/setTime.vue"], resolve))
+            },
+            {
+                path: 'detail',
+                name: 'detail',
+                component: resolve => (require(["../views/backEndMGT/detail/detail.vue"], resolve))
+            },
+        ]
     }
 ]
 
