@@ -30,7 +30,7 @@
         <ball fillColor="#89e1d3"></ball>
       </div>
     </div>
-    <div @click="loginClick" class="login pos-ab">登录</div>
+    <div @click="loginClick"  class="login pos-ab">登录</div>
   </div>
 </template>
 

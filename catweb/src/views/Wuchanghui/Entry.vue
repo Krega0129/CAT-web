@@ -1,8 +1,8 @@
 <template>
   <div class="entry pos-re full">
-    <CircleScale Left="-20vw" Top="-50vh" fillColor="#89e1d3" :rList="[50,150,250,350,450]"></CircleScale>
-    <CircleScale Left="10vw" Top="0vh" fillColor="#fbaf51" :rList="[50,150,250,350,450]"></CircleScale>
-    <CircleScale Left="50vw" Top="-20vh" fillColor="#31b9f7" :rList="[50,150,250,350,450]"></CircleScale>
+    <CircleScale Left="-20vw" Top="-50vh" fillColor="#89e1d3" :rList="rList"></CircleScale>
+    <CircleScale Left="10vw" Top="0vh" fillColor="#fbaf51" :rList="rList"></CircleScale>
+    <CircleScale Left="50vw" Top="-20vh" fillColor="#31b9f7" :rList="rList"></CircleScale>
     <div class="logo pos-ab">
       <img src="../../assets/images/logo-c.png" alt="" class="logo-c logo-words">
       <img src="../../assets/images/logo-dot.png" alt="" class="logo-dot">
@@ -37,7 +37,8 @@
     name: 'entry',
     data() {
       return {
-        isShow: false
+        isShow: false,
+        rList: ['8.5vh','25.5vh','42.6vh','59.6vh','76.7vh']
       }
     },
     components: {
@@ -165,7 +166,7 @@
     width: 6vh;
     height: 6vh;
     transform: translate(50vw,-24.4vh);
-    animation: logo-rect-style 8s cubic-bezier(.42,1.3,.93,1.06) .5s;
+    animation: logo-rect-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的studio */
@@ -173,7 +174,7 @@
     width: 37.8vh;
     height: 8.7vh;
     bottom: -5vh;
-    right: 0;
+    right: 2vh;
     opacity: 0;
     animation: studioDisp 6s 2s;
   }
@@ -205,11 +206,11 @@
 
   /* 开始按钮旁的手 */
   .entry .startBtn img {
-    width: 50px;
-    height: 50px;
+    width: 8.5vh;
+    height: 8.5vh;
     transform: rotate(-80deg);
-    left: -50px;
-    top: -20px;
+    left: -8.5vh;
+    top: -3.4vh;
     animation: handMove 6s infinite;
   }
 
@@ -237,7 +238,7 @@
   /* 介绍语句 */
   .words {
     font-size: 2.7vh;
-    animation: showWords 8s -3s forwards;
+    animation: showWords 8s -2s forwards;
   }
 
   @keyframes showWords {

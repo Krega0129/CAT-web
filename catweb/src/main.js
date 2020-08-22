@@ -18,3 +18,8 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
+
+window.addEventListener('resize', () => {
+  document.body.style.width = 100 + 'vw'
+  document.body.style.height = 100 + 'vh'
+}, false)

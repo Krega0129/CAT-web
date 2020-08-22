@@ -89,6 +89,10 @@
     transform: scale(1.2);
   }
 
+  .homeMod .pic p {
+    font-weight: bold;
+  }
+
   /* 鼠标移动到模块上面，背景圆显示出来 */
   .homeMod .pic:hover  + svg > .circle {
     transform: scale(1);

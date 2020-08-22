@@ -5,11 +5,39 @@ import VueRouter from 'vue-router'
 const Entry = () => import('@/views/Wuchanghui/Entry')
 const Home = () => import('@/views/Wuchanghui/home/Home')
 const Intro = () => import('@/views/Intro')
-const Profile = () => import('@/views/Profile')
+const Profile = () => import('@/views/Wuchanghui/profile/Profile')
 const FrontEnd = () => import('@/views/Front-end')
 const BackEnd = () => import('@/views/Back-end')
 
+const UserInfo = () => import('@/views/Wuchanghui/profile/UserInfo')
+const Progress = () => import('@/views/Wuchanghui/profile/Progress')
+const MeetingAppoint = () => import('@/views/Wuchanghui/profile/MeetingAppoint')
+const Groups = () => import('@/views/Wuchanghui/profile/Groups')
+
 Vue.use(VueRouter)
+
+const profChildren = [
+    {
+        path: '',
+        redirect: 'userInfo'
+    },
+    {
+        path: 'userInfo',
+        component: UserInfo
+    },
+    {
+        path: 'progress',
+        component: Progress
+    },
+    {
+        path: 'meetingAppoint',
+        component: MeetingAppoint
+    },
+    {
+        path: 'groups',
+        component: Groups
+    }
+]
 
 const routes = [{
         path: '/',
@@ -29,7 +57,8 @@ const routes = [{
     },
     {
         path: '/profile',
-        component: Profile
+        component: Profile,
+        children: profChildren
     },
     {
         path: '/front-end',
