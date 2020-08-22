@@ -1,7 +1,8 @@
 <template>
   <div class="loginReg">
     <color-circle/>
-    <backGround/> 
+    <backGround/>
+    <div class="lines"></div>
   </div>
 </template>
 
@@ -21,7 +22,16 @@ export default {
 <style scoped>
 .loginReg {
   position: relative;
-  width: 100%;
-  /* height: 100%; */
+  width: 100vw;
+  height: 80vh;
+}
+.lines{
+  position: absolute;
+  bottom: -5vh;
+  left: 0;
+  width: 80vw;
+  height: 85vh;
+  background: url('../../assets/img/lines.png');
+  z-index: -100;
 }
 </style>

@@ -18,7 +18,7 @@ export default {
     return {
       menuList:['首页','信息管理','预约时间'],
       pathList:['home','info','setTime'],
-      /* pathList:['/backEnd/home','/backEnd/info','/backEnd/setTime'], */
+      pathLists:['/backEnd/home','/backEnd/info','/backEnd/setTime'],
       currentIndex:0
     }
   },
@@ -26,8 +26,19 @@ export default {
     itemClick(index){
       this.currentIndex = index
       this.$router.push(this.pathList[index])
+    },
+    changeCurrentIndex(){
+      if(this.$route.path == this.pathLists[0])
+        this.currentIndex = 0;
+        else if(this.$route.path == this.pathLists[2])
+          this.currentIndex = 2
+          else this.currentIndex = 1;
     }
+  },
+  mounted(){
+    this.changeCurrentIndex();
   }
+
 };
 </script>
 

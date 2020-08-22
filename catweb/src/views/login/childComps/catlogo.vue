@@ -52,7 +52,7 @@ export default {
   top: 0;
   left: 0;
   width: 24.69vw;
-  height: 100%;
+  height: 75vh;
   background: linear-gradient(
     to right,
     #fcc467,
@@ -110,7 +110,7 @@ export default {
 } 
 .welcome{
   font-weight: bolder;
-  font-size: 6vh;
+  font-size: 3.5vw;
   color: #69739a;
 }
 .tocat{
@@ -154,5 +154,13 @@ export default {
 }
 .letterE{
   color: #43a9e7;
+}
+.lines{
+  position: absolute;
+  bottom: -20vh;
+  left: -20vw;
+  width: 30vw;
+  height: 30vh;
+  background-color: black;
 }
 </style>

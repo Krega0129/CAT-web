@@ -8,60 +8,214 @@
       <span class="remarks">姓名</span>
       <el-input v-model="searchName" size="medium"></el-input>
     </div>
+    <el-button
+      type="primary"
+      icon="el-icon-search"
+      size="medium"
+      ref="searchBtn"
+      @click="NameSearch"
+    >搜索</el-button>
     <div class="stage">
       <span class="remarks remarks-stage">阶段</span>
       <el-select v-model="stageValue" placeholder="请选择" size="medium">
-        <el-option v-for="item in stages" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <el-option
+          v-for="(item,index) in stages"
+          :key="index"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
       </el-select>
     </div>
-    <el-switch
-      style="display: block"
-      v-model="isFont"
-      active-color="#13ce66"
-      inactive-color="#ff4949"
-      active-text="后台"
-      inactive-text="前端"
-    ></el-switch>
-    <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
-     <el-button type="info" size="medium">重置</el-button>
-    <el-button type="success" size="medium">批量通过</el-button>
-    <el-button type="danger" size="medium">批量淘汰</el-button>
+    <el-select v-model="directionValue" clearable placeholder="请选择" style="width:5vw" size="small">
+      <el-option
+        v-for="item in direction"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      ></el-option>
+    </el-select>
+    <el-button
+      type="primary"
+      icon="el-icon-search"
+      size="medium"
+      ref="searchBtn"
+      @click="StagesSearch"
+    >搜索</el-button>
+    <el-button type="info" size="medium" @click="Reset">重置</el-button>
+    <el-button type="success" size="medium" @click="pass">批量通过</el-button>
+    <el-button type="danger" size="medium" @click="out">批量淘汰</el-button>
+    <el-button size="medium" style="background:#ebee28;color:black" @click="sendInfo">发送消息</el-button>
   </div>
 </template>
 
 <script>
+import { passOrOut, sendInfo } from "@/network/result";
 export default {
   name: "search",
   data() {
     return {
       stages: [
         {
-          value: "选项1",
+          value: "笔试",
           label: "笔试"
         },
         {
-          value: "选项2",
-          label: "一轮面试"
+          value: "第一轮面试",
+          label: "第一轮面试"
         },
         {
-          value: "选项3",
-          label: "二轮面试"
+          value: "第二轮面试",
+          label: "第二轮面试"
         },
         {
-          value: "选项4",
-          label: "一轮考核"
+          value: "第一轮考核",
+          label: "第一轮考核"
         },
         {
-          value: "选项5",
-          label: "二轮考核"
-        },
-        
+          value: "第二轮考核",
+          label: "第二轮考核"
+        }
       ],
-      stageValue: "",
+      direction: [
+        {
+          value: "前端",
+          label: "前端"
+        },
+        {
+          value: "后台",
+          label: "后台"
+        }
+      ],
+      directionValue: "",
+      stageValue: "第一轮面试",
       searchNumber: null,
       searchName: "",
-      isFont:true
+      myCheckData: [],
+      content: null
     };
+  },
+  watch: {
+    checkData(val) {
+      this.myCheckData = val;
+    }
+  },
+  props: {
+    checkData: ""
+  },
+  methods: {
+    StagesSearch() {
+      this.$bus.$emit("StagesSearch", this.stageValue, this.directionValue);
+    },
+    NameSearch() {
+      this.$bus.$emit("NameSearch", this.searchName, this.searchNumber);
+    },
+    Reset() {
+      this.$router.go(0);
+    },
+    pass() {
+      this.$confirm("此操作将把用户状态批量改为通过, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$bus.$emit("getCheckData");
+        })
+        .then(() => {
+          for (const item of this.myCheckData) {
+            item.adoptChecked = 1;
+          }
+        })
+        .then(() => {
+          passOrOut(this.myCheckData);
+        })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "批量通过成功!"
+          });
+        })
+        .then(() => {
+          setTimeout(() => {
+            this.$router.go(0);
+          }, 700);
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消"
+          });
+        });
+    },
+    out() {
+      this.$confirm("此操作将把用户状态批量改为淘汰, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$bus.$emit("getCheckData");
+        })
+        .then(() => {
+          for (const item of this.myCheckData) {
+            item.adoptChecked = 2;
+          }
+        })
+        .then(() => {
+          passOrOut(this.myCheckData);
+        })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "批量淘汰成功!"
+          });
+        })
+        .then(() => {
+          setTimeout(() => {
+            this.$router.go(0);
+          }, 700);
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消"
+          });
+        });
+    },
+    sendInfo() {
+      this.$prompt("请输入要发送的内容", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      })
+        .then(value => {
+          this.content = value.value;
+          this.$bus.$emit("getCheckData");
+          console.log(this.content);
+        })
+        .then(() => {
+          for (const item of this.myCheckData) {
+            item.content = this.content;
+          }
+          console.log(this.myCheckData);
+        })
+        .then(() => {
+          sendInfo(this.myCheckData).then(res=>{
+            console.log(res);
+          })
+        })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "发送成功"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消输入"
+          });
+        });
+    }
   }
 };
 </script>
@@ -85,7 +239,7 @@ export default {
   padding-top: 1vh;
 }
 .remarks-stage {
+  margin-left: 1.2vw;
   margin-right: -0.9vw;
 }
-
 </style>

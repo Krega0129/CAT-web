@@ -1,7 +1,9 @@
 <template>
   <div class="backEndMGT">
-      <asideMenu></asideMenu>
+    <asideMenu></asideMenu>
+    <keep-alive exclude="detail">
       <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -17,8 +19,8 @@ export default {
 </script>
   
 <style scoped>
-@import '.../../../../assets/css/base.css';
-.backEndMGT{
+@import ".../../../../assets/css/base.css";
+.backEndMGT {
   display: flex;
 }
 </style>

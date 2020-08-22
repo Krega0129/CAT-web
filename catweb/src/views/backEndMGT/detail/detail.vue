@@ -1,41 +1,89 @@
 <template>
   <div class="detail">
-    <div class="back">
+    <div class="back" @click="goBack">
       <i class="el-icon-back"></i>
       <span>返回</span>
-      <span class="detailed">个人信息详情</span>
+      <span class="fontDetailed">个人信息详情</span>
     </div>
     <div class="mainInfo">
-      <el-collapse v-model="activeNames" @change="handleChange">
-        <el-collapse-item title="一致性 Consistency" name="基本信息">
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-        <el-collapse-item title="反馈 Feedback" name="自我介绍">
-          <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-          <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
-        </el-collapse-item>
-        <el-collapse-item title="效率 Efficiency" name="考核评价">
-          <div>简化流程：设计简洁直观的操作流程；</div>
-          <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-          <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
-        </el-collapse-item>
-        <el-collapse-item title="可控 Controllability" name="4">
-          <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-          <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-        </el-collapse-item>
-      </el-collapse>
+      <img src alt class="avatar" />
+      <table class="detailed">
+        <tr>
+          <td class="column">姓名</td>
+          <td>{{stuData.name}}</td>
+          <td class="column">学院</td>
+          <td>{{stuData.collage}}</td>
+        </tr>
+        <tr>
+          <td class="column">学号</td>
+          <td>{{stuData.stuNumber}}</td>
+          <td class="column">专业</td>
+          <td>{{stuData.major}}</td>
+        </tr>
+        <tr>
+          <td class="column">方向</td>
+          <td>{{stuData.direction}}</td>
+          <td class="column">班级</td>
+          <td>{{stuData.clazz}}</td>
+        </tr>
+      </table>
+      <table class="stage">
+        <tr>
+          <td class="column">当前阶段</td>
+          <td>{{stuData.stage}}</td>
+          <td class="column">通过状况</td>
+          <td>{{stuData.adoptChecked}}</td>
+        </tr>
+        <tr>
+          <td class="column">预约下次面试时间</td>
+          <td>{{stuData.appointTime}}</td>
+          <td class="column">是否服从安排</td>
+          <td>{{stuData.isObey}}</td>
+        </tr>
+      </table>
+      <div class="introduce">
+        <el-collapse v-model="activeNames" @change="handleChange" accordion>
+          <el-collapse-item title="对方向的理解" name="0" style="font-size:5vh;">
+            <article>{{stuData.dirSummary}}</article>
+          </el-collapse-item>
+          <el-collapse-item title="自我介绍" name="1">
+            <article>{{stuData.introduce}}</article>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getSearch, StuDetail } from "@/network/admin.js";
+
 export default {
   name: "detail",
   data() {
     return {
-      activeName: ["基本信息"]
+      activeNames: ["1"],
+      stuData: {}
     };
+  },
+  methods: {
+    handleChange(val) {},
+    goBack() {
+      this.$router.go(-1);
+    }
+  },
+  created() {
+    this.$bus.$on("outputStuNum", stuNum => {
+      const data = {
+        stuNumber: stuNum
+      };
+      getSearch(data).then(res => {
+        this.stuData = new StuDetail(res.data[0]);
+      });
+    });
+  },
+  beforeDestroy() {
+    this.$bus.$off("outputStuNum");
   }
 };
 </script>
@@ -51,7 +99,7 @@ export default {
   font-size: 2vh;
   cursor: pointer;
 }
-.detailed {
+.fontDetailed {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -62,7 +110,65 @@ export default {
   color: #409eff;
 }
 .mainInfo {
-  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vw;
+  margin: 0 auto;
+  margin-top: 1vw;
+  width: 84vw;
+  height: 90vh;
   background-color: #ffffff;
+}
+.avatar {
+  margin: 0 auto;
+  margin-bottom: 3vw;
+  width: 7vw;
+  height: 7vw;
+  background-color: rgb(59, 17, 98);
+}
+.detailed {
+  border-collapse: collapse;
+  border-top: 1px solid #e6eaee;
+  border-left: 1px solid #e6eaee;
+}
+.detailed tr td {
+  width: 15vw;
+  height: 5vh;
+  line-height: 5vh;
+  padding: 0 2vh;
+  font-size: 2vh;
+  border: 1px solid #a5bdd6;
+  color: black;
+}
+.detailed tr td.column {
+  background-color: #eff3f6;
+  color: #393c3e;
+  width: 10vw;
+}
+.stage {
+  margin-top: 1vw;
+  border-collapse: collapse;
+  border-top: 1px solid #e6eaee;
+  border-left: 1px solid #e6eaee;
+}
+.stage tr td {
+  width: 15vw;
+  height: 5vh;
+  line-height: 5vh;
+  padding: 0 2vh;
+  font-size: 2vh;
+  border: 1px solid #a5bdd6;
+  color: black;
+}
+.stage tr td.column {
+  background-color: #eff3f6;
+  color: #393c3e;
+  width: 10vw;
+}
+.introduce {
+  margin-top: 2vw;
+  width: 50vw;
+  padding: 1vh;
 }
 </style>
