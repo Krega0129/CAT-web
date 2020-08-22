@@ -11,7 +11,6 @@ import './assets/iconfont/icon.css'
 
 Vue.prototype.$bus = Bus;
 Vue.config.productionTip = false
-Vue.use(ElementUI);
 
 new Vue({
     router,

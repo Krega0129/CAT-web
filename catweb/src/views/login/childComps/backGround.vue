@@ -53,10 +53,19 @@ export default {
 .back-ground {
   position: relative;
   width: 54.5vw;
-  height: 75vh;
+  height: 70vh;
   margin: 15vh auto;
   border-radius: 1vw;
+  /* box-shadow: -1vh 1.5vh 1vh   rgba(0, 0, 0, 0.205); */
   /* background-image: linear-gradient(to top, #e14fad 0%, #f9d423 100%); */
+}
+.back-ground::before{
+  position: absolute;
+  width: 100%;
+  height: 75vh;
+  content: '';
+  border-radius: 1vw;
+  box-shadow: -1vh 1.5vh 1vh   rgba(0, 0, 0, 0.205);
 }
 .moveAni {
   position: absolute;

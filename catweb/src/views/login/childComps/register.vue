@@ -4,39 +4,89 @@
     <div class="title">Create a  Account</div>
     <div class="account">
       <div class="tips">Account</div>
-      <input type="text" class="RegAccount" placeholder="Username">
+      <input type="text" class="RegAccount" :class="{isWarn:!isAccountOK}" placeholder="请输入8-16位数字,字母" @input="testAccount" v-model="account">
     </div>
     <div class="password">
       <div class="tips">Password</div>
-      <input type="password" class="RegPassword" placeholder="Password">
+      <input type="password" class="RegPassword" :class="{isWarn:!isPasswordOK}" placeholder="请输入8-16位数字,字母" @input="testPassword" v-model="password">
     </div>
     <div class="phoneNum">  
-      <div class="tips">E-mail</div>
-      <input type="text" class="RegPn" placeholder="E-mail">
+      <div class="tips">Phone</div>
+      <input type="text" class="RegPn" :class="{isWarn:!isPhoneOK}" placeholder="手机号码" @input="testPhone" v-model="phone">
     </div>
     <div class="test">
-      <input type="text" class="code" placeholder="Code">
-      <div class="send">Send</div>
+      <input type="text" class="code" placeholder="验证码" v-model="code">
+      <div class="send" @click="send">发送</div>
     </div>
     <div class="cancelReg">
-      <div class="cancel" @click="toLogin">Cancel</div>
-      <div class="reg">Register</div>
+      <div class="cancel" @click="toLogin">返回</div>
+      <div class="reg" @click="register">注册</div>
     </div>
   </div>
 </template>
 
 <script>
+import {getPhoneCode,register} from '@/network/login'
 export default {
   name: "register",
   methods:{
     toLogin(){
       this.$bus.$emit('toLogin')
       this.RegLeftBorder=false
+    },
+    testAccount(){
+      const AccountReg = /^[a-zA-Z0-9]{8,16}$/
+      if(AccountReg.test(this.account)){
+        this.isAccountOK = true
+      }else{
+        this.isAccountOK = false
+      }
+    },
+    testPassword(){
+      const PasswordReg = /^[a-zA-Z0-9]{8,16}$/
+      if(PasswordReg.test(this.password)){
+        this.isPasswordOK = true
+      }else{
+        this.isPasswordOK = false
+      }
+    },
+    testPhone(){
+      const PhoneReg = /^1\d{10}$/
+      if(PhoneReg.test(this.phone)){
+        this.isPhoneOK = true
+      }else{
+        this.isPhoneOK = false
+      }
+    },
+    send(){
+      if(this.isPhoneOK){
+        const data = {phone:this.phone}
+        getPhoneCode(data).then(res=>{
+        })
+      }else{
+        this.isPhoneOK = false
+      }
+    },
+    register(){
+      if(this.isPhoneOK&&this.isAccountOK&&this.isPasswordOK&&this.code != ''){
+        const data = {code:this.code,password:this.password,phone:this.phone,username:this.account}
+        console.log(data);
+        register(data).then(res=>{
+          console.log(res);
+        })
+      }
     }
   },
   data(){
     return {
-      RegLeftBorder:false
+      RegLeftBorder:false,
+      account:null,
+      password:null,
+      phone:null,
+      code:null,
+      isAccountOK:true,
+      isPasswordOK:true,
+      isPhoneOK:true,
     }
   },
   mounted(){
@@ -145,5 +195,8 @@ export default {
   background-color: rgb(30, 117, 133);
   text-align: center;
   cursor: pointer;
+}
+.isWarn{
+  border-bottom: rgb(245, 60, 60) .2vw solid;
 }
 </style>
