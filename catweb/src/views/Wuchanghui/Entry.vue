@@ -1,15 +1,15 @@
 <template>
   <div class="entry pos-re full">
-    <CircleScale Left="-300px" Top="-300px" fillColor="#89e1d3" :rList="[50,150,250,350,450]"></CircleScale>
-    <CircleScale Left="0" Top="0px" fillColor="#fbaf51" :rList="[50,150,250,350,450]"></CircleScale>
-    <CircleScale Left="500px" Top="-200px" fillColor="#31b9f7" :rList="[50,150,250,350,450]"></CircleScale>
-    <div class="logo">
+    <CircleScale Left="-20vw" Top="-50vh" fillColor="#89e1d3" :rList="rList"></CircleScale>
+    <CircleScale Left="10vw" Top="0vh" fillColor="#fbaf51" :rList="rList"></CircleScale>
+    <CircleScale Left="50vw" Top="-20vh" fillColor="#31b9f7" :rList="rList"></CircleScale>
+    <div class="logo pos-ab">
       <img src="../../assets/images/logo-c.png" alt="" class="logo-c logo-words">
       <img src="../../assets/images/logo-dot.png" alt="" class="logo-dot">
       <img src="../../assets/images/logo-a.png" alt="" class="logo-a logo-words">
       <img src="../../assets/images/logo-rect.png" alt="" class="logo-rect">
       <img src="../../assets/images/logo-t.png" alt="" class="logo-t logo-words">
-      <img src="../../assets/images/logo-studio.png" alt="" class="logo-studio dp-bk logo-words">
+      <img src="../../assets/images/logo-studio.png" alt="" class="logo-studio dp-bk logo-words pos-ab">
     </div>
     <div class="words t-al-cent" v-if="isShow">
       <h2>想要变强吗</h2>
@@ -37,7 +37,8 @@
     name: 'entry',
     data() {
       return {
-        isShow: false
+        isShow: false,
+        rList: ['8.5vh','25.5vh','42.6vh','59.6vh','76.7vh']
       }
     },
     components: {
@@ -69,13 +70,18 @@
     background: #f1f4fd;
   }
 
-  .logo {
-    margin: 200px auto 0 auto;
-    width: 420px;
-    height: 200px;
+  .entry .logo {
+    left: 50%;
+    top: 50%;
+    margin-left: -35.5vh;
+    margin-top: -17vh;
+    width: 71vh;
+    height: 34vh;
   }
 
   .logo img {
+    padding: 0;
+    margin: 0;
     display: inline-block;
   }
 
@@ -92,34 +98,34 @@
 
   @keyframes logo-dot-style {
     0%, 100% {
-      transform: translate(-800px,20px) rotate(-1200deg);
+      transform: translate(-50vw,3.4vh) rotate(-1200deg);
     }
     20%, 80% {
-      transform: translate(0, 20px) rotate(0);
+      transform: translate(0, 3.4vh) rotate(0);
     }
   }
 
   @keyframes logo-rect-style {
     0%, 100% {
-      transform: translate(800px,-143px);
+      transform: translate(50vw,-24.3vh);
     }
     16%{
-      transform: translate(0,-143px);
-      width: 32px;
-      height: 32px;
+      transform: translate(0,-24.3vh);
+      width: 6vh;
+      height: 6vh;
     }
     18% {
-      transform: translate(8px,-143px);
-      width: 10px;
-      height: 40px;
+      transform: translate(1.4vh,-24.3vh);
+      width: 2vh;
+      height: 8vh;
     }
     20% {
-      transform: translate(8px,-143px);
-      width: 32px;
-      height: 32px;
+      transform: translate(1.4vh,-24.3vh);
+      width: 6vh;
+      height: 6vh;
     }
     80% {
-      transform: translate(8px,-143px);
+      transform: translate(1.4vh,-24.3vh);
     }
   }
 
@@ -130,29 +136,45 @@
     animation: logostyle 8s;
   }
 
+  .logo-c {
+    width: 20.6vh;
+    height: 21.3vh;
+  }
+
   /* 分别是cat中的a,t两个字母动画的延迟时间 */
   .logo-a {
+    width: 21.3vh;
+    height: 21.3vh;
     animation-delay: .2s;
   }
   .logo-t {
+    width: 15.2vh;
+    height: 25.4vh;
     animation-delay: .4s;
   }
 
   /* logo中的小圆点 */
   .logo-dot {
-    transform: translate(-800px,20px);
+    width: 6vh;
+    height: 6vh;
+    transform: translate(-50vw,20px);
     animation: logo-dot-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的小正方形 */
   .logo-rect {
-    transform: translate(800px,-143px);
-    animation: logo-rect-style 8s cubic-bezier(.53,.51,.48,1.38) .5s;
+    width: 6vh;
+    height: 6vh;
+    transform: translate(50vw,-24.4vh);
+    animation: logo-rect-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的studio */
   .logo-studio {
-    margin: 50px 0 0 200px;
+    width: 37.8vh;
+    height: 8.7vh;
+    bottom: -5vh;
+    right: 2vh;
     opacity: 0;
     animation: studioDisp 6s 2s;
   }
@@ -160,7 +182,7 @@
   @keyframes studioDisp {
     0%, 90% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(3.4vh);
     }
     40%, 60% {
       opacity: 1;
@@ -170,25 +192,25 @@
 
   /* 开始按钮 */
   .entry .startBtn {
-    width: 120px;
-    height: 50px;
+    width: 20.4vh;
+    height: 8.5vh;
     text-align: center;
-    line-height: 50px;
-    font-size: 20px;
+    line-height: 8.5vh;
+    font-size: 3.4vh;
     background: #87ddd0;
     color: white;
     left: 50%;
-    margin-left: -60px;
-    bottom: 100px;
+    margin-left: -10.2vh;
+    bottom: 17vh;
   }
 
   /* 开始按钮旁的手 */
   .entry .startBtn img {
-    width: 50px;
-    height: 50px;
+    width: 8.5vh;
+    height: 8.5vh;
     transform: rotate(-80deg);
-    left: -50px;
-    top: -20px;
+    left: -8.5vh;
+    top: -3.4vh;
     animation: handMove 6s infinite;
   }
 
@@ -215,15 +237,16 @@
 
   /* 介绍语句 */
   .words {
-    animation: showWords 8s -3s forwards;
+    font-size: 2.7vh;
+    animation: showWords 8s -2s forwards;
   }
 
   @keyframes showWords {
     0%{
-      transform: translateY(0);
+      transform: translateY(50vh);
     }
     100%{
-      transform: translateY(-300px);
+      transform: translateY(20vh);
     }
   }
 </style>
