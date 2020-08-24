@@ -120,9 +120,10 @@ const router = new VueRouter({
     //权限判断
 router.beforeEach((to, from, next) => {
     const token = sessionStorage.getItem("data")
-
+    console.log(token);
     if (to.meta.requireAuth == true) {
         if (!token) {
+        // this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
             next({ path: '/loginReg' })
         } else {
             return next()
