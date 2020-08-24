@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 
+Vue.use(ElementUI)
 Vue.prototype.$bus = Bus;
 Vue.config.productionTip = false
 

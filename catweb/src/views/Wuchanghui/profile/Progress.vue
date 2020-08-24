@@ -3,7 +3,7 @@
     <div v-if="!isSign" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>
       <div class="signBtn pos-ab">
-        <router-link to="" class="dp-bk full">我要报名</router-link>
+        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
     <div v-else class="proSuc t-al-cent pos-re full">
@@ -18,23 +18,6 @@
           <el-step :title="work2" :description="work2desp"></el-step>
         </el-steps>
       </div>
-
-
-      <!-- 测试 -->
-      <!-- <div class="btn pos-ab">
-        <button @click="isPassWri = true">passWri</button>
-        <button @click="isPassWri = false">!passWri</button>
-        <button @click="isPassFace1 = true">PassFace1</button>
-        <button @click="isPassFace1 = false">!PassFace1</button>
-        <button @click="isPassFace2 = true">PassFace2</button>
-        <button @click="isPassFace2 = false">!PassFace2</button>
-        <button @click="isPasswork1 = true">Passwork1</button>
-        <button @click="isPasswork1 = false">!Passwork1</button>
-        <button @click="isPasswork2 = true">Passwork2</button>
-        <button @click="isPasswork2 = false">!Passwork2</button>
-        <button @click="isPassAll = true">PassAll</button>
-        <button @click="isPassAll = false">!PassAll</button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -142,9 +125,9 @@
   @import url(../../../assets/css/base.css);
 
   .profai .title {
-    padding-top: 5vh;
+    padding-top: 10vh;
     font-size: 4vh;
-    color: rgb(0, 253, 84);
+    color: black;
   }
 
   .profai .signBtn {
