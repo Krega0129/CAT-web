@@ -40,8 +40,7 @@ a {
     cursor: url('../../assets/images/cursor-hover.png'), auto;
 }
 
-ul,
-ol {
+ul, ol {
     list-style: none;
 }
 
@@ -111,9 +110,7 @@ ol {
     flex-wrap: wrap;
 }
 
-
 /* 字体省略号 */
-
 .text-elli {
     overflow: hidden;
     white-space: nowrap;
