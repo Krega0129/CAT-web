@@ -51,11 +51,14 @@ export default {
 
 <style scoped>
 .back-ground {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 20vw;
   width: 54.5vw;
   height: 70vh;
   margin: 15vh auto;
   border-radius: 1vw;
+  z-index: 100;
   /* box-shadow: -1vh 1.5vh 1vh   rgba(0, 0, 0, 0.205); */
   /* background-image: linear-gradient(to top, #e14fad 0%, #f9d423 100%); */
 }

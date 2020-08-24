@@ -81,15 +81,34 @@ export default {
     },
     judge() {
       if (this.account == "" || this.password == "") {
-        this.loginFailed()
+        this.loginFailed();
       } else {
         const data = { password: this.password, username: this.account };
-        login(data).then(res => {
-          if(res.code == 2500)
-          this.loginFailed()
-        }).catch(()=>{
-          this.loginFailed()
-        });
+        login(data)
+          .then(res => {
+            if (res.code == 2500) {
+              this.loginFailed();
+              this.$notify.error({
+                title: "警告",
+                message: "账号或密码不正确",
+                duration: 4500,
+                position: "bottom-right"
+              });
+            } else if (res.code == 2200) {
+              this.$notify.success({
+                title: "成功",
+                message: "登录成功,即将跳转",
+                duration: 4500,
+                position: "bottom-right"
+              });
+              setTimeout(() => {
+                this.$router.push('/home')
+              }, 1500);
+            }
+          })
+          .catch(() => {
+            this.loginFailed();
+          });
       }
     }
   }
