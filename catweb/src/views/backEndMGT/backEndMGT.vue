@@ -14,6 +14,20 @@ export default {
   name: "backEndMGT",
   components: {
     asideMenu
+  },
+  beforeRouteEnter: (to, from, next) => {
+    const data = localStorage.getItem("code");
+    if (data == 1204) {
+      next();
+    } else {
+      alert('请先登录')
+      setTimeout(() => {
+        next({ path: "/backLogin" });
+      }, 1500);
+    }
+    /* console.log(to);
+    console.log(from);
+    console.log(next); */
   }
 };
 </script>

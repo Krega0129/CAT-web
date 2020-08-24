@@ -18,8 +18,8 @@ export function register(data) {
         method: 'post',
         url: '/cat-registration/insert',
         data: data,
-        header: {
-            'Content-Type': 'application/x--www-form-urlencoded',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
         }
     })
 }
@@ -29,8 +29,30 @@ export function login(data) {
         method: 'post',
         url: '/cat-registration/login',
         data: data,
-        header: {
-            'Content-Type': 'application/x--www-form-urlencoded',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+}
+
+export function judgeExistPhone(data) {
+    return axios({
+        method: 'post',
+        url: '/cat-registration/selectByPhone',
+        data: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+}
+
+export function judgeExistAccount(data) {
+    return axios({
+        method: 'post',
+        url: '/cat-registration/selectByUsername',
+        data: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
         }
     })
 }

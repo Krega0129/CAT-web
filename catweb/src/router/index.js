@@ -35,7 +35,10 @@ const routes = [{
     },
     {
         path: '/profile',
-        component: Profile
+        component: Profile,
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: '/front-end',
@@ -49,6 +52,11 @@ const routes = [{
         path: '/loginReg',
         name: 'loginReg',
         component: resolve => (require(["../views/login/loginReg.vue"], resolve)),
+    },
+    {
+        path: '/backLogin',
+        name: 'backLogin',
+        component: resolve => (require(["../views/backEndMGT/backLogin/backLogin.vue"], resolve))
     },
     {
         path: '/backEnd',
@@ -83,8 +91,22 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-    mode: 'history',
-    routes
+        mode: 'history',
+        routes
+    })
+    //权限判断
+router.beforeEach((to, from, next) => {
+    const token = sessionStorage.getItem("data")
+
+    if (to.meta.requireAuth == true) {
+        if (!token) {
+            next({ path: '/loginReg' })
+        } else {
+            return next()
+        }
+    } else {
+        next()
+    }
 })
 
 export default router

@@ -103,6 +103,7 @@ export default {
   opacity: .8;
 }
 .welcometocat{
+  margin-bottom: 1vh;
   position: absolute;
   top: 35vh;
   left: 3vw;
@@ -123,6 +124,7 @@ export default {
   margin: 0 3vh 0 1.5vh;
 }
 .sentence{
+  margin-top: 1vh;
   position: absolute;
   bottom: 12vh;
   left: 3.5vw;
@@ -155,12 +157,5 @@ export default {
 .letterE{
   color: #43a9e7;
 }
-.lines{
-  position: absolute;
-  bottom: -20vh;
-  left: -20vw;
-  width: 30vw;
-  height: 30vh;
-  background-color: black;
-}
+
 </style>
