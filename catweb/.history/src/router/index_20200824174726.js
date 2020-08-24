@@ -33,9 +33,6 @@ const profChildren = [{
     {
         path: 'userInfo',
         component: UserInfo,
-        meta: {
-            requireAuth: true
-        }
     },
     {
         path: 'progress',

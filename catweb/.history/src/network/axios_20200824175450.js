@@ -20,15 +20,11 @@ export default function axios(option) {
              * 拿到token，判断token是否存在，存在则在请求头中加入token，否则为null
              */
             /* const token = sessionStorage.getItem('data')
-            if(token){
-                config.headers.Authorization = token
-            }else{
-                config.headers.Authorization = null
-            }
+            token ? config.headers.Authorization = token : null; */
             // 3.对请求的参数进行序列化(看服务器是否需要序列化)
             config.data = qs.stringify(config.data)
                 /* console.log(config.data); */
-            // 4.等等
+                // 4.等等
             return config
         }, err => {
             // console.log('来到了request拦截failure中');
