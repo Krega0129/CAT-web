@@ -2,43 +2,62 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 /* import { component } from 'vue/types/umd' */
 
-const Entry = () => import('@/views/Wuchanghui/Entry')
-const Home = () => import('@/views/Wuchanghui/home/Home')
-const Intro = () => import('@/views/Intro')
-const Profile = () => import('@/views/Wuchanghui/profile/Profile')
-const FrontEnd = () => import('@/views/Front-end')
-const BackEnd = () => import('@/views/Back-end')
+const Entry = () =>
+    import ('@/views/Wuchanghui/Entry')
+const Home = () =>
+    import ('@/views/Wuchanghui/home/Home')
+const Intro = () =>
+    import ('@/views/Intro')
+const Profile = () =>
+    import ('@/views/Wuchanghui/profile/Profile')
+const FrontEnd = () =>
+    import ('@/views/Front-end')
+const BackEnd = () =>
+    import ('@/views/Back-end')
 
-const UserInfo = () => import('@/views/Wuchanghui/profile/UserInfo')
-const Progress = () => import('@/views/Wuchanghui/profile/Progress')
-const MeetingAppoint = () => import('@/views/Wuchanghui/profile/MeetingAppoint')
-const Groups = () => import('@/views/Wuchanghui/profile/Groups')
+const UserInfo = () =>
+    import ('@/views/Wuchanghui/profile/UserInfo')
+const Progress = () =>
+    import ('@/views/Wuchanghui/profile/Progress')
+const MeetingAppoint = () =>
+    import ('@/views/Wuchanghui/profile/MeetingAppoint')
+const Groups = () =>
+    import ('@/views/Wuchanghui/profile/Groups')
 
 Vue.use(VueRouter)
-
-const profChildren = [
-    {
+const profChildren = [{
         path: '',
         redirect: 'userInfo'
     },
     {
         path: 'userInfo',
-        component: UserInfo
+        component: UserInfo,
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: 'progress',
-        component: Progress
+        component: Progress,
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: 'meetingAppoint',
-        component: MeetingAppoint
+        component: MeetingAppoint,
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: 'groups',
-        component: Groups
+        component: Groups,
+        meta: {
+            requireAuth: true
+        }
     }
 ]
-
 const routes = [{
         path: '/',
         redirect: '/start'
@@ -120,10 +139,8 @@ const router = new VueRouter({
     //权限判断
 router.beforeEach((to, from, next) => {
     const token = sessionStorage.getItem("data")
-    console.log(token);
-    if (to.meta.requireAuth == true) {
+    if (to.meta.requireAuth) {
         if (!token) {
-        // this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
             next({ path: '/loginReg' })
         } else {
             return next()
@@ -138,6 +155,5 @@ export default router
 //解决路径重复报错
 const originalReplace = VueRouter.prototype.replace
 VueRouter.prototype.replace = function replace(location) {
-  return originalReplace.call(this, location).catch(err => err)
+    return originalReplace.call(this, location).catch(err => err)
 }
-
