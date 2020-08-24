@@ -123,7 +123,6 @@ router.beforeEach((to, from, next) => {
     console.log(token);
     if (to.meta.requireAuth == true) {
         if (!token) {
-        // this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
             next({ path: '/loginReg' })
         } else {
             return next()
