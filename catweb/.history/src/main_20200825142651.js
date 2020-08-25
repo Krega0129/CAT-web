@@ -9,9 +9,11 @@ import Bus from './assets/js/bus'
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
-import axios from 'axios'
+
 Vue.prototype.$bus = Bus;
+import axios from 'axios'
 Vue.prototype.$axios = axios;
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 new Vue({

@@ -10,10 +10,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import axios from 'axios'
-Vue.prototype.$bus = Bus;
 Vue.prototype.$axios = axios;
+Vue.use(ElementUI)
+Vue.prototype.$bus = Bus;
 Vue.config.productionTip = false
-Vue.use(ElementUI);
 new Vue({
     router,
     store,

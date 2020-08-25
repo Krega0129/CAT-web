@@ -11,7 +11,7 @@ module.exports = {
             }
         }
     },
-    /* chainWebpack: config => {
+    chainWebpack: config => {
         const oneOfsMap = config.module.rule('scss').oneOfs.store
         oneOfsMap.forEach(item => {
             item
@@ -19,18 +19,9 @@ module.exports = {
                 .loader('sass-resources-loader')
                 .options({
                     // 要公用的scss的路径
-                    resources: './src/assets/all.css/*.scss'
+                    resources: './src/assets/all.css'
                 })
                 .end()
         })
-    }, */
-    pluginOptions: {
-        'style-resources-loader': {
-            preProcessor: 'scss',
-            patterns: [
-                //加上自己的文件路径，不能使用别名
-                path.resolve(__dirname, 'src/styles/_variables.scss'),
-            ]
-        }
     }
 }

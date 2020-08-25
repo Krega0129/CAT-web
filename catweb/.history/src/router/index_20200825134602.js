@@ -24,6 +24,8 @@ const MeetingAppoint = () =>
 const Groups = () =>
     import ('@/views/Wuchanghui/profile/Groups')
 
+
+
 Vue.use(VueRouter)
 
 const profChildren = [{
@@ -92,10 +94,6 @@ const routes = [{
         path: '/backLogin',
         name: 'backLogin',
         component: resolve => (require(["../views/backEndMGT/backLogin/backLogin.vue"], resolve))
-    },
-    {
-        path: '/app',
-        component: resolve => (require(["../views/kai/application-form.vue"], resolve))
     },
     {
         path: '/backEnd',

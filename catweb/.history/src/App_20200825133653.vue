@@ -1,7 +1,11 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <!-- <loginReg></loginReg> -->
     <router-view></router-view>
+=======
+    <ApplicationForm></ApplicationForm>
+>>>>>>> c2799ceba2cd4ca48173a0ac3c5a439b9839dc3d
   </div>
 </template>
 <script>
@@ -15,6 +19,7 @@ export default {
 }
 </script>
 
+<<<<<<< HEAD
 <script>
 import loginReg from './views/login/loginReg'
 export default {
@@ -31,4 +36,7 @@ export default {
     width: 100%;
     height: 100%;
   }
+=======
+<style lang="scss" scoped>
+>>>>>>> c2799ceba2cd4ca48173a0ac3c5a439b9839dc3d
 </style>
