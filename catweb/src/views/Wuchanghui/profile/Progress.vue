@@ -51,7 +51,8 @@
         .then(res => {
           /* 显示进度 */
           console.log(res);
-          this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
+          // this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
+          this.wridesp = res.data[0].content
           if (res.data[0].adoptChecked == '通过') {
             this.write = '恭喜你通过了笔试'
             this.activeNum = 2
@@ -89,7 +90,8 @@
             this.face2desp = ''
           }
           if (res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '已预约') {
-            this.work1desp = `时间：${res.data[3].time}，地点：${res.data[3].content}`
+            // this.work1desp = `时间：${res.data[3].time}，地点：${res.data[3].content}`
+            this.work1desp = res.data[3].content
           } else if(res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '未预约'){
             this.work1desp = '未预约'
           }
@@ -103,7 +105,8 @@
             this.work1desp = ''
           }
           if (res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '已预约') {
-            this.work2desp = `时间：${res.data[4].time}，地点：${res.data[4].content}`
+            // this.work2desp = `时间：${res.data[4].time}，地点：${res.data[4].content}`
+            this.work2desp = res.data[4].content
           } else if(res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '未预约'){
             this.work2desp = '未预约'
           }
