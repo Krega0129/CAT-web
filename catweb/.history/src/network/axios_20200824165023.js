@@ -30,6 +30,7 @@ export default function axios(option) {
             // console.log('来到了request拦截failure中');
             return err
         })
+
         instance.interceptors.response.use(response => {
             // console.log('来到了response拦截success中');
             return response.data
