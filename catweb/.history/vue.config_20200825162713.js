@@ -20,10 +20,9 @@ module.exports = {
     },
 
     pluginOptions: {
-        'style-resources-loader': {
-            preProcessor: 'scss',
-            patterns: []
-        }
-    },
-    publicPath: './'
+      'style-resources-loader': {
+        preProcessor: 'scss',
+        patterns: []
+      }
+    }
 }

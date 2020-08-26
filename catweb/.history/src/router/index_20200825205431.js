@@ -130,7 +130,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-        /* mode: 'history', */
+        mode: 'history',
         routes
     })
     //权限判断
