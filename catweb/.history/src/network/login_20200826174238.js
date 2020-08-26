@@ -27,7 +27,7 @@ export function register(data) {
 export function login(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/user/login',
+        url: '/cat-registration/login',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
