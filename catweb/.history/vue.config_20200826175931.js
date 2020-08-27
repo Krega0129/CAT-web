@@ -15,19 +15,7 @@ module.exports = {
                 'views': '@/views',
                 '@': resolve('src'),
             }
-        },
-        /* devServer: {
-            proxy: {
-                '/proxy': {
-                    target: 'http://175.24.113.119:8080',
-                    changeOrigin: true, //改变源
-                    ws: true, //跨域
-                    pathRewrite: {
-                        '^/proxy': ''
-                    }
-                }
-            }
-        } */
+        }
 
     },
 
@@ -38,6 +26,6 @@ module.exports = {
         }
     },
     publicPath: './',
-
+    proxy: "http://175.24.113.119:8080"
 
 }

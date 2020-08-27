@@ -1,12 +1,14 @@
 import originAxios from 'axios'
 import qs from 'qs'
-
+const token = sessionStorage.getItem('token') || null
 export default function axios(option) {
     return new Promise((resolve, reject) => {
         // 1.创建axios的实例
         const instance = originAxios.create({
-            baseURL: 'http://47.93.19.109:8080',
-            timeout: 5000
+            /* withCredentials: true, */
+            baseURL: 'http://175.24.113.119:8080',
+            timeout: 5000,
+            /* headers: { Authorization: token }, */
         });
 
         // 配置请求和响应拦截
@@ -15,9 +17,16 @@ export default function axios(option) {
             // 1.当发送网络请求时, 在页面中添加一个loading组件, 作为动画
 
             // 2.某些请求要求用户必须登录, 判断用户是否有token, 如果没有token跳转到login页面
-
+            const token = sessionStorage.getItem('token')
+            if (token) {
+                config.headers.token = token;
+            } else {
+                config.headers.token = null;
+            }
             // 3.对请求的参数进行序列化(看服务器是否需要序列化)
-            /* config.data = qs.stringify(config.data) */
+            if (typeof config.data == 'object' && JSON.stringify(config.data).indexOf('{') == 0) { //判断变量m是不是json对象
+                config.data = qs.stringify(config.data)
+            }
             /* console.log(config.data); */
             // 4.等等
             return config

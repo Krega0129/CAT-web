@@ -16,7 +16,7 @@ module.exports = {
                 '@': resolve('src'),
             }
         },
-        /* devServer: {
+        devServer: {
             proxy: {
                 '/proxy': {
                     target: 'http://175.24.113.119:8080',
@@ -27,7 +27,7 @@ module.exports = {
                     }
                 }
             }
-        } */
+        }
 
     },
 
