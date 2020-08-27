@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url(../../assets/all.css/fold.scss);
+@import url(../../assets/sass/fold.scss);
 .application-form {
   position: relative;
   left: 50%;

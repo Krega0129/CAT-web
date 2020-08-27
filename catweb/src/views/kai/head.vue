@@ -1,7 +1,7 @@
 <template>
   <el-upload
     class="avatar-uploader"
-    action="http://175.24.113.119:8080/cat-registration/userInfo/uploadPhoto"
+    action="http://47.93.19.109:8080/cat-registration/userInfo/uploadPhoto"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload"

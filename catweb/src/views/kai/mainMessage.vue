@@ -77,8 +77,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(../../assets/all.css/shake.scss);
-@import url(../../assets/all.css/input.scss);
+@import url(../../assets/sass/shake.scss);
+@import url(../../assets/sass/input.scss);
 .textBox {
   border-bottom: none;
 }
