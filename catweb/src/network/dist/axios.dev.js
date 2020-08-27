@@ -17,7 +17,8 @@ function axios(option) {
   return new Promise(function (resolve, reject) {
     // 1.创建axios的实例
     var instance = _axios["default"].create({
-      baseURL: 'http://175.24.113.119:8080',
+      withCredentials: true,
+      baseURL: 'http://47.93.19.109:8080',
       timeout: 5000
     }); // 配置请求和响应拦截
 
