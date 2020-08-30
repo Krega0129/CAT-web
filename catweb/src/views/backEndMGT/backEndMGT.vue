@@ -1,7 +1,7 @@
 <template>
   <div class="backEndMGT">
     <asideMenu></asideMenu>
-    <keep-alive exclude="detail">
+    <keep-alive exclude="detail" class="keep">
       <router-view></router-view>
     </keep-alive>
   </div>
@@ -35,6 +35,7 @@ export default {
 <style scoped>
 @import ".../../../../assets/css/base.css";
 .backEndMGT {
+  overflow: hidden;
   display: flex;
 }
 </style>

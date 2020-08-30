@@ -233,7 +233,7 @@ export default {
 <style scoped>
 .search {
   padding: 1vw;
-  margin: 1vw;
+  margin: 1vw 0 1vw 2vw;
   width: 85vw;
   background-color: #ffffff;
 }

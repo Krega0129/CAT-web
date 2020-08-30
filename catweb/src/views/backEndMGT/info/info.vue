@@ -37,7 +37,7 @@ export default {
 <style scoped>
 .header {
   padding-left: 5vh;
-  width: 87vw;
+  width: 89vw;
   height: 5vh;
   line-height: 5vh;
   background-color: #ffffff;
