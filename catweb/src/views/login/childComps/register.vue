@@ -88,7 +88,7 @@ export default {
     },
     send() {
       if (this.btnNoDisabled) {
-        if (this.isPhoneOK&&!this.haveExistAccount&&!this.haveExistPhone) {
+        if (this.isPhoneOK&&!this.haveExistAccount&&!this.haveExistPhone&&this.account !== ''&&this.password !== '') {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
             if (this.sendTime <= 0) {
@@ -103,9 +103,7 @@ export default {
             }
           }, 1000);
           getPhoneCode(data).then(res => {});
-        } else {
-          this.isPhoneOK = false;
-        }
+        } 
       }
     },
     register() {
@@ -115,7 +113,10 @@ export default {
         this.isPasswordOK &&
         this.haveExistAccount&&
         this.haveExistPhone&&
-        this.code != ""
+        this.code != ""&&
+        this.account != ""&&
+        this.password != ""&&
+        this.phone != ""
       ) {
         const data = {
           code: this.code,
@@ -156,7 +157,7 @@ export default {
             duration: 4500,
             position: "bottom-right"
           });
-        }else if(res.code == 2509){
+        }else if(res.code == 2501){
           this.haveExistPhone = false
         }
       });
