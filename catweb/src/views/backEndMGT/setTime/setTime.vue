@@ -5,8 +5,8 @@
       <div class="listShow">
         <span>已设置预约时间</span>
         <el-table :data="tableData" border style="width: 100%" height="500">
-          <el-table-column prop="date" label="已设置可预约时间" width="300"></el-table-column>
-          <el-table-column prop="stage" label="阶段" width="300"></el-table-column>
+          <el-table-column prop="date" label="已设置可预约时间" width="200"></el-table-column>
+          <el-table-column prop="stage" label="阶段" width="200"></el-table-column>
           <el-table-column label="操作" fixed="right">
             <template slot-scope="scope">
               <i
