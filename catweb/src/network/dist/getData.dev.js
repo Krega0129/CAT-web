@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function getData() {
   return (0, _axios["default"])({
     method: 'get',
-    url: '/cat-registration/chartDate/selectDate' // data: data,
+    url: '/cat_registration_war_exploded/chartDate/selectDate' // data: data,
     // headers: {
     //     /* 'Content-Type': 'application/x-www-form-urlencoded', */
     //     'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import axios from './axios.js'
 
 export function getCheckStuNum(data) {
     return axios({
+
         method: 'post',
         url: '/cat_registration_war_exploded/userInfo/selectInfoByNumber', //根据学号
         data: data,
