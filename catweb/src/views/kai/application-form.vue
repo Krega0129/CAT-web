@@ -117,6 +117,7 @@ export default {
   left: 50%;
   margin-left: -350px;
   width: 700px;
+
 }
 .el-row {
   &:last-child {
