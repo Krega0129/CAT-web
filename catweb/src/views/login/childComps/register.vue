@@ -88,7 +88,7 @@ export default {
     },
     send() {
       if (this.btnNoDisabled) {
-        if (this.isPhoneOK&&this.haveExistAccount&&this.haveExistPhone) {
+        if (this.isPhoneOK&&!this.haveExistAccount&&!this.haveExistPhone) {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
             if (this.sendTime <= 0) {

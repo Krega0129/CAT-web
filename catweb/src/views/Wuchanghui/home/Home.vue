@@ -73,7 +73,8 @@
     },
     mounted() {
       getUserInfo().then(res => {
-        this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.heads
+        console.log(res);
+        this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.head
       })
     }
   }
@@ -118,6 +119,14 @@
     .home img {
       width: 100px;
       height: 80px;
+      border-radius: 50% 20%;
+    }
+  }
+
+  @media screen and (min-width: 900px){
+    .home img {
+      width: 10vw;
+      height: 20vh;
       border-radius: 50% 20%;
     }
   }
