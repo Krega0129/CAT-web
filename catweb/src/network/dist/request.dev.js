@@ -17,7 +17,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function getCheckStuNum(data) {
   return (0, _axios["default"])({
     method: 'post',
-    url: '/cat-registration/userInfo/selectInfoByNumber',
+    url: '/cat_registration_war_exploded/userInfo/selectInfoByNumber',
     //根据学号
     data: data,
     headers: {
@@ -30,7 +30,7 @@ function getCheckStuNum(data) {
 function getSubmit(data) {
   return (0, _axios["default"])({
     method: 'post',
-    url: '/cat-registration/userInfo/signUp',
+    url: '/cat_registration_war_exploded/userInfo/signUp',
     data: data,
     headers: {
       'Content-Type': 'application/json;charset=utf-8' // 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function getSubmit(data) {
 function headSubmit(upload) {
   return (0, _axios["default"])({
     method: 'post',
-    url: '/cat-registration/userInfo/uploadPhoto',
+    url: '/cat_registration_war_exploded/userInfo/uploadPhoto',
     data: upload,
     headers: {
       'Content-Type': 'multipart/form-data' // 'Content-Type': 'application/json',
