@@ -155,7 +155,7 @@ export default {
 .header {
   margin-bottom: 2vh;
   padding-left: 5vh;
-  width: 87vw;
+  width: 90vw;
   height: 5vh;
   line-height: 5vh;
   background-color: #ffffff;

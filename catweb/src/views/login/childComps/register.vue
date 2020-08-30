@@ -88,7 +88,7 @@ export default {
     },
     send() {
       if (this.btnNoDisabled) {
-        if (this.isPhoneOK) {
+        if (this.isPhoneOK&&this.existAccount&&this.existPhone) {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
             if (this.sendTime <= 0) {
@@ -147,6 +147,7 @@ export default {
       const data = { phone: this.phone };
       judgeExistPhone(data).then(res => {
         if (res.code == 2201) {
+          this.existPhone = true
           this.$notify.error({
             title: "警告",
             message: "手机号已注册",
@@ -160,6 +161,7 @@ export default {
       const data = { username: this.account };
       judgeExistAccount(data).then(res => {
         if (res.code == 2209) {
+          this.existAccount = true
           this.$notify.error({
             title: "警告",
             message: "账号已注册",
@@ -182,7 +184,9 @@ export default {
       isPhoneOK: true,
       btnNoDisabled: true,
       sendTime: 60,
-      sendMessage: "发送"
+      sendMessage: "发送",
+      existAccount:false,
+      existPhone:false
     };
   },
   mounted() {
