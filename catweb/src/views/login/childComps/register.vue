@@ -138,7 +138,7 @@ export default {
             });
             setTimeout(() => {
               this.$router.push("/loginReg");
-            }, 1500);
+            }, 1000);
           }
         });
       }

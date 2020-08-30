@@ -2,12 +2,12 @@
   <div class="listShow">
     <el-table :data="stuData" stripe style="width: 100%" @selection-change="select">
       <el-table-column type="selection" width="100"></el-table-column>
-      <el-table-column prop="stuNumber" label="学号" width="230"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="230"></el-table-column>
-      <el-table-column prop="direction" label="方向" width="230"></el-table-column>
-      <el-table-column prop="stage" label="考核阶段" width="230"></el-table-column>
-      <el-table-column prop="appointTime" label="已预约时间" width="230"></el-table-column>
-      <el-table-column prop="adoptChecked" label="是否通过" width="200">
+      <el-table-column prop="stuNumber" label="学号" width="140"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="100"></el-table-column>
+      <el-table-column prop="direction" label="方向" width="100"></el-table-column>
+      <el-table-column prop="stage" label="考核阶段" width="140"></el-table-column>
+      <el-table-column prop="appointTime" label="已预约时间" width="140"></el-table-column>
+      <el-table-column prop="adoptChecked" label="是否通过" width="140">
         <template slot-scope="scope">
           <span v-if="scope.row.adoptChecked == 0">待审核</span>
           <span v-else-if="scope.row.adoptChecked == 1" style="color:rgb(9, 223, 116)">通过</span>
