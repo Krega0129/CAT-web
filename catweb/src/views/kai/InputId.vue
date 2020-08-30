@@ -5,6 +5,7 @@
         class="input__field input__field--jiro"
         type="text"
         id="input-10"
+        autocomplete="off"
         v-model="userId"
         v-on:blur="checkId()"
         v-on:focus="changeId()"
@@ -47,6 +48,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url(../../assets/all.css/input.scss);
+<style lang="scss" scoped>
+@import url(../../assets/sass/input.scss);
 </style>

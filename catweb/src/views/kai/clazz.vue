@@ -141,9 +141,7 @@ export default {
 };
 </script>
 
-<style scoped>
-/* // @import url(../all.css/shake.scss); */
-/* // @import url(../all.css/select.scss); */
+<style lang="scss" >
 .block {
   width: 300px;
   margin-left: 20px;

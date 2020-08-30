@@ -10,8 +10,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import axios from 'axios'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 Vue.prototype.$bus = Bus;
 Vue.prototype.$axios = axios;
+Vue.prototype.$store = store;
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 new Vue({

@@ -97,9 +97,11 @@ export default {
         }else if(res.code == 3511){
            this.$message.error("请勿重复提交！！");
         } else {
+          router.push("/home")
           this.$message({
             message: "报名成功!",
             type: "success",
+            
           });
         }
       });
