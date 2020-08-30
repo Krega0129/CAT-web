@@ -88,7 +88,7 @@ export default {
     },
     send() {
       if (this.btnNoDisabled) {
-        if (this.isPhoneOK&&this.existAccount&&this.existPhone) {
+        if (this.isPhoneOK&&this.haveExistAccount&&this.haveExistPhone) {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
             if (this.sendTime <= 0) {
@@ -113,6 +113,8 @@ export default {
         this.isPhoneOK &&
         this.isAccountOK &&
         this.isPasswordOK &&
+        this.haveExistAccount&&
+        this.haveExistPhone&&
         this.code != ""
       ) {
         const data = {
@@ -137,7 +139,7 @@ export default {
               position: "bottom-right"
             });
             setTimeout(() => {
-              this.$router.push("/loginReg");
+              this.$router.go(0)
             }, 1000);
           }
         });
@@ -147,13 +149,15 @@ export default {
       const data = { phone: this.phone };
       judgeExistPhone(data).then(res => {
         if (res.code == 2201) {
-          this.existPhone = true
+          this.haveExistPhone = true
           this.$notify.error({
             title: "警告",
             message: "手机号已注册",
             duration: 4500,
             position: "bottom-right"
           });
+        }else if(res.code == 2509){
+          this.haveExistPhone = false
         }
       });
     },
@@ -161,13 +165,15 @@ export default {
       const data = { username: this.account };
       judgeExistAccount(data).then(res => {
         if (res.code == 2209) {
-          this.existAccount = true
+          this.haveExistAccount = true
           this.$notify.error({
             title: "警告",
             message: "账号已注册",
             duration: 4500,
             position: "bottom-right"
           });
+        }else if(res.code == 2509){
+          this.haveExistAccount = false
         }
       });
     }
@@ -185,8 +191,8 @@ export default {
       btnNoDisabled: true,
       sendTime: 60,
       sendMessage: "发送",
-      existAccount:false,
-      existPhone:false
+      haveExistAccount:false,
+      haveExistPhone:false
     };
   },
   mounted() {
