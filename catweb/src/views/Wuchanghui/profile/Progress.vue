@@ -29,7 +29,7 @@
     name: 'Progress',
     data() {
       return {
-        isSign: true,
+        isSign: sessionStorage.getItem('sign'),
         /* 进度表标题 */
         write: '笔试',
         face1: '第一轮面试',
@@ -51,9 +51,6 @@
         work1Status: '',
         work2Status: '',
       }
-    },
-    methods: {
-      
     },
     mounted() {
       checkPro()

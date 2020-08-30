@@ -62,7 +62,7 @@
     name: 'MeetingAppoint',
     data() {
       return {
-        isSign: true,
+        isSign: sessionStorage.getItem('sign'),
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -76,7 +76,7 @@
         selectApointTime: [],
         /* 当前选择的日期 */
         selDate: null,
-        /*  */
+        /* 是否展示报名人数 */
         isShowPeoNum: false
       }
     },

@@ -30,7 +30,7 @@
         <ball fillColor="#89e1d3"></ball>
       </div>
     </div>
-    <div @click="loginClick"  class="login pos-ab">登录</div>
+    <div @click="loginClick" v-if="!isLogin" class="login pos-ab">登录</div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@
     data() {
       return {
         /* 判断登录状态 */
-        isLogin: true,
+        isLogin: sessionStorage.getItem('token'),
         imgSrc: ''
       }
     },
@@ -84,6 +84,8 @@
 
   .home {
     overflow: hidden;
+    min-width: 900px;
+    min-height: 400px;
     background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
@@ -97,11 +99,6 @@
     border-radius: 50% 20%;
   }
   
-  /* 第二和第三个模块样式不同 */
-  .home .special {
-    border-radius: 20% 50%;
-  }
-
   /* 工作室logo */
   .home .logo {
     width: 85vh;
@@ -115,6 +112,19 @@
     margin-left: -42.5vh;
     background: url(../../../assets/images/logo.png);
     background-size: 100% 100%;
+  }
+  
+  @media screen and (max-width: 900px){
+    .home img {
+      width: 100px;
+      height: 80px;
+      border-radius: 50% 20%;
+    }
+  }
+
+  /* 第二和第三个模块样式不同 */
+  .home .special {
+    border-radius: 20% 50%;
   }
 
   .home .logo img {

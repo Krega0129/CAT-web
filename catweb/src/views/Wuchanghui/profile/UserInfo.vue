@@ -55,7 +55,7 @@
     name: 'UserInfo',
     data() {
       return {
-        isSign: true,
+        isSign: sessionStorage.getItem('sign'),
         userName: '',
         stuNum: '',
         collage: '',
