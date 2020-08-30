@@ -73,7 +73,7 @@
     },
     mounted() {
       getUserInfo().then(res => {
-        // this.imgSrc = 'http://175.24.113.119:8080/cat-registration/' + res.data.heads
+        this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.heads
       })
     }
   }

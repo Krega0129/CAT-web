@@ -27,7 +27,7 @@
         <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
       </div>
     </div>
-    <router-link to="/home" :style="{'font-size': '3vh'}">返回首页</router-link>
+    <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">X</router-link>
   </div>
 </template>
 
@@ -190,5 +190,16 @@
     top: 1vh;
     border-radius: 50%;
     border: .2vh solid black;
+  }
+
+  .profile .closeProfile {
+    top: 10vh;
+    right: 10vw;
+    width: 5vh;
+    height: 5vh;
+    line-height: 4vh;
+    color: white;
+    border: .2vw solid white;
+    border-radius: 50%;
   }
 </style>
