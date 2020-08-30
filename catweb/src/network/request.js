@@ -3,7 +3,7 @@ import axios from './axios.js'
 export function getCheckStuNum(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/userInfo/selectInfoByNumber', //根据学号
+        url: '/cat_registration_war_exploded/userInfo/selectInfoByNumber', //根据学号
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -15,7 +15,7 @@ export function getCheckStuNum(data) {
 export function getSubmit(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/userInfo/signUp',
+        url: '/cat_registration_war_exploded/userInfo/signUp',
         data: data,
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -27,7 +27,7 @@ export function getSubmit(data) {
 export function headSubmit(upload) {
     return axios({
         method: 'post',
-        url: '/cat-registration/userInfo/uploadPhoto',
+        url: '/cat_registration_war_exploded/userInfo/uploadPhoto',
         data: upload,
         headers: {
             'Content-Type': 'multipart/form-data',

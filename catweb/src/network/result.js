@@ -3,7 +3,7 @@ import axios from './search.js'
 export function passOrOut(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/updateAdoptChecked',
+        url: '/cat_registration_war_exploded/manager/updateAdoptChecked',
         data: data,
         headers: {
             /* 'Content-Type': 'application/x-www-form-urlencoded', */
@@ -15,7 +15,7 @@ export function passOrOut(data) {
 export function sendInfo(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/updateContent',
+        url: '/cat_registration_war_exploded/manager/updateContent',
         data: data,
         headers: {
             /* 'Content-Type': 'application/x-www-form-urlencoded', */

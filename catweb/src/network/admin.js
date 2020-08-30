@@ -3,7 +3,7 @@ import axios from './axios.js'
 export function getSearch(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/selectUser', //根据学号或名字
+        url: '/cat_registration_war_exploded/manager/selectUser', //根据学号或名字
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

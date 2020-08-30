@@ -14,7 +14,7 @@ import axios from './axios.js'
 export function deleteTime(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/delAppoint',
+        url: '/cat_registration_war_exploded/manager/delAppoint',
         data: data,
         headers: {
             /* "Content-Type": "multipart/form-data" */
@@ -27,7 +27,7 @@ export function deleteTime(data) {
 export function getTime() {
     return axios({
         method: 'get',
-        url: '/cat-registration/appointTime/selectTime',
+        url: '/cat_registration_war_exploded/appointTime/selectTime',
         headers: {
             'Content-Type': 'application/json',
             /* "Content-Type": "multipart/form-data" */

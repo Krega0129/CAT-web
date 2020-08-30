@@ -57,7 +57,8 @@
       /* 获取用户信息 */
       getUserInfo().then(res => {
         // console.log(res);
-        this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
+        this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+        
         this.userName = res.data.name
       })
     }

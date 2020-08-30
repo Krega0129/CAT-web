@@ -15,7 +15,7 @@
         </select>
         <div class="peoNum dp-in-bl">
           <span v-if="!isShowPeoNum">选择后查看预约人数</span>
-          <span v-else>此场已预约人数：{{peoNum}}</span>
+          <span v-else>此场已预约人数：{{peoNum}} / {{peoMaxNum}}</span>
         </div>
         <button @click="appoint" class="appointBtn">确定</button>
       </div>
