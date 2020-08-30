@@ -27,7 +27,7 @@
         <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
       </div>
     </div>
-    <router-link to="/home" :style="{'font-size': '3vh'}">返回首页</router-link>
+    <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">X</router-link>
   </div>
 </template>
 
@@ -57,7 +57,8 @@
       /* 获取用户信息 */
       getUserInfo().then(res => {
         // console.log(res);
-        // this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
+        this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+        
         this.userName = res.data.name
       })
     }
@@ -129,7 +130,7 @@
   }
 
   .profile .userProfile .leftBar .funcList li a {
-    font-size: 3vh;
+    font-size: 1.5vw;
   }
 
   .profile .userProfile .leftBar .funcList li:last-child {
@@ -189,5 +190,16 @@
     top: 1vh;
     border-radius: 50%;
     border: .2vh solid black;
+  }
+
+  .profile .closeProfile {
+    top: 10vh;
+    right: 10vw;
+    width: 5vh;
+    height: 5vh;
+    line-height: 4vh;
+    color: white;
+    border: .2vw solid white;
+    border-radius: 50%;
   }
 </style>

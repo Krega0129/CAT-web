@@ -27,6 +27,7 @@
       </router-link>
       <img class="pos-ab" src="../../assets/images/hand.png" alt="">
     </div>
+    <router-link to="/home" style="z-index: 10" class="pos-ab">跳过动画</router-link>
   </div>
 </template>
 

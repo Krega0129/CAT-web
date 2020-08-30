@@ -27,6 +27,7 @@ export function register(data) {
 export function login(data) {
     return axios({
         method: 'post',
+        // url: '/cat-registration/user/login',
         url: '/cat_registration_war_exploded/user/login',
         data: data,
         headers: {

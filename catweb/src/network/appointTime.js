@@ -3,7 +3,7 @@ import axios from './axios.js'
 export function seeAppointTime(data) {
   return axios({
       method: 'get',
-      url: '/cat-registration/appointTime/selectTime',
+      url: '/cat_registration_war_exploded/appointTime/selectTime',
       data: data,
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -15,7 +15,7 @@ export function seeAppointTime(data) {
 export function appointTime(data) {
   return axios({
       method: 'post',
-      url: '/cat-registration/appointTime/appointTime',
+      url: '/cat_registration_war_exploded/appointTime/appointTime',
       data: data,
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,7 +27,7 @@ export function appointTime(data) {
 export function cancelAppointTime(data) {
   return axios({
       method: 'post',
-      url: '/cat-registration/appointTime/cancelAppoint',
+      url: '/cat_registration_war_exploded/appointTime/cancelAppoint',
       data: data,
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,7 +39,7 @@ export function cancelAppointTime(data) {
 export function hadAppointTime(data) {
   return axios({
       method: 'post',
-      url: '/cat-registration/appointTime/selectAppointedTime',
+      url: '/cat_registration_war_exploded/appointTime/selectAppointedTime',
       data: data,
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

@@ -23,6 +23,15 @@ new Vue({
     render: h => h(App)
 }).$mount('#app')
 
+// axios.interceptors.request.use(config => {
+//     if(sessionStorage.getItem('token')) {
+//         config.headers.Authorization = sessionStorage.getItem('token');
+//     }
+//     return config;
+// }, err => {
+//     console.log(err);
+// })
+
 window.addEventListener('resize', () => {
     document.body.style.width = 100 + 'vw'
     document.body.style.height = 100 + 'vh'

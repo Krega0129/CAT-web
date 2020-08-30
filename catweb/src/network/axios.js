@@ -5,7 +5,9 @@ export default function axios(option) {
     return new Promise((resolve, reject) => {
         // 1.创建axios的实例
         const instance = originAxios.create({
-            withCredentials: true,
+            // withCredentials: true,
+            // baseURL: 'http://175.24.113.119:8080',
+            // baseURL: 'http://47.93.19.109:8080',
             baseURL: 'http://192.168.1.106:8080',
             timeout: 5000,
             /* headers: { Authorization: token }, */
@@ -26,6 +28,11 @@ export default function axios(option) {
             if (typeof config.data == 'object' && JSON.stringify(config.data).indexOf('{') == 0) { //判断变量m是不是json对象
                 config.data = qs.stringify(config.data)
             }
+
+            // if(window.sessionStorage.getItem('token')) {
+            //     config.headers.Authorization = window.ArraysessionStorage.getItem('token');
+            // }
+
             /* console.log(config.data); */
             // 4.等等
             return config
