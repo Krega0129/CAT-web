@@ -5,8 +5,8 @@
       <div class="listShow">
         <span>已设置预约时间</span>
         <el-table :data="tableData" border style="width: 100%" height="500">
-          <el-table-column prop="date" label="已设置可预约时间" width="300"></el-table-column>
-          <el-table-column prop="stage" label="阶段" width="300"></el-table-column>
+          <el-table-column prop="date" label="已设置可预约时间" width="200"></el-table-column>
+          <el-table-column prop="stage" label="阶段" width="200"></el-table-column>
           <el-table-column label="操作" fixed="right">
             <template slot-scope="scope">
               <i
@@ -20,8 +20,10 @@
       <div class="addList">
         <span>新增预约时间</span>
         <div class="addShow" v-for="(item,index) in newSet" :key="index">
-          <el-input placeholder="请输入预约时间" v-model="item.date" clearable style="width:15vw"></el-input>
-          <el-input placeholder="请输入阶段" v-model="item.stage" clearable style="width:15vw"></el-input>
+          <el-date-picker v-model="item.date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">></el-date-picker>
+          <el-select v-model="item.stage" placeholder="请选择">
+            <el-option v-for="sta in stages" :key="sta.value" :label="sta.label" :value="sta.value"></el-option>
+          </el-select>
           <i class="el-icon-circle-close" @click="newTimeDelete(index)"></i>
         </div>
         <div class="btn">
@@ -42,7 +44,11 @@ export default {
   data() {
     return {
       tableData: [],
-      newSet: []
+      newSet: [],
+      stages: [
+        { label: "第一轮面试", value: "第一轮面试" },
+        { label: "第二轮面试", value: "第二轮面试" },
+      ],
     };
   },
   methods: {
@@ -54,50 +60,55 @@ export default {
       this.newSet.splice(index, 1);
     },
     submitNewTime() {
-      this.$confirm("将提交预约时间, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          const data = [];
-          for (const item of this.newSet) {
-            if (item.date == null || item.stage == null) {
-              this.$notify.error({
-                title: "警告",
-                message: "不允许为空",
-                duration: 2500,
-                position: "bottom-right"
-              });
-              return new Promise.reject();
+      if (this.newSet.length !== 0) {
+        this.$confirm("将提交预约时间, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
+            const data = [];
+            for (const item of this.newSet) {
+              if (
+                this.newSet == null ||
+                item.date == null ||
+                item.stage == null
+              ) {
+                this.$notify.error({
+                  title: "警告",
+                  message: "不允许为空",
+                  duration: 2500,
+                  position: "bottom-right",
+                });
+                return new Promise.reject();
+              }
+              data.push(item);
+              setNewTime(data).then((res) => {});
             }
-            data.push(item);
-          }
-          setNewTime(data).then(res => {
+          })
+          .then(() => {
+            this.newSet = [];
+            this.getTime();
+          })
+          .then(() => {
+            this.$message({
+              type: "success",
+              message: "提交成功!",
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消",
+            });
           });
-        })
-        .then(() => {
-          this.newSet = [];
-          this.getTime();
-        })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "提交成功!"
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消"
-          });
-        });
+      }
     },
     deleteOldTime(date, stage) {
       this.$confirm("将删除已设置时间, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
         .then(() => {
           const data = { date, stage };
@@ -106,7 +117,7 @@ export default {
         .then(() => {
           this.$message({
             type: "success",
-            message: "删除成功!"
+            message: "删除成功!",
           });
         })
         .then(() => {
@@ -116,12 +127,12 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "已取消删除",
           });
         });
     },
     getTime() {
-      getTime().then(res => {
+      getTime().then((res) => {
         this.tableData = [];
         if (res.code == 0) {
           for (const item of res.data) {
@@ -132,11 +143,11 @@ export default {
           }
         }
       });
-    }
+    },
   },
   created() {
     this.getTime();
-  }
+  },
 };
 </script>
 

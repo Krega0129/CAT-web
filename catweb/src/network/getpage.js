@@ -2,7 +2,7 @@ import axios from './search.js'
 export function getPageData(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/selectByStage',
+        url: '/cat_registration_war_exploded/manager/selectByStage',
         data: data,
         headers: {
             /* 'Content-Type': 'application/x-www-form-urlencoded', */
@@ -15,7 +15,7 @@ export function getPageData(data) {
 export function getStageDirection(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/manager/selectByDirectionWithStage',
+        url: '/cat_registration_war_exploded/manager/selectByDirectionWithStage',
         data: data,
         headers: {
             /* 'Content-Type': 'application/x-www-form-urlencoded', */
