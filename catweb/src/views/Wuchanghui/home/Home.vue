@@ -2,19 +2,19 @@
   <div class="home full pos-ab">
     <!-- 引入模块，L,T,R,B分别为绝对定位的位置，cL,cH,cR,cB分别为svg圆形的位置，cX,cY,cr分别是圆心位置和半径，fillColor为圆的填充颜色 -->
     <homeMod L="10vw" T="13vh" cL="-44vw" cT="-129vh" class="t-al-cent pos-re" fillColor="#89e1d3">
-      <img src="../../../assets/images/cat.webp" slot="pic" alt="" @click="picClick($event, '/intro')">
+      <img src="../../../assets/images/cat.jpg" slot="pic" alt="" @click="picClick($event, '/intro')">
       <p slot="title">工作室介绍</p>
     </homeMod>
     <homeMod R="12vw" T="13vh" cL="-24vw" cT="-133vh" class="t-al-cent" fillColor="#fbaf51">
-      <img src="../../../assets/images/profile.gif" slot="pic" alt="" @click="picClick($event, '/profile')" class="special">
+      <img src="../../../assets/images/profile.jpg" slot="pic" alt="" @click="picClick($event, '/profile')" class="special">
       <p slot="title">个人中心</p>
     </homeMod>
     <homeMod L="10vw" B="13vh" cL="-44vw" cT="-20vh" class="t-al-cent" fillColor="#31b9f7">
-      <img src="../../../assets/images/front-end.webp" slot="pic" alt="" @click="picClick($event, '/front-end')" class="special">
+      <img src="../../../assets/images/front-end.jpg"  slot="pic" alt="" @click="picClick($event, '/front-end')" class="special">
       <p slot="title">前端</p>
     </homeMod>
     <homeMod R="12vw" B="14vh " cL="-22vw" cT="-21vh" class="t-al-cent" fillColor="lightcoral">
-      <img src="../../../assets/images/back-end.gif" slot="pic" alt="" @click="picClick($event, '/back-end')">
+      <img src="../../../assets/images/back-end.jpg" slot="pic" alt="" @click="picClick($event, '/back-end')">
       <p slot="title">后台</p>
     </homeMod>
     <!-- 工作室logo -->
@@ -37,13 +37,15 @@
 <script>
   import homeMod from './homeMod'
   import ball from './ball'
+  import {getUserInfo} from '../../../network/getUserInfo'
 
   export default {
     name: 'home',
     data() {
       return {
         /* 判断登录状态 */
-        isLogin: true
+        isLogin: true,
+        imgSrc: ''
       }
     },
     components: {
@@ -68,6 +70,11 @@
       loginClick() {
         this.$router.push('/loginReg')
       }
+    },
+    mounted() {
+      getUserInfo().then(res => {
+        // this.imgSrc = 'http://175.24.113.119:8080/cat-registration/' + res.data.heads
+      })
     }
   }
 </script>
@@ -86,7 +93,7 @@
   /* 四个模块图片的样式 */
   .home img {
     width: 10vw;
-    height: 10vw;
+    height: 20vh;
     border-radius: 50% 20%;
   }
   
@@ -161,5 +168,6 @@
   .home .login {
     left: 50%;
     bottom: 3.4vh;
+    z-index: 2;
   }
-</style>>
+</style>

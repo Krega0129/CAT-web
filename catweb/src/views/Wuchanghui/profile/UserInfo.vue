@@ -6,8 +6,8 @@
         <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
-    <div v-else class="UserInfoSuc pos-re full t-al-cent">
-      <h2 class="title">个人信息</h2>
+    <div v-else class="UserInfoSuc pos-re full">
+      <h2 class="title t-al-cent">个人信息</h2>
       <form action="">
         <table>
           <tbody>

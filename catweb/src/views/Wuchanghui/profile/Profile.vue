@@ -57,7 +57,7 @@
       /* 获取用户信息 */
       getUserInfo().then(res => {
         // console.log(res);
-        // this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
+        this.userImgURL = 'http://175.24.113.119:8080/cat-registration/' + res.data.head
         this.userName = res.data.name
       })
     }
@@ -129,7 +129,7 @@
   }
 
   .profile .userProfile .leftBar .funcList li a {
-    font-size: 3vh;
+    font-size: 1.5vw;
   }
 
   .profile .userProfile .leftBar .funcList li:last-child {

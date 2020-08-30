@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
 @import url(../../assets/all.css/shake.scss);
 @import url(../../assets/all.css/input.scss);
 .textBox {

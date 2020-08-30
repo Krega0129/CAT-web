@@ -110,7 +110,7 @@ export default {
 
 
 
-<style lang="scss" scoped>
+<style scoped>
 .button-parrot {
   position: relative;
 }
@@ -146,16 +146,18 @@ button {
     #f09520,
     #22abe1
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  &:hover {
+}
+
+button:hover {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
       0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
       0 16px 16px rgba(0, 0, 0, 0.12);
-  }
-  &:active {
+}
+
+button:active {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
       0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
       0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
-  }
 }
 
 .name {

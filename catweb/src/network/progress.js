@@ -1,16 +1,13 @@
-import axios from 'axios'
-axios.defaults.baseURL = 'http://175.24.113.119:8080'
+import axios from './axios.js'
 
-export function checkPro(url, params) {
-  return new Promise((resolve, reject) => {
-    axios.get(url, params)
-      .then(response => {
-          resolve(response.data);
-      }, err => {
-          reject(err);
-      })
-      .catch((error) => {
-          reject(error)
-      })
-  })
+export function checkPro() {
+    return axios({
+        method: 'get',
+        url: '/cat-registration/schedulePro/select',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            /* 'Content-Type': 'application/json', */
+            /* "Content-Type": "multipart/form-data" */
+        }
+    })
 }

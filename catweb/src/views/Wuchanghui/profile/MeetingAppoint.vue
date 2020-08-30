@@ -143,6 +143,10 @@
                 console.log('ok');
                 this.peoNum = res.data[LastedStage].dateNumbers[this.appointDate]
               }
+              this.$message({
+                message: '取消预约成功',
+                type: 'success'
+              })
               this.appointDate = ''
               this.isAppoint = false;
             })
@@ -215,11 +219,11 @@
   .MeetingAppoint .appointSuc .date {
     height: 5vh;
     margin-top: 8vh;
-    font-size: 3vh;
+    font-size: 1.3vw;
   }
 
   .MeetingAppoint .appointSuc .date .chooseDate {
-    font-size: 3vh;
+    font-size: 1.3vw;
     width: 15vw;
     height: 5vh;
   }
@@ -230,7 +234,7 @@
   }
 
   .MeetingAppoint .appointSuc .date .peoNum {
-    font-size: 3vh;
+    font-size: 1.3vw;
     width: 15vw;
     line-height: 5vh;
     height: 4.9vh;
@@ -248,7 +252,7 @@
     width: 36vw;
     height: 35vh;
     /* overflow-y: scroll; */
-    font-size: 3vh;
+    font-size: 1.3vw;
     margin: 5vh auto;
   }
 

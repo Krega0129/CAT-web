@@ -16,7 +16,7 @@ export function getPhoneCode(data) {
 export function register(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/insert',
+        url: '/cat-registration/user/insert',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,7 +27,7 @@ export function register(data) {
 export function login(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/login',
+        url: '/cat-registration/user/login',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +38,7 @@ export function login(data) {
 export function judgeExistPhone(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/selectByPhone',
+        url: '/cat-registration/user/selectByPhone',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -49,7 +49,7 @@ export function judgeExistPhone(data) {
 export function judgeExistAccount(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/selectByUsername',
+        url: '/cat-registration/user/selectByUsername',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,7 +60,7 @@ export function judgeExistAccount(data) {
 export function phoneLogin(data) {
     return axios({
         method: 'post',
-        url: '/cat-registration/loginByPhone',
+        url: '/cat-registration/user/loginByPhone',
         data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

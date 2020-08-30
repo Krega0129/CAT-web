@@ -134,6 +134,8 @@ export default {
                   position: "bottom-right"
                 });
               } else if (res.code == 2200) {
+                console.log(res);
+                sessionStorage.setItem('token', res.data);
                 this.$notify.success({
                   title: "成功",
                   message: "登录成功,即将跳转",

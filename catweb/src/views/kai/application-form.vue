@@ -110,7 +110,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 @import url(../../assets/all.css/fold.scss);
 .application-form {
   position: relative;
@@ -118,18 +118,17 @@ export default {
   margin-left: -350px;
   width: 700px;
 }
-.el-row {
-  &:last-child {
+.el-row:last-child {
     margin-bottom: 0;
-  }
 }
+
 .el-col {
   border-radius: 4px;
 }
 .el-switch {
   top: 30px;
 }
-// .bg-purple-dark {
+/* // .bg-purple-dark {
 //   background: #99a9bf;
 // }
 // .bg-purple {
@@ -137,7 +136,7 @@ export default {
 // }
 // .bg-purple-light {
 //   background: #e5e9f2;
-// }
+// } */
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
