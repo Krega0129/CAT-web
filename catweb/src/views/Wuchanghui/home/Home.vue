@@ -64,7 +64,11 @@
         target.style.transform = 'translate(' + toLeft + ',' + toTop + ') scale(1.5)';
         target.style.borderRadius = '20% 20%'
         setTimeout(() => {
-          this.$router.push(path)
+          if(path === '/profile' && !sessionStorage.getItem('token')) {
+            this.$router.push('/loginReg')
+          } else {
+            this.$router.push(path)
+          }
         }, 2000)
       },
       loginClick() {
@@ -85,8 +89,8 @@
 
   .home {
     overflow: hidden;
-    min-width: 900px;
-    min-height: 400px;
+    /* min-width: 800px;
+    min-height: 300px; */
     background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
@@ -96,7 +100,7 @@
   /* 四个模块图片的样式 */
   .home img {
     width: 10vw;
-    height: 20vh;
+    height: 8vw;
     border-radius: 50% 20%;
   }
   
@@ -115,7 +119,7 @@
     background-size: 100% 100%;
   }
   
-  @media screen and (max-width: 900px){
+  /* @media screen and (max-width: 800px){
     .home img {
       width: 100px;
       height: 80px;
@@ -123,13 +127,21 @@
     }
   }
 
-  @media screen and (min-width: 900px){
+  @media screen and (max-height: 300px){
+    .home img {
+      width: 100px;
+      height: 80px;
+      border-radius: 50% 20%;
+    }
+  }
+
+  @media screen and (min-width: 800px){
     .home img {
       width: 10vw;
       height: 20vh;
       border-radius: 50% 20%;
     }
-  }
+  } */
 
   /* 第二和第三个模块样式不同 */
   .home .special {

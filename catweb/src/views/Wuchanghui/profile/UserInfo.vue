@@ -1,9 +1,9 @@
 <template>
   <div class="userInfo">
-    <div v-if="!isSign" class="userInfoFai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="userInfoFai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看个人信息</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
     <div v-else class="UserInfoSuc pos-re full">
@@ -55,7 +55,7 @@
     name: 'UserInfo',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         userName: '',
         stuNum: '',
         collage: '',
@@ -73,6 +73,11 @@
     },
     created() {
       getUserInfo().then(res => {
+        if(res.data) {
+          this.isSign = true;
+        } else {
+          this.isSign = false
+        }
         this.userName = res.data.name
         this.stuNum = res.data.stuNumber
         this.collage = res.data.collage

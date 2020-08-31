@@ -1,12 +1,12 @@
 <template>
   <div class="MeetingAppoint">
-    <div v-if="!isSign" class="appointfai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="appointfai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看预约进度</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
-    <div v-else class="appointSuc pos-re full t-al-cent">
+    <div v-else-if="isSign" class="appointSuc pos-re full t-al-cent">
       <h2 class="title">预约面试：{{appointOption}}</h2>
       <div class="date">
         <select class="chooseDate" name="" id="" @change="timeChange($event.target.value)">
@@ -62,7 +62,7 @@
     name: 'MeetingAppoint',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -168,6 +168,12 @@
     },
     mounted() {
       seeAppointTime({}).then(res => {
+        if(res.code === 0) {
+          this.isSign = true;
+        } else {
+          this.isSign = false
+        }
+
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;

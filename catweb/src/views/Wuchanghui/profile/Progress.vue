@@ -1,12 +1,12 @@
 <template>
   <div class="progress t-al-cent full">
-    <div v-if="!isSign" class="profai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
-    <div v-else class="proSuc t-al-cent pos-re full">
+    <div v-else-if="isSign" class="proSuc t-al-cent pos-re full">
       <h2 class="title">考核进度</h2>
       <div style="height: 60vh;" class="proBar pos-ab">
         <el-steps direction="vertical" :active="activeNum" finish-status="success">
@@ -29,7 +29,7 @@
     name: 'Progress',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         /* 进度表标题 */
         write: '笔试',
         face1: '第一轮面试',
@@ -57,7 +57,11 @@
         .then(res => {
           /* 显示进度 */
           console.log(res);
-
+          if(res.code === 0) {
+            this.isSign = true;
+          } else {
+            this.isSign = false;
+          }
           this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
           // this.wridesp = res.data[0].content
           if (res.data[0].adoptChecked == '通过') {
