@@ -38,7 +38,8 @@
             <tr>
               <td>个人介绍：</td>
               <td class="pos-re">
-                <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea>
+                <!-- <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea> -->
+                <div class="selfIntro pos-ab">{{introduce}}</div>
               </td>
             </tr>
           </tbody>
@@ -142,7 +143,7 @@
     padding: 2vh 1vw;
   }
 
-  .userInfo .UserInfoSuc table textarea {
+  /* .userInfo .UserInfoSuc table textarea {
     top: 1vh;
     border-radius: 1vh;
     outline: none;
@@ -152,10 +153,21 @@
     vertical-align: top;
     resize: none;
     padding-left: .5vw;
+  } */
+
+  .userInfo .UserInfoSuc table .selfIntro {
+    top: 1vh;
+    border-radius: 1vh;
+    line-height: 5vh;
+    height: 15vh;
+    width: 30vw;
+    background: white;
+    vertical-align: top;
+    padding-left: .5vw;
   }
 
-  .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{
+  /* .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{
     display: none;
-  }
+  } */
 
 </style>

@@ -100,7 +100,7 @@
   /* 四个模块图片的样式 */
   .home img {
     width: 10vw;
-    height: 8vw;
+    height: 9vw;
     border-radius: 50% 20%;
   }
   

@@ -3,8 +3,9 @@
     <div class="userProfile dp-fx">
       <div class="leftBar t-al-cent pos-re">
         <div class="userImg pos-re">
-          <img :src="userImgURL" alt="" class="dp-bk full">
-          <i class="setUserImg dp-bk pos-ab" @click="isSetUserImg = true"></i>
+          <img v-if="!userImgURL" src="../../../assets/images/userImg.jpg" alt="" class="dp-bk full">
+          <img v-else :src="userImgURL" alt="" class="dp-bk full">
+          <!-- <i class="setUserImg dp-bk pos-ab" @click="isSetUserImg = true"></i> -->
         </div>
         <h4 class="userName text-elli">{{userName}}</h4>
         <ul class="funcList">
@@ -13,8 +14,8 @@
           <li><router-link class="dp-bk" to="/profile/meetingAppoint">预约面试</router-link></li>
           <li><router-link class="dp-bk" to="/profile/groups">我要进群</router-link></li>
         </ul>
-        <!-- <div class="logout pos-ab"></div>
-        <div class="setting pos-ab"></div> -->
+        <div class="logout pos-ab" @click="logOut"></div>
+        <!-- <div class="setting pos-ab"></div> -->
       </div>
       <div class="dispInfo">
         <!-- 引入各个功能页面 -->
@@ -24,7 +25,7 @@
         <input type="file" class="uploadFile" accept="image/jpg, image/png" name="" id="" @change="changeUserImg($event)">
         <input type="submit" value="提交" @click="changeUserImg($event)">
         <!-- <img class="viewImg dp-bk" :src="imgUrl" alt=""> -->
-        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
+        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">☚</span>
       </div>
     </div>
     <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">X</router-link>
@@ -52,13 +53,21 @@
       //   // this.imgUrl = ev.target.value
       //   console.log(ev.target.value);
       // },
+      logOut() {
+        sessionStorage.removeItem('token');
+        this.$message({
+          message: '您已安全退出',
+          type: 'success'
+        })
+        this.$router.replace('/home')
+      }
     },
     mounted() {
       /* 获取用户信息 */
       getUserInfo().then(res => {
-        // console.log(res);
-        this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
-        
+        if(res.data.head) {
+          this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+        }
         this.userName = res.data.name
       })
     }
