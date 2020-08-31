@@ -90,7 +90,7 @@
   .home {
     overflow: hidden;
     /* min-width: 800px;
-    min-height: 300px; */
+    min-height: 500px; */
     background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
@@ -118,24 +118,46 @@
     background: url(../../../assets/images/logo.png);
     background-size: 100% 100%;
   }
+
+  /* @media screen and (max-height: 400px){
+    .home img {
+      width: 100px;
+      height: 90px;
+      border-radius: 50% 20%;
+    }
+
+    .home .logo {
+      width: 400px;
+      height: 400px;
+      left: 50%;
+      top: 50%;
+      margin-top: -200px;
+      margin-left: -200px;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+    .home img {
+      width: 100px;
+      height: 90px;
+      border-radius: 50% 20%;
+    }
+  }
   
-  /* @media screen and (max-width: 800px){
+  @media screen and (max-width: 800px) and (max-height: 400px){
     .home img {
       width: 100px;
-      height: 80px;
+      height: 90px;
       border-radius: 50% 20%;
     }
-  }
 
-  @media screen and (max-height: 300px){
-    .home img {
-      width: 100px;
-      height: 80px;
-      border-radius: 50% 20%;
+    .home .logo {
+      width: 400px;
+      height: 400px;
     }
-  }
+  } */
 
-  @media screen and (min-width: 800px){
+  /* @media screen and (min-width: 800px){
     .home img {
       width: 10vw;
       height: 20vh;
