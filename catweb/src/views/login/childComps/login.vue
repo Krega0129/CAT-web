@@ -1,93 +1,230 @@
 <template>
   <div class="login">
-    <img src="@/assets/img/CATlogo.jpg" alt="" class="catlogo">
+    <img src="@/assets/img/CATlogo.jpg" alt class="catlogo" />
     <div class="title">Sign In</div>
-    <div class="account">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-yonghu" />
-      </svg>
-      <input
-        type="text"
-        placeholder="Username"
-        @focus="Acfocus"
-        @blur="Acblur"
-        :class="{active:Afocus,danger:isdanger}"
-        v-model="account"
-      />
+    <i class="el-icon-refresh swap" @click="changeUser"></i>
+    <div v-if="isUser">
+      <div class="account">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yonghu" />
+        </svg>
+        <input
+          type="text"
+          placeholder="输入账号"
+          @focus="Acfocus"
+          @blur="Acblur"
+          :class="{active:Afocus,danger:isdanger}"
+          v-model="account"
+        />
+      </div>
+      <div class="password">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-mima2" />
+        </svg>
+        <input
+          type="password"
+          placeholder="输入密码"
+          @blur="Pablur"
+          v-model="password"
+          :class="{active:Pfocus,danger:isdanger}"
+          @focus="Pafocus"
+        />
+      </div>
     </div>
-    <div class="password">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-mima2" />
-      </svg>
-      <input
-        type="password"
-        placeholder="Password"
-        @blur="Pablur"
-        v-model="password"
-        :class="{active:Pfocus,danger:isdanger}"
-        @focus="Pafocus"
-      />
+    <div v-else>
+      <div class="account">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shouji" />
+        </svg>
+        <input
+          type="text"
+          placeholder="输入手机"
+          @focus="Acfocus"
+          @blur="Acblur"
+          :class="{active:Afocus,danger:isdanger}"
+          v-model="phone"
+        />
+      </div>
+      <div class="code">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-mima2" />
+        </svg>
+        <input
+          type="password"
+          placeholder="输入验证码"
+          @blur="Pablur"
+          v-model="code"
+          :class="{active:Pfocus,danger:isdanger}"
+          @focus="Pafocus"
+        />
+        <div class="sendCode" @click="send" :class="{btndisabled:!btnNoDisabled}">{{message}}</div>
+      </div>
     </div>
     <div class="loginbtn" @click="judge" :class="{incorrect:isincorrect}">{{dangerMessage}}</div>
     <div class="tips">
       <h5>
-        Don't have a account?
-        <span class="signup" @click="toReg" >Sign up</span>
+        
+        <span class="signup" @click="toReg">注册账号</span>
       </h5>
-      <h5 class="forget">Forget password?</h5>
+      <h5 class="forget">忘记密码?</h5>
     </div>
   </div>
 </template>
 <script>
-import {loginPost} from '@/network/login'
+import { login, phoneLogin ,getPhoneCode} from "@/network/login";
 export default {
   name: "login",
   data() {
     return {
       account: "",
       password: "",
-      Afocus:false,
-      Pfocus:false,
-      isdanger:false,
-      dangerMessage:'Login',
-      isincorrect:false
-    }
+      Afocus: false,
+      Pfocus: false,
+      isdanger: false,
+      dangerMessage: "登录",
+      isincorrect: false,
+      isUser: true,
+      message: "发送验证码",
+      phone: null,
+      code: null,
+      btnNoDisabled: true,
+      sendTime: 60
+    };
   },
-  methods:{
-    Acfocus(){
-      this.Afocus = !this.Afocus
+  methods: {
+    Acfocus() {
+      this.Afocus = !this.Afocus;
     },
-    Acblur(){
-      this.Afocus = !this.Afocus
+    Acblur() {
+      this.Afocus = !this.Afocus;
     },
-    Pafocus(){
-      this.Pfocus = !this.Pfocus
+    Pafocus() {
+      this.Pfocus = !this.Pfocus;
     },
-    Pablur(){
-      this.Pfocus = !this.Pfocus
+    Pablur() {
+      this.Pfocus = !this.Pfocus;
     },
-    toReg(){
-      this.$bus.$emit('toReg')
+    toReg() {
+      this.$bus.$emit("toReg");
     },
-    judge(){
-      if(this.account == '' || this.password == ''){
-        this.isdanger = true
-        this.isincorrect = true
-        this.dangerMessage = 'Incorrect username or password';
-        setTimeout(()=>{
-          this.isdanger = false;
-          this.isincorrect = false
-          this.dangerMessage = 'Login'
-        },1500)
+    loginFailed() {
+      this.isdanger = true;
+      this.isincorrect = true;
+      this.dangerMessage = "输入不正确";
+      setTimeout(() => {
+        this.isdanger = false;
+        this.isincorrect = false;
+        this.dangerMessage = "登录";
+      }, 1500);
+    },
+    judge() {
+      if (this.isUser) {
+        if (this.account == "" || this.password == "") {
+          this.loginFailed();
+        } else {
+          const data = { password: this.password, username: this.account };
+          login(data)
+            .then(res => {
+              if (res.code == 2500) {
+                this.loginFailed();
+                this.$notify.error({
+                  title: "警告",
+                  message: "账号或密码不正确",
+                  duration: 4500,
+                  position: "bottom-right"
+                });
+              } else if (res.code == 2200) {
+                const data = res.data
+                sessionStorage.setItem('token',data)
+                this.$notify.success({
+                  title: "成功",
+                  message: "登录成功,即将跳转",
+                  duration: 4500,
+                  position: "bottom-right"
+                });
+                setTimeout(() => {
+                  this.$router.push("/home");
+                }, 1500);
+              }
+            })
+            .catch(() => {
+              this.loginFailed();
+            });
+        }
+      } else {
+        if (this.phone == "" || this.code == "") {
+          this.loginFailed();
+        } else {
+          const data = { phone: this.phone, code: this.code };
+          phoneLogin(data)
+            .then(res => {
+              if (res.code == 2503) {
+                this.loginFailed();
+                this.$notify.error({
+                  title: "警告",
+                  message: "手机号未注册",
+                  duration: 4500,
+                  position: "bottom-right"
+                });
+              } else if (res.code == 2200) {
+                const data = res.data
+                sessionStorage.setItem('data',data)
+                this.$notify.success({
+                  title: "成功",
+                  message: "登录成功,即将跳转",
+                  duration: 4500,
+                  position: "bottom-right"
+                });
+                setTimeout(() => {
+                  this.$router.push("/home");
+                }, 1500);
+              } else if (res.code == 2506) {
+                this.loginFailed();
+                this.$notify.error({
+                  title: "警告",
+                  message: "验证码错误",
+                  duration: 4500,
+                  position: "bottom-right"
+                });
+              }
+            })
+            .catch(() => {
+              this.loginFailed();
+            });
+        }
+      }
+    },
+    changeUser() {
+      this.isUser = !this.isUser;
+    },
+    send() {
+      if (this.btnNoDisabled) {
+        if(this.phone == null){
+          this.loginFailed()
+        }else{
+          const data = { phone: this.phone };
+          let countdown = setInterval(() => {
+            if (this.sendTime <= 0) {
+              clearInterval(countdown);
+              this.sendTime = 60;
+              this.btnNoDisabled = true;
+              this.message = "发送";
+            } else {
+              this.sendTime--;
+              this.btnNoDisabled = false;
+              this.message = `${this.sendTime}后重新获取`;
+            }
+          }, 1000);
+          getPhoneCode(data).then(res => {});
+
+        }
       }
     }
-    
   }
 };
 </script>
 
 <style scoped>
-
 .login {
   width: 30vw;
   height: 75vh;
@@ -103,10 +240,15 @@ export default {
   background-position: 0 45vh;
 }
 .title {
-  margin-bottom: 10vh;
+  position: relative;
+  margin-bottom: 7vh;
   text-align: center;
   font-size: 3.5vh;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.swap {
+  margin-left: 18vw;
+  font-size: 4vh;
 }
 .login input {
   padding: 2.8vh 0;
@@ -115,7 +257,7 @@ export default {
   height: 3vh;
   border: none;
   border-bottom: 0.5vh solid rgb(60, 192, 137);
-  font-size: 2.5vh;
+  font-size: 2vh;
   background-color: inherit;
 }
 .account {
@@ -131,6 +273,45 @@ export default {
 }
 .password {
   position: relative;
+}
+.code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.code > input {
+  font-size: 2vh;
+  position: relative;
+  width: 12vw;
+}
+.code > svg {
+  position: absolute;
+  top: 0.5vh;
+  left: 0.5vh;
+  font-size: 4.5vh;
+  color: rgb(101, 79, 143);
+}
+.sendCode {
+  margin-top: 2vh;
+  margin-right: 1vw;
+  width: 6vw;
+  height: 4vh;
+  line-height: 4vh;
+  text-align: center;
+  background-color: aquamarine;
+  border-radius: 2vh;
+  color: rgb(78, 78, 78);
+  font-size: 1.7vh;
+   white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+}
+.btndisabled{
+  color: #ffffff;
+  background-color: rgb(238, 138, 138);
+  border: 0.1vh solid #eb6464;
 }
 .password > svg {
   position: absolute;
@@ -167,27 +348,28 @@ export default {
   color: rgba(42, 42, 42, 0.856);
 }
 .signup {
-  font-size: 1.8vh;
-  color: rgba(240, 152, 28, 0.76);
+  font-size: 2vh;
+  color: rgba(247, 138, 35, 0.925);
   cursor: pointer;
 }
 .forget {
-  color: rgba(128, 128, 128, 0.822);
+  font-size: 1.8vh;
+  color: rgba(83, 80, 233, 0.822);
   cursor: pointer;
 }
-.login .danger{
-  border-bottom-color:  rgb(209, 103, 103) ;
-  box-shadow:  0 0 .5vh .2vh #aa4747;
+.login .danger {
+  border-bottom-color: rgb(209, 103, 103);
+  box-shadow: 0 0 0.5vh 0.2vh #aa4747;
 }
-.incorrect{
+.incorrect {
   background-color: #d84646c5;
   color: azure;
   font-size: 2.3vh;
 }
-.catlogo{
+.catlogo {
   position: absolute;
   top: 0;
-  right:0;
+  right: 0;
   width: 10vw;
 
   border-radius: 1vw;

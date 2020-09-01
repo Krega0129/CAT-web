@@ -1,7 +1,7 @@
 <template>
   <div class="loginReg">
     <color-circle/>
-    <backGround/> 
+    <backGround/>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
 <style scoped>
 .loginReg {
   position: relative;
-  width: 100%;
-  /* height: 100%; */
+  width: 100vw;
+  height: 100vh;
+  background-image: url('.../../../../assets/img/point.png');
 }
 </style>

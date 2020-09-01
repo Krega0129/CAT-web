@@ -1,7 +1,7 @@
 <template>
-  <svg xmln="http://www.w3.org/2000/svg" width="100%" :height="H" class="svg circleScale pos-ab" :style="{left: Left, top: Top}">
+  <svg xmln="http://www.w3.org/2000/svg" :width="Wid" :height="Hei" class="svg circleScale pos-ab" :style="{left: Left, top: Top}">
     <g class="pos-ab">
-      <circle v-for="R in rList" cx="500" cy="500" :r="R" :key="R" :fill="fillColor" class="circle"></circle>
+      <circle v-for="R in rList" :cx="cirX" :cy="cirY" :r="R" :key="R" :fill="fillColor" class="circle" :style="{'transform-origin': transOri}"></circle>
     </g>
   </svg>
 </template>
@@ -9,23 +9,34 @@
 <script>
   export default {
     name: 'circleScale',
-    data() {
-      return {
-        H: window.innerHeight,
-      }
-    },
     props: {
       Left: [String],
       Top: [String],
       R: [String, Number],
-      fillColor: {
-        type: String,
-        required: true
-      },
       rList: [Array],
       fillColor: {
         type: String,
         default: 'yellow'
+      },
+      Wid: {
+        type: String,
+        default: '170vh'
+      },
+      Hei: {
+        type: String,
+        default: '170vh'
+      },
+      cirX: {
+        type: String,
+        default: '85vh'
+      },
+      cirY: {
+        type: String,
+        default: '85vh'
+      },
+      transOri: {
+        type: String,
+        default: '85vh 85vh'
       }
     }
   }
@@ -36,14 +47,12 @@
 
   .svg {
     top: 0;
-    width: 1000px;
-    height: 1000px;
   }
 
   .svg .circle {
     opacity: .2;
     animation: circleScale 2s linear infinite;
-    transform-origin: 500px 500px;
+    /* transform-origin: 85vh 85vh; */
   }
 
   .svg:nth-of-type(2) .circle {

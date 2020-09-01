@@ -4,6 +4,16 @@
     <router-view></router-view>
   </div>
 </template>
+<script>
+import ApplicationForm from './views/kai/application-form.vue'
+export default {
+  name:'app',
+  components:{
+    ApplicationForm
+  },
+  
+}
+</script>
 
 <script>
 import loginReg from './views/login/loginReg'
