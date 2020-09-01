@@ -8,7 +8,7 @@
     </div>
     <div v-else-if="isSign" class="proSuc t-al-cent pos-re full">
       <h2 class="title">考核进度</h2>
-      <div style="height: 60vh;" class="proBar pos-ab">
+      <div style="height: 60vh; width: 50vw" class="proBar pos-ab">
         <el-steps direction="vertical" :active="activeNum" finish-status="success">
           <el-step title="报名成功，准备笔试" ></el-step>
           <el-step class="step" :title="write" :description="wridesp" :status="wriStatus"></el-step>
@@ -62,8 +62,8 @@
           } else {
             this.isSign = false;
           }
-          this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
-          // this.wridesp = res.data[0].content
+          // this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
+          this.wridesp = res.data[0].content
           if (res.data[0].adoptChecked == '通过') {
             this.write = '恭喜你通过了笔试'
             this.activeNum = 2

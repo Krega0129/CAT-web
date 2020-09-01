@@ -25,10 +25,10 @@
         <input type="file" class="uploadFile" accept="image/jpg, image/png" name="" id="" @change="changeUserImg($event)">
         <input type="submit" value="提交" @click="changeUserImg($event)">
         <!-- <img class="viewImg dp-bk" :src="imgUrl" alt=""> -->
-        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">☚</span>
+        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
       </div>
     </div>
-    <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">X</router-link>
+    <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">☚</router-link>
   </div>
 </template>
 
@@ -80,7 +80,7 @@
   .profile {
     height: 100vh;
     overflow: hidden;
-    background: url(../../../assets/images/bg3.jpg) no-repeat;
+    background: url(../../../assets/images/bg7.jpg) no-repeat;
     background-size: cover;
   }
 
