@@ -63,10 +63,10 @@
     <div class="loginbtn" @click="judge" :class="{incorrect:isincorrect}">{{dangerMessage}}</div>
     <div class="tips">
       <h5>
-        Don't have a account?
-        <span class="signup" @click="toReg">Sign up</span>
+        
+        <span class="signup" @click="toReg">注册账号</span>
       </h5>
-      <h5 class="forget">Forget password?</h5>
+      <h5 class="forget">忘记密码?</h5>
     </div>
   </div>
 </template>
@@ -81,7 +81,7 @@ export default {
       Afocus: false,
       Pfocus: false,
       isdanger: false,
-      dangerMessage: "Login",
+      dangerMessage: "登录",
       isincorrect: false,
       isUser: true,
       message: "发送验证码",
@@ -348,12 +348,13 @@ export default {
   color: rgba(42, 42, 42, 0.856);
 }
 .signup {
-  font-size: 1.8vh;
-  color: rgba(240, 152, 28, 0.76);
+  font-size: 2vh;
+  color: rgba(247, 138, 35, 0.925);
   cursor: pointer;
 }
 .forget {
-  color: rgba(128, 128, 128, 0.822);
+  font-size: 1.8vh;
+  color: rgba(83, 80, 233, 0.822);
   cursor: pointer;
 }
 .login .danger {
