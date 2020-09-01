@@ -32,13 +32,20 @@
           <td class="column">当前阶段</td>
           <td>{{stuData.stage}}</td>
           <td class="column">通过状况</td>
-          <td>{{stuData.adoptChecked}}</td>
+          <td>
+            <span v-if="stuData.adoptChecked == 0">待审核</span>
+          <span v-else-if="stuData.adoptChecked == 1" style="color:rgb(9, 223, 116)">通过</span>
+          <span v-else-if="stuData.adoptChecked == 2" style="color:rgb(223, 9, 9)">淘汰</span>
+         </td>
         </tr>
         <tr>
           <td class="column">预约下次面试时间</td>
           <td>{{stuData.appointTime}}</td>
           <td class="column">是否服从安排</td>
-          <td>{{stuData.isObey}}</td>
+          <td>
+            <span v-if="stuData.isObey == 0">不服从</span>
+            <span v-else-if="stuData.isObey == 1">服从</span>
+          </td>
         </tr>
       </table>
       <div class="introduce">
@@ -63,28 +70,28 @@ export default {
   data() {
     return {
       activeNames: ["1"],
-      stuData: {}
+      stuData: {},
     };
   },
   methods: {
     handleChange(val) {},
     goBack() {
       this.$router.go(-1);
-    }
+    },
   },
   created() {
-    this.$bus.$on("outputStuNum", stuNum => {
+    this.$bus.$on("outputStuNum", (stuNum) => {
       const data = {
-        stuNumber: stuNum
+        stuNumber: stuNum,
       };
-      getSearch(data).then(res => {
+      getSearch(data).then((res) => {
         this.stuData = new StuDetail(res.data[0]);
       });
     });
   },
   beforeDestroy() {
     this.$bus.$off("outputStuNum");
-  }
+  },
 };
 </script>
 

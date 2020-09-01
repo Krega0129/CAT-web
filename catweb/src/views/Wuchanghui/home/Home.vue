@@ -64,7 +64,11 @@
         target.style.transform = 'translate(' + toLeft + ',' + toTop + ') scale(1.5)';
         target.style.borderRadius = '20% 20%'
         setTimeout(() => {
-          this.$router.push(path)
+          if(path === '/profile' && !sessionStorage.getItem('token')) {
+            this.$router.push('/loginReg')
+          } else {
+            this.$router.push(path)
+          }
         }, 2000)
       },
       loginClick() {
@@ -73,7 +77,9 @@
     },
     mounted() {
       getUserInfo().then(res => {
-        this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.heads
+        if(res && res.data && res.data.head){
+          this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.head
+        }
       })
     }
   }
@@ -84,8 +90,8 @@
 
   .home {
     overflow: hidden;
-    min-width: 900px;
-    min-height: 400px;
+    /* min-width: 800px;
+    min-height: 500px; */
     background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
@@ -95,7 +101,7 @@
   /* 四个模块图片的样式 */
   .home img {
     width: 10vw;
-    height: 20vh;
+    height: 9vw;
     border-radius: 50% 20%;
   }
   
@@ -113,14 +119,52 @@
     background: url(../../../assets/images/logo.png);
     background-size: 100% 100%;
   }
-  
-  @media screen and (max-width: 900px){
+
+  /* @media screen and (max-height: 400px){
     .home img {
       width: 100px;
-      height: 80px;
+      height: 90px;
+      border-radius: 50% 20%;
+    }
+
+    .home .logo {
+      width: 400px;
+      height: 400px;
+      left: 50%;
+      top: 50%;
+      margin-top: -200px;
+      margin-left: -200px;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+    .home img {
+      width: 100px;
+      height: 90px;
       border-radius: 50% 20%;
     }
   }
+  
+  @media screen and (max-width: 800px) and (max-height: 400px){
+    .home img {
+      width: 100px;
+      height: 90px;
+      border-radius: 50% 20%;
+    }
+
+    .home .logo {
+      width: 400px;
+      height: 400px;
+    }
+  } */
+
+  /* @media screen and (min-width: 800px){
+    .home img {
+      width: 10vw;
+      height: 20vh;
+      border-radius: 50% 20%;
+    }
+  } */
 
   /* 第二和第三个模块样式不同 */
   .home .special {

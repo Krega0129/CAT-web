@@ -1,7 +1,8 @@
 <template>
   <el-upload
     class="avatar-uploader"
-    action="http://47.93.19.109:8080/cat-registration/userInfo/uploadPhoto"
+    action="http://192.168.1.106:8080/cat_registration_war_exploded/userInfo/uploadPhoto"
+    :headers="myHeaders"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload"
@@ -14,10 +15,13 @@
 <script>
 import { headSubmit } from "../../network/request.js";
 // import { jsToFormData } from "../../assets/js/turnFormData.js";
+const token = sessionStorage.getItem("token");
+
 export default {
   data() {
     return {
       imageUrl: "",
+      myHeaders: {token: token},
     };
   },
   methods: {
@@ -35,13 +39,13 @@ export default {
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       } else {
-        console.log(upload);
-        headSubmit(upload).then((res) => {
-          this.$message({
-            message: "上传成功",
-            type: "success",
-          });
-        });
+        console.log(this.myHeaders);
+        // headSubmit(upload).then((res) => {
+        //   this.$message({
+        //     message: "上传成功",
+        //     type: "success",
+        //   });
+        // });
       }
       return isLt2M && (isPNG || isJPG);
       // const formData = new FormData();

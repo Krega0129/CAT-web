@@ -32,5 +32,6 @@ module.exports = {
                 path.resolve(__dirname, 'src/styles/_variables.scss'),
             ]
         }
-    }
+    },
+    publicPath: './'
 }
