@@ -94,8 +94,7 @@ export default {
           !this.haveExistPhone &&
           this.account != null &&
           this.password != null &&
-          this.phone != null &&
-          this.code != null
+          this.phone != null 
         ) {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
