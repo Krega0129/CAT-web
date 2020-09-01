@@ -1,7 +1,7 @@
 <template>
   <div class="register" :class="{RegLeftBorder:RegLeftBorder}">
     <img src="@/assets/img/CATlogo.jpg" alt class="catlogo" />
-    <div class="title">Create a Account</div>
+    <div class="title">Create an account</div>
     <div class="account">
       <div class="tips">Account</div>
       <input
@@ -53,7 +53,7 @@ import {
   getPhoneCode,
   register,
   judgeExistPhone,
-  judgeExistAccount
+  judgeExistAccount,
 } from "@/network/login";
 export default {
   name: "register",
@@ -88,7 +88,14 @@ export default {
     },
     send() {
       if (this.btnNoDisabled) {
-        if (this.isPhoneOK&&!this.haveExistAccount&&!this.haveExistPhone&&this.account !== ''&&this.password !== '') {
+        if (
+          this.isPhoneOK &&
+          !this.haveExistAccount &&
+          !this.haveExistPhone &&
+          this.account != null &&
+          this.password != null &&
+          this.phone != null 
+        ) {
           const data = { phone: this.phone };
           let countdown = setInterval(() => {
             if (this.sendTime <= 0) {
@@ -102,8 +109,8 @@ export default {
               this.sendMessage = `${this.sendTime}后重新获取`;
             }
           }, 1000);
-          getPhoneCode(data).then(res => {});
-        } 
+          getPhoneCode(data).then((res) => {});
+        }
       }
     },
     register() {
@@ -111,36 +118,36 @@ export default {
         this.isPhoneOK &&
         this.isAccountOK &&
         this.isPasswordOK &&
-        this.haveExistAccount&&
-        this.haveExistPhone&&
-        this.code != ""&&
-        this.account != ""&&
-        this.password != ""&&
+        !this.haveExistAccount &&
+        !this.haveExistPhone &&
+        this.code != "" &&
+        this.account != "" &&
+        this.password != "" &&
         this.phone != ""
       ) {
         const data = {
           code: this.code,
           password: this.password,
           phone: this.phone,
-          username: this.account
+          username: this.account,
         };
-        register(data).then(res => {
+        register(data).then((res) => {
           if (res.code == 2508) {
             this.$notify.error({
               title: "警告",
               message: "验证码错误",
               duration: 4500,
-              position: "bottom-right"
+              position: "bottom-right",
             });
           } else if (res.code == 2202) {
             this.$notify.success({
               title: "成功",
               message: "注册成功",
               duration: 4500,
-              position: "bottom-right"
+              position: "bottom-right",
             });
             setTimeout(() => {
-              this.$router.go(0)
+              this.$router.go(0);
             }, 1000);
           }
         });
@@ -148,36 +155,36 @@ export default {
     },
     existPhone() {
       const data = { phone: this.phone };
-      judgeExistPhone(data).then(res => {
+      judgeExistPhone(data).then((res) => {
         if (res.code == 2201) {
-          this.haveExistPhone = true
+          this.haveExistPhone = true;
           this.$notify.error({
             title: "警告",
             message: "手机号已注册",
             duration: 4500,
-            position: "bottom-right"
+            position: "bottom-right",
           });
-        }else if(res.code == 2501){
-          this.haveExistPhone = false
+        } else if (res.code == 2501) {
+          this.haveExistPhone = false;
         }
       });
     },
     existAccount() {
       const data = { username: this.account };
-      judgeExistAccount(data).then(res => {
+      judgeExistAccount(data).then((res) => {
         if (res.code == 2209) {
-          this.haveExistAccount = true
+          this.haveExistAccount = true;
           this.$notify.error({
             title: "警告",
             message: "账号已注册",
             duration: 4500,
-            position: "bottom-right"
+            position: "bottom-right",
           });
-        }else if(res.code == 2509){
-          this.haveExistAccount = false
+        } else if (res.code == 2509) {
+          this.haveExistAccount = false;
         }
       });
-    }
+    },
   },
   data() {
     return {
@@ -192,15 +199,15 @@ export default {
       btnNoDisabled: true,
       sendTime: 60,
       sendMessage: "发送",
-      haveExistAccount:false,
-      haveExistPhone:false
+      haveExistAccount: false,
+      haveExistPhone: false,
     };
   },
   mounted() {
     this.$bus.$on("toReg", () => {
       this.RegLeftBorder = true;
     });
-  }
+  },
 };
 </script>
 
@@ -245,9 +252,10 @@ export default {
   border: none;
   border-bottom: rgb(78, 156, 146) 0.2vw solid;
   background-color: inherit;
+  font-size: 2vh;
 }
 .tips {
-  font-size: 2vh;
+  font-size: 2.2vh;
   color: rgb(44, 134, 104);
 }
 .test {
@@ -266,6 +274,7 @@ export default {
   border: none;
   border-bottom: rgb(78, 156, 146) 0.2vw solid;
   background-color: inherit;
+  font-size: 2vh;
 }
 .send {
   width: 6vw;
@@ -275,7 +284,7 @@ export default {
   text-align: center;
   border-radius: 3vh;
   color: rgb(83, 82, 82);
-  font-size: 1.7vh;
+  font-size: 1.9vh;
   color: black;
 }
 .btndisabled {
@@ -286,16 +295,17 @@ export default {
 .cancelReg {
   margin-top: 4vh;
   width: 18vw;
-  height: 4vh;
+  height: 4.5vh;
   display: flex;
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.87);
+  font-size: 2vh;
+  line-height: 4.6vh;
 }
 .cancel {
   box-sizing: content-box;
   width: 8.5vw;
-  height: 4vh;
-  line-height: 4vh;
+  height: 4.5vh;
   border-radius: 0.5vh;
   background-color: rgb(87, 9, 129);
   text-align: center;
@@ -304,8 +314,7 @@ export default {
 .reg {
   box-sizing: content-box;
   width: 8.5vw;
-  height: 4vh;
-  line-height: 4vh;
+  height: 4.5vh;
   border-radius: 0.5vh;
   background-color: rgb(30, 117, 133);
   text-align: center;

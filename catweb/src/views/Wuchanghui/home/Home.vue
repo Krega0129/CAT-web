@@ -77,8 +77,9 @@
     },
     mounted() {
       getUserInfo().then(res => {
-        console.log(res);
-        this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.head
+        if(res && res.data && res.data.head){
+          this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.head
+        }
       })
     }
   }
