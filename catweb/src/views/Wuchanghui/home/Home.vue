@@ -44,7 +44,7 @@
     data() {
       return {
         /* 判断登录状态 */
-        isLogin: sessionStorage.getItem('token'),
+        isLogin: localStorage.getItem('token'),
         imgSrc: ''
       }
     },
@@ -64,7 +64,7 @@
         target.style.transform = 'translate(' + toLeft + ',' + toTop + ') scale(1.5)';
         target.style.borderRadius = '20% 20%'
         setTimeout(() => {
-          if(path === '/profile' && !sessionStorage.getItem('token')) {
+          if(path === '/profile' && !localStorage.getItem('token')) {
             this.$router.push('/loginReg')
           } else {
             this.$router.push(path)

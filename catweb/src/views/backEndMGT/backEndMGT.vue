@@ -2,7 +2,7 @@
   <div class="backEndMGT">
     <asideMenu></asideMenu>
     <keep-alive exclude="detail" class="keep">
-      <router-view></router-view>
+      <router-view ></router-view>
     </keep-alive>
   </div>
 </template>
@@ -12,6 +12,10 @@ import asideMenu from "./asideMenu/asideMenu";
 
 export default {
   name: "backEndMGT",
+  data(){
+    return {
+    }
+  },
   components: {
     asideMenu
   },
@@ -25,10 +29,11 @@ export default {
         next({ path: "/backLogin" });
       }, 1500);
     }
-    /* console.log(to);
-    console.log(from);
-    console.log(next); */
-  }
+  },
+  methods: {
+    
+  },
+  
 };
 </script>
   

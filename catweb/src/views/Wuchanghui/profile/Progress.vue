@@ -69,6 +69,7 @@
             this.activeNum = 2
             this.wridesp = '';
           } else if (res.data[0].adoptChecked == '淘汰') {
+            this.$bus.$emit('out');
             this.wriStatus = "error"
             this.write = '很遗憾，你没有通过我们的笔试'
             this.wridesp = '';
@@ -84,6 +85,7 @@
             this.face1desp = ''
             this.activeNum = 3
           } else if (res.data[1] && res.data[1].adoptChecked == '淘汰') {
+            this.$bus.$emit('out');
             this.face1Status = "error"
             this.face1 = '很遗憾，你没有通过一轮面试'
             this.face1desp = ''
@@ -99,6 +101,7 @@
             this.activeNum = 4
             this.face2desp = ''
           } else if (res.data[2] && res.data[2].adoptChecked == '淘汰') {
+            this.$bus.$emit('out');
             this.face2Status = "error"
             this.face2 = '很遗憾，你没有通过二轮面试'
             this.face2desp = ''
@@ -115,6 +118,7 @@
             this.activeNum = 5
             this.work1desp = ''
           } else if (res.data[3] && res.data[3].adoptChecked == '淘汰') {
+            this.$bus.$emit('out');
             this.work1Status = "error"
             this.work1 = '很遗憾，你没有通过一轮考核'
             this.work1desp = ''
@@ -131,6 +135,7 @@
             this.activeNum = 6
             this.work2desp = ''
           } else if (res.data[4] && res.data[4].adoptChecked == '淘汰') {
+            this.$bus.$emit('out');
             this.work2Status = "error"
             this.work2 = '很遗憾，你没有通过二轮考核'
             this.work2desp = ''

@@ -39,7 +39,7 @@
               <td>个人介绍：</td>
               <td class="pos-re">
                 <!-- <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea> -->
-                <div class="selfIntro pos-ab">{{introduce}}</div>
+                <div class="selfIntro pos-ab mt-5 ">{{introduce}}</div>
               </td>
             </tr>
           </tbody>

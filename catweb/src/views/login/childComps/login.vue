@@ -86,9 +86,10 @@ export default {
       isUser: true,
       message: "发送验证码",
       phone: null,
-      code: null,
+      code: null,//储存验证码
       btnNoDisabled: true,
-      sendTime: 60
+      sendTime: 60,
+      preCode:null//储存token
     };
   },
   methods: {
@@ -135,7 +136,7 @@ export default {
                 });
               } else if (res.code == 2200) {
                 const data = res.data
-                sessionStorage.setItem('token',data)
+                localStorage.setItem('token',data)
                 this.$notify.success({
                   title: "成功",
                   message: "登录成功,即将跳转",
@@ -155,7 +156,7 @@ export default {
         if (this.phone == "" || this.code == "") {
           this.loginFailed();
         } else {
-          const data = { phone: this.phone, code: this.code };
+          const data = { phone: this.phone, preCode:this.code,code:this.preCode};
           phoneLogin(data)
             .then(res => {
               if (res.code == 2503) {
@@ -168,7 +169,7 @@ export default {
                 });
               } else if (res.code == 2200) {
                 const data = res.data
-                sessionStorage.setItem('data',data)
+                localStorage.setItem('token',data)
                 this.$notify.success({
                   title: "成功",
                   message: "登录成功,即将跳转",
@@ -215,7 +216,9 @@ export default {
               this.message = `${this.sendTime}后重新获取`;
             }
           }, 1000);
-          getPhoneCode(data).then(res => {});
+          getPhoneCode(data).then(res => {
+            this.preCode = res.data
+          });
 
         }
       }

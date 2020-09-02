@@ -109,7 +109,9 @@ export default {
               this.sendMessage = `${this.sendTime}后重新获取`;
             }
           }, 1000);
-          getPhoneCode(data).then((res) => {});
+          getPhoneCode(data).then((res) => {
+            this.preCode = res.data
+          });
         }
       }
     },
@@ -126,9 +128,10 @@ export default {
         this.phone != ""
       ) {
         const data = {
-          code: this.code,
+          code: this.preCode,
           password: this.password,
           phone: this.phone,
+          preCode:this.code,
           username: this.account,
         };
         register(data).then((res) => {
@@ -201,6 +204,7 @@ export default {
       sendMessage: "发送",
       haveExistAccount: false,
       haveExistPhone: false,
+      preCode:null
     };
   },
   mounted() {

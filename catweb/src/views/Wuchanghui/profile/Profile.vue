@@ -54,7 +54,7 @@
       //   console.log(ev.target.value);
       // },
       logOut() {
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         this.$message({
           message: '您已安全退出',
           type: 'success'

@@ -9,7 +9,7 @@
     <div v-else-if="!canAppoint" class="appointfai t-al-cent pos-re full">
       <h2 class="title">当前阶段不可预约</h2>
     </div>
-    <div v-else-if="isSign" class="appointSuc pos-re full t-al-cent">
+    <div v-else class="appointSuc pos-re full t-al-cent">
       <h2 class="title">预约面试：{{appointOption}}</h2>
       <div class="date">
         <select class="chooseDate" name="" id="" @change="timeChange($event.target.value)">
@@ -180,12 +180,16 @@
           this.isSign = false
         }
 
+        this.$bus.$on('out', () => {
+          this.canAppoint = false;
+        })
+
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
-        if(this.appointOption === '第一轮面试' || this.appointOption === '第一轮面试') {
-          this.cancelAppoint = true;
+        if(this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') {
+          this.canAppoint = true;
         } else {
           this.canAppoint = false
         }
