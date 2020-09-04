@@ -1,6 +1,7 @@
 <template>
   <div class="profile full">
-    <div class="userProfile dp-fx">
+    <snowBG></snowBG>
+    <div class="userProfile pos-ab dp-fx">
       <div class="leftBar t-al-cent pos-re">
         <div class="userImg pos-re">
           <img v-if="!userImgURL" src="../../../assets/images/userImg.jpg" alt="" class="dp-bk full">
@@ -36,6 +37,7 @@
   import {uploadUserImg} from '../../../network/uploadUserImg'
   import {getUserInfo} from '../../../network/getUserInfo'
   import {uploadUserHead} from '../../../network/uploadUserImg'
+  import snowBG from '../snowBG'
 
   export default {
     name: 'profile',
@@ -47,6 +49,9 @@
         userImgURL: '',
         // imgUrl: '',
       }
+    },
+    components: {
+      snowBG
     },
     methods: {
       // changeUserImg(ev) {
@@ -77,26 +82,28 @@
 <style scoped>
   @import url(../../../assets/css/base.css);
 
-  .profile {
+  /* .profile {
     height: 100vh;
     overflow: hidden;
-    background: url(../../../assets/images/bg7.jpg) no-repeat;
+    background: url(../../../assets/images/bg.jpg) no-repeat;
     background-size: cover;
-  }
+  } */
 
   .profile .userProfile {
+    top: 10vh;
+    left: 15vw;
     width: 70vw;
     height: 80vh;
-    margin: 10vh auto 0 auto;
   }
 
   .profile .userProfile .leftBar{
+    font-family: 'FZShuTi';
+    color: black;
     width: 20vw;
     height: 100%;
     padding: 10vh 6vw;
-    background: white;
     box-sizing: border-box;
-    box-shadow: .1vw 0 1vw gray;
+    box-shadow: .1vw 0 1vw white;
   }
 
   .profile .userProfile .leftBar .userImg {
@@ -135,15 +142,11 @@
   .profile .userProfile .leftBar .funcList li {
     height: 6vh;
     line-height: 6vh;
-    border-top: .3vh gray solid;
   }
 
   .profile .userProfile .leftBar .funcList li a {
+    color: black;
     font-size: 1.5vw;
-  }
-
-  .profile .userProfile .leftBar .funcList li:last-child {
-    border-bottom: .3vh gray solid;
   }
 
   .profile .userProfile .leftBar .logout {
@@ -169,7 +172,8 @@
   .profile .userProfile .dispInfo {
     width: 50vw;
     height: 100%;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
+    box-shadow: .1vw 0 1vw rgb(164, 241, 237);
     color: black;
   }
 
