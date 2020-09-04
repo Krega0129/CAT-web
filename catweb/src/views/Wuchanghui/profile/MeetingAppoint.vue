@@ -172,7 +172,7 @@
         })
       }
     },
-    mounted() {
+    created() {
       seeAppointTime({}).then(res => {
         if(res.code === 0) {
           this.isSign = true;
@@ -180,19 +180,24 @@
           this.isSign = false
         }
 
-        this.$bus.$on('out', () => {
-          this.canAppoint = false;
-        })
+        
 
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
-        if(this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') {
+        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') && res.data[LastedStage].adoptChecked === '淘汰') {
           this.canAppoint = true;
+          console.log(3);
         } else {
           this.canAppoint = false
+          console.log(4);
         }
+
+        this.$bus.$on('out', () => {
+          console.log(1);
+          this.canAppoint = false;
+        })
         
         /* 获取可选日期 */
         for(let st in res.data[LastedStage].dateNumbers) {
@@ -215,6 +220,10 @@
 </script>
 
 <style scoped>
+  .MeetingAppoint {
+    font-family: 'STXingkai';
+  }
+
   .appointfai .title {
     padding-top: 10vh;
     font-size: 4vh;

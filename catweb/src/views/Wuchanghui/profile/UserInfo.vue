@@ -73,7 +73,7 @@
       }
     },
     created() {
-      getUserInfo().then(res => {
+        getUserInfo().then(res => {
         if(res.data) {
           this.isSign = true;
         } else {
@@ -92,8 +92,8 @@
           this.direction = '未报名'
         }
         this.introduce = res.data.introduce
-      })
-    }
+        })
+      }
   }
 </script>
 
@@ -117,6 +117,7 @@
   }
 
   .userInfo {
+    font-family: 'STXingkai';
     margin-top: 0;
   }
 
@@ -136,7 +137,8 @@
   }
 
   .userInfo .UserInfoSuc table tr {
-    border-left: .5vw solid lightskyblue;
+    border-left: .5vw solid white;
+    border-radius: .5vw;
   }
 
   .userInfo .UserInfoSuc table td {
