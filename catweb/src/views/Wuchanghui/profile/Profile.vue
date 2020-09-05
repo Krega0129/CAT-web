@@ -10,10 +10,10 @@
         </div>
         <h4 class="userName text-elli">{{userName}}</h4>
         <ul class="funcList">
-          <li><router-link class="dp-bk" to="/profile/userInfo">个人信息</router-link></li>
-          <li><router-link class="dp-bk" to="/profile/progress">考核进度</router-link></li>
-          <li><router-link class="dp-bk" to="/profile/meetingAppoint">预约面试</router-link></li>
-          <li><router-link class="dp-bk" to="/profile/groups">我要进群</router-link></li>
+          <li @click="liClick(0)"><router-link class="dp-bk" to="/profile/userInfo">个人信息</router-link></li>
+          <li @click="liClick(1)"><router-link class="dp-bk" to="/profile/progress">考核进度</router-link></li>
+          <li @click="liClick(2)"><router-link class="dp-bk" to="/profile/meetingAppoint">预约面试</router-link></li>
+          <li @click="liClick(3)"><router-link class="dp-bk" to="/profile/groups">我要进群</router-link></li>
         </ul>
         <div class="logout pos-ab" @click="logOut"></div>
         <!-- <div class="setting pos-ab"></div> -->
@@ -65,10 +65,20 @@
           type: 'success'
         })
         this.$router.replace('/home')
+      },
+      liClick(index) {
+        const funcLis = document.getElementsByClassName('funcList')[0].getElementsByTagName('li');
+        for (let i = 0; i < funcLis.length; i++) {
+          // funcLis[i].style.background = 'transparent';
+          funcLis[i].style.borderLeft = 'none';
+        }
+        // funcLis[index].style.background = 'lightblue';
+        funcLis[index].style.borderLeft = '.6vw solid lightblue';
       }
     },
     mounted() {
       /* 获取用户信息 */
+      this.liClick(0);
       getUserInfo().then(res => {
         if(res.data.head) {
           this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
@@ -98,15 +108,17 @@
 
   .profile .userProfile .leftBar{
     font-family: 'FZShuTi';
+    background: white;
     color: black;
     width: 20vw;
     height: 100%;
-    padding: 10vh 6vw;
+    padding: 10vh 0;
     box-sizing: border-box;
-    box-shadow: .1vw 0 1vw white;
+    box-shadow: .1vw 0 1vw gray;
   }
 
   .profile .userProfile .leftBar .userImg {
+    margin-left: 6vw;
     width: 8vw;
     height: 8vw;
     border-radius: 50%;
@@ -134,14 +146,22 @@
   }
 
   .profile .userProfile .leftBar .funcList {
+    /* box-sizing: border-box; */
+    padding: 0 3vw;
     width: 100%;
     margin-top: 5vh;
     line-height: 6vh;
   }
 
   .profile .userProfile .leftBar .funcList li {
+    /* box-sizing: border-box; */
     height: 6vh;
+    width: 100%;
     line-height: 6vh;
+  }
+
+  .profile .userProfile .leftBar .funcList li:hover {
+    background: lightblue;
   }
 
   .profile .userProfile .leftBar .funcList li a {
@@ -172,7 +192,7 @@
   .profile .userProfile .dispInfo {
     width: 50vw;
     height: 100%;
-    /* background: #f3f3f3; */
+    background: #f3f3f3;
     box-shadow: .1vw 0 1vw rgb(164, 241, 237);
     color: black;
   }
