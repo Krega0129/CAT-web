@@ -3,27 +3,20 @@
     <div class="application-form paper">
       <el-form>
         <el-row>
-          <el-col :span="20" style="height:20px">
+          <el-col :span="20" >
             <h2 class="title">CAT报名表</h2>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="20" >
+        <el-row class="el-row2">
+          <el-col :span="12">
             <h4 class="profession-selectName headName">头像</h4>
             <Head></Head>
           </el-col>
-          <div class="clearfloat"></div>
-        </el-row>
-        <el-row>
           <el-col :span="8">
             <InputName></InputName>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light"></div>
-          </el-col>
-          <el-col :span="8">
             <InputId></InputId>
           </el-col>
+          <div class="clearfloat"></div>
         </el-row>
         <el-row>
           <el-col :span="24">
@@ -119,11 +112,14 @@ export default {
   width: 700px;
 }
 .el-row:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .el-col {
   border-radius: 4px;
+}
+.el-row2{
+  height: 200px;
 }
 .el-switch {
   top: 30px;
@@ -147,7 +143,7 @@ export default {
 }
 .title {
   text-align: center;
-  line-height: 60px;
+  line-height: 100px;
 }
 .profession-selectName,
 .direction-switchName {
@@ -158,8 +154,9 @@ export default {
   font-size: 14px;
   color: #ed9521;
 }
-.headName{
-  margin-right: 30px;
+.headName {
+  margin-right: 20px;
+  line-height: 200px;
 }
 .direction-switchName {
   color: #24aae1;
@@ -174,5 +171,4 @@ export default {
   clear: both;
   height: 0;
 }
-
 </style>

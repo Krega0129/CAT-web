@@ -5,7 +5,7 @@
         <el-form-item prop="Intro">
           <el-input
             type="textarea"
-            :rows="2"
+            autosize
             placeholder="请输入内容"
             v-model="ruleForm.Intro"
             autofocus="true"
@@ -19,7 +19,7 @@
         <el-form-item prop="skill">
           <el-input
             type="textarea"
-            :rows="2"
+            autosize
             placeholder="请输入内容"
             v-model="ruleForm.skill"
             :class="{ 'shake': isActive2 }"

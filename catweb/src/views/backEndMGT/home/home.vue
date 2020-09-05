@@ -38,8 +38,8 @@ export default {
   background-color: #ffffff;
 }
 .mainBox {
-  min-width: 1024px;
-  max-width:1600px;
+  // min-width: 1024px;
+  // max-width:1600px;
   display: flex;
   flex-wrap: wrap;
   padding: 2vh;
