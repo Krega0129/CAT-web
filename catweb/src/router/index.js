@@ -7,13 +7,13 @@ const Entry = () =>
 const Home = () =>
     import ('@/views/Wuchanghui/home/Home')
 const Intro = () =>
-    import ('@/views/Intro')
+    import ('@/views/intro/intro/Intro')
 const Profile = () =>
     import ('@/views/Profile')
 const FrontEnd = () =>
-    import ('@/views/Front-end')
+    import ('@/views/intro/Front-end/Front-end')
 const BackEnd = () =>
-    import ('@/views/Back-end')
+    import ('@/views/intro/Back-end/Back-end')
 
 Vue.use(VueRouter)
 

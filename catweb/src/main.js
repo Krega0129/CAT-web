@@ -12,7 +12,6 @@ Vue.prototype.$bus = Bus;
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
-Vue.use(ElementUI)
 
 new Vue({
     router,
