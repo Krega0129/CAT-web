@@ -4,10 +4,10 @@ const token = sessionStorage.getItem('token') || null
 export default function axios(option) {
     return new Promise((resolve, reject) => {
         // 1.创建axios的实例
-        const instance = originAxios.create({
+         const instance = originAxios.create({
             withCredentials: true,
             baseURL: 'http://175.24.113.119:8080',
-            /* baseURL: 'http://47.93.19.109:8080', */
+             /* baseURL: 'http://47.93.19.109:8080', */
             /* baseURL: 'http://192.168.1.108:8080', */
             timeout: 5000,
             /* headers: { Authorization: token }, */
@@ -20,7 +20,7 @@ export default function axios(option) {
             // 2.某些请求要求用户必须登录, 判断用户是否有token, 如果没有token跳转到login页面
             const token = localStorage.getItem('token')
             if (token) {
-                config.headers.token = token;
+                config.headers.token = token;       
             } else {
                 config.headers.token = null;
             }
