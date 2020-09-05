@@ -83,7 +83,6 @@
             <span>们</span> 
             <span>!</span>          
           </div>
-          <!-- 前端的世界欢迎你的加入 -->
         </footer>
        
 
