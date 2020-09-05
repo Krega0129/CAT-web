@@ -93,7 +93,7 @@
         .then(res => {
           /* 显示进度 */
           console.log(res);
-          if(res.code === 0) {
+          if(res.data) {
             this.isSign = true;
           } else {
             this.isSign = false;
