@@ -86,22 +86,25 @@ export default {
       this.dirSummary = data;
       this.$set(this.userInfo, "dirSummary", this.dirSummary);
     });
+    this.$bus.$on("showHead", (data) => {
+      this.head = data;
+      this.$set(this.userInfo, "head", this.head);
+    });
   },
   methods: {
     submitMessage() {
       let userInfo = JSON.stringify(this.userInfo);
       console.log(userInfo);
       getSubmit(userInfo).then((res) => {
-        if (res.code == 3507) {
+        if (res.code === 3507) {
           this.$message.error("报名表不能为空！！！");
-        }else if(res.code == 3511){
-           this.$message.error("请勿重复提交！！");
-        } else {
-          this.$router.push("/home")
+        } else if (res.code === 3511) {
+          this.$message.error("请勿重复提交！！");
+        } else if (res.code === 0) {
+          this.$router.push("/home");
           this.$message({
             message: "报名成功!",
             type: "success",
-            
           });
         }
       });
@@ -151,15 +154,15 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
-      0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
-      0 16px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
 }
 
 button:active {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
-      0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
-      0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
 }
 
 .name {

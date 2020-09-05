@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" >
 
 .el-switch {
   margin: 11px 0 0 20px;
