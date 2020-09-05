@@ -80,10 +80,10 @@
       /* 获取用户信息 */
       this.liClick(0);
       getUserInfo().then(res => {
-        if(res.data.head) {
+        if(res.data && res.data.head) {
           this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+          this.userName = res.data.name
         }
-        this.userName = res.data.name
       })
     }
   }
