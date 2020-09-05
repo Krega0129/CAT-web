@@ -6,12 +6,12 @@
       <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
       <img src="../../../assets/images/front-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
       <img src="../../../assets/images/back-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')">
-      <div class="pos-ab t-al-cent lBtn" @click="pre">&lt;</div>
-      <div class="pos-ab t-al-cent rBtn" @click="after">&gt;</div>
+      <div class="pos-ab t-al-cent btn lBtn" @click="pre">◀</div>
+      <div class="pos-ab t-al-cent btn rBtn" @click="after">▶</div>
     </div>
     <!-- 工作室logo -->
     <div class="pos-ab logoBox">
-      <circleScale class="scaleBG" :Wid="Wid" :Hei="Hei" :cirX="cirX" :cirY="cirY" transOri="center" :rList="rList" :Left="Left" :Top="Top" fillColor="lightcoral"></circleScale>
+      <circleScale v-show="isShowCir" class="scaleBG" :Wid="Wid" :Hei="Hei" :cirX="cirX" :cirY="cirY" transOri="center" :rList="rList" :Left="Left" :Top="Top" fillColor="lightcoral"></circleScale>
       <div class="title pos-ab t-al-cent">
         <h3 v-if="index === 0">工作室介绍</h3>
         <h3 v-else-if="index === 1">个人主页</h3>
@@ -32,8 +32,8 @@
         <ball fillColor="#89e1d3"></ball>
       </div>
     </div>
-    <div @click="loginClick" v-if="!isLogin" class="login pos-ab t-al-cent">登录</div>
-    <div @click="logOutClick" v-else class="login pos-ab t-al-cent">退出登录</div>
+    <div @click="loginClick" v-if="!isLogin" class="btn login pos-ab t-al-cent">登录</div>
+    <div @click="logOutClick" v-else class="btn login pos-ab t-al-cent">退出登录</div>
   </div>
 </template>
 
@@ -61,7 +61,8 @@
         cirY: '25.5vh',
         rList: ['20.4vh'],
         Left: '',
-        Top: ''
+        Top: '',
+        isShowCir: false
       }
     },
     components: {
@@ -99,12 +100,15 @@
       logOutClick() {
         localStorage.removeItem('token');
         this.isLogin = false;
+        // history.go(0)
         this.$message ({
           message: '您已安全退出！',
           type: 'success'
         })
+        
       },
       pre() {
+        this.isShowCir = false
         if(this.isFirst) {
           this.$refs.logo.style.transform = 'scale(.2) translateY(-144.8vh)'
           this.$refs.logo.style.boxShadow = '.1vw 0 10vw rgb(164, 241, 237)'
@@ -125,8 +129,12 @@
             case 2: this.posList = [0, 15.6, 39, 62.5]; break;
           }
         }
+        setTimeout(() => {
+          this.isShowCir = true
+        }, 500)
       },
       after() {
+        this.isShowCir = false;
         if(this.isFirst) {
           this.$refs.logo.style.transform = 'scale(.2) translateY(-144.8vh)'
           this.$refs.logo.style.boxShadow = '.1vw 0 10vw rgb(164, 241, 237)'
@@ -146,6 +154,9 @@
             case 3: this.posList = [-15.6, 0, 15.6, 39]; break;
           }
         }
+        setTimeout(() => {
+          this.isShowCir = true
+        }, 500)
       }
     },
     mounted() {
@@ -189,21 +200,7 @@
     height: 8.5vh;
   }
 
-  .home div[class$="Btn"] {
-    font-size: 4vh;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    width: 5.1vh;
-    height: 5.1vh;
-    line-height: 5.1vh;
-  }
-
-  .home .lBtn {
-    left: 15vw;
-  }
-  .home .rBtn {
-    right: 15vw;
-  }
+  
 
   /* 四个模块图片的样式 */
   .home img {
@@ -244,62 +241,12 @@
   }
 
   .home .logoBox .title {
+    color: lightseagreen;
     font-size: 4vh;
     width: 20vw;
     left: 50%;
     margin-left: -10vw;
     bottom: -10vh;
-  }
-
-  /* @media screen and (max-height: 400px){
-    .home img {
-      width: 100px;
-      height: 90px;
-      border-radius: 50% 20%;
-    }
-
-    .home .logo {
-      width: 400px;
-      height: 400px;
-      left: 50%;
-      top: 50%;
-      margin-top: -200px;
-      margin-left: -200px;
-    }
-  }
-
-  @media screen and (max-width: 800px){
-    .home img {
-      width: 100px;
-      height: 90px;
-      border-radius: 50% 20%;
-    }
-  }
-  
-  @media screen and (max-width: 800px) and (max-height: 400px){
-    .home img {
-      width: 100px;
-      height: 90px;
-      border-radius: 50% 20%;
-    }
-
-    .home .logo {
-      width: 400px;
-      height: 400px;
-    }
-  } */
-
-  /* @media screen and (min-width: 800px){
-    .home img {
-      width: 10vw;
-      height: 20vh;
-      border-radius: 50% 20%;
-    }
-  } */
-
-  /* 第二和第三个模块样式不同 */
-  .home .special {
-    border-radius: 20% 50%;
   }
 
   .home .logo img {
@@ -350,14 +297,105 @@
     }
   }
 
+  // .home .login {
+  //   right: 10vw;
+  //   top: 3.4vh;
+  //   width: 6vw;
+  //   height: 5vh;
+  //   font-size: 3vh;
+  //   line-height: 5vh;
+  //   background: lightcoral;
+  //   z-index: 2;
+  // }
+
+  @import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
+
+  $text: white;
+  $light-pink: #bee2f3;
+  $pink: #9edcf5;
+  $dark-pink: #75afca;
+  $pink-border: #5da9cc;
+  $pink-shadow: #6e95af;
+
+  * {
+    box-sizing: border-box;
+    &::before, &::after {
+      box-sizing: border-box;
+    }
+  }
+
+  .home .btn {
+    cursor: pointer;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+    &.btn {
+      font-weight: 600;
+      color: $text;
+      text-transform: uppercase;
+      background: $light-pink;
+      border: 2px solid $pink-border;
+      border-radius: 0.75em;
+      transform-style: preserve-3d;
+      transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+      &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $dark-pink;
+        border-radius: inherit;
+        box-shadow: 0 0 0 2px $pink-border, 0 0.625em 0 0 $pink-shadow;
+        transform: translate3d(0, 0.75em, -1em);
+        transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+      }
+      &:hover {
+        background: $pink;
+        transform: translate(0, 0.25em);
+        &::before {
+          box-shadow: 0 0 0 2px $pink-border, 0 0.5em 0 0 $pink-shadow;
+          transform: translate3d(0, 0.5em, -1em);
+        }
+      }
+      &:active {
+        background: $pink;
+        transform: translate(0em, 0.75em);
+        &::before {
+          box-shadow: 0 0 0 2px $pink-border, 0 0 $pink-shadow;
+          transform: translate3d(0, 0, -1em);
+        }
+      }
+    }
+  }
+
   .home .login {
     right: 10vw;
     top: 3.4vh;
-    width: 6vw;
-    height: 5vh;
+    width: 8vw;
+    height: 8vh;
     font-size: 3vh;
-    line-height: 5vh;
-    background: lightcoral;
+    line-height: 8vh;
     z-index: 2;
+  }
+
+  .home div[class$="Btn"] {
+    width: 5vw;
+    height: 8vh;
+    font-size: 4vh;
+    border-radius: 50%;
+    line-height: 8vh;
+  }
+
+  .home .lBtn {
+    left: 5vw;
+  }
+  .home .rBtn {
+    right: 5vw;
   }
 </style>
