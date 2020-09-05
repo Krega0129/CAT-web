@@ -184,7 +184,7 @@
   }
 
   .home .scaleBG {
-    margin: 8.5vh 0 0 5.1vh;
+    margin: 6.5vh 0 0 5.1vh;
   }
 
   .home .banner {
