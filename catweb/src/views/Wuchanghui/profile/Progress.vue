@@ -1,21 +1,21 @@
 <template>
   <div class="progress t-al-cent full">
-    <div v-if="!isSign" class="profai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
-    <div v-else class="proSuc t-al-cent pos-re full">
+    <div v-else-if="isSign" class="proSuc t-al-cent pos-re full">
       <h2 class="title">考核进度</h2>
-      <div style="height: 60vh;" class="proBar pos-ab">
+      <div style="height: 60vh; width: 50vw" class="proBar pos-ab">
         <el-steps direction="vertical" :active="activeNum" finish-status="success">
           <el-step title="报名成功，准备笔试" ></el-step>
-          <el-step class="step" :title="write" :description="wridesp" :status="wriStatus"></el-step>
-          <el-step class="step" :title="face1" :description="face1desp" :status="face1Status"></el-step>
-          <el-step class="step" :title="face2" :description="face2desp" :status="face2Status"></el-step>
-          <el-step class="step" :title="work1" :description="work1desp" :status="work1Status"></el-step>
-          <el-step class="step" :title="work2" :description="work2desp" :status="work2Status"></el-step>
+          <el-step class="step" :title="proTitle[0]" :description="msg[0]" :status="proStatus[0]"></el-step>
+          <el-step class="step" :title="proTitle[1]" :description="msg[1]" :status="proStatus[1]"></el-step>
+          <el-step class="step" :title="proTitle[2]" :description="msg[2]" :status="proStatus[2]"></el-step>
+          <el-step class="step" :title="proTitle[3]" :description="msg[3]" :status="proStatus[3]"></el-step>
+          <el-step class="step" :title="proTitle[4]" :description="msg[4]" :status="proStatus[4]"></el-step>
         </el-steps>
       </div>
     </div>
@@ -29,27 +29,63 @@
     name: 'Progress',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         /* 进度表标题 */
-        write: '笔试',
-        face1: '第一轮面试',
-        face2: '第二轮面试',
-        work1: '第一轮考核',
-        work2: '第二轮考核',
+        // write: '笔试',
+        // face1: '第一轮面试',
+        // face2: '第二轮面试',
+        // work1: '第一轮考核',
+        // work2: '第二轮考核',
         /* 进度表秒速内容 */
-        wridesp: '',
-        face1desp: '',
-        face2desp: '',
-        work1desp: '',
-        work2desp: '',
+        // wridesp: '',
+        // face1desp: '',
+        // face2desp: '',
+        // work1desp: '',
+        // work2desp: '',
         /* 当前进度 */
         activeNum: 1,
         /* 考核状态 */
-        wriStatus: '',
-        face1Status: '',
-        face2Status: '',
-        work1Status: '',
-        work2Status: '',
+        // wriStatus: '',
+        // face1Status: '',
+        // face2Status: '',
+        // work1Status: '',
+        // work2Status: '',
+
+        /* 进度条标题 */
+        proTitle: ['笔试', '第一轮面试', '第二轮面试', '第一轮考核', '第二轮考核'],
+        /* 进度条消息 */
+        msg: ['', '', '', '', ''],
+        /* 进度条状态 */
+        proStatus: ['', '', '', '', ''],
+        /* 进度条成功信息 */
+        sucMsg: ['恭喜你通过了笔试', '恭喜你通过了一轮面试', '恭喜你通过了二轮面试', '恭喜你通过了一轮考核', '恭喜你通过了 二轮考核'],
+        /* 进度条失败 */
+        failMsg: ['很遗憾，你没有通过我们的笔试', '很遗憾，你没有通过一轮面试', '很遗憾，你没有通过二轮面试', '很遗憾，你没有通过一轮考核', '很遗憾，你没有通过二轮考核']
+      }
+    },
+    methods: {
+      showPro(res, index, sucMessage, failMessage) {
+        if (res.data[index] && res.data[index].adoptChecked === 1) {
+          this.proTitle[index] = sucMessage
+          this.activeNum = index + 2
+          this.msg[index] = '';
+        /* 淘汰 */
+        } else if (res.data[index] && res.data[index].adoptChecked === 2) {
+          this.$bus.$emit('out');
+          console.log(2);
+          this.proStatus[index] = "error"
+          this.proTitle[index] = failMessage
+          this.msg[index] = '';
+        }
+        if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 1) {
+          if (index === 1 || index === 2) {
+            this.msg[index + 1] = `时间：${res.data[index + 1].time}，地点：${res.data[index + 1].content}`
+          } else {
+            this.msg[index + 1] = res.data[index + 1].content
+          }
+        } else if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 0){
+          this.msg[index + 1] = '未预约'
+        }
       }
     },
     mounted() {
@@ -57,80 +93,92 @@
         .then(res => {
           /* 显示进度 */
           console.log(res);
-
-          this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
+          if(res.code === 0) {
+            this.isSign = true;
+          } else {
+            this.isSign = false;
+          }
+          // this.wridesp = `时间：${res.data[0].time}，地点：${res.data[0].content}`
           // this.wridesp = res.data[0].content
-          if (res.data[0].adoptChecked == '通过') {
-            this.write = '恭喜你通过了笔试'
-            this.activeNum = 2
-            this.wridesp = '';
-          } else if (res.data[0].adoptChecked == '淘汰') {
-            this.wriStatus = "error"
-            this.write = '很遗憾，你没有通过我们的笔试'
-            this.wridesp = '';
-          }
-          if (res.data[0].adoptChecked == '通过' && res.data[1] && res.data[1].adoptChecked == '未开始' && res.data[1].signChecked == '已预约') {
-            this.face1desp = `时间：${res.data[1].time}，地点：${res.data[1].content}`
-          } else if (res.data[0].adoptChecked == '通过' && res.data[1] && res.data[1].adoptChecked == '未开始' && res.data[1].signChecked == '未预约'){
-            this.face1desp = '未预约'
+          this.msg[0] = res.data[0].content
+          /* 通过 */
+
+          for (let i = 0; i < this.msg.length; i++) {
+            this.showPro(res, i, this.sucMsg[i], this.failMsg[i])
           }
 
-          if (res.data[1] && res.data[1].adoptChecked == '通过'){
-            this.face1 = '恭喜你通过了一轮面试'
-            this.face1desp = ''
-            this.activeNum = 3
-          } else if (res.data[1] && res.data[1].adoptChecked == '淘汰') {
-            this.face1Status = "error"
-            this.face1 = '很遗憾，你没有通过一轮面试'
-            this.face1desp = ''
-          }
-          if (res.data[1].adoptChecked == '通过' && res.data[2] && res.data[2].adoptChecked == '未开始' && res.data[2].signChecked == '已预约') {
-            this.face2desp = `时间：${res.data[2].time}，地点：${res.data[2].content}`
-          } else if(res.data[1].adoptChecked == '通过' && res.data[2] && res.data[2].adoptChecked == '未开始' && res.data[2].signChecked == '未预约'){
-            this.face2desp = '未预约'
-          }
+          // if (res.data[0].adoptChecked === 1) {
+          //   this.write = '恭喜你通过了笔试'
+          //   this.activeNum = 2
+          //   this.wridesp = '';
+          // /* 淘汰 */
+          // } else if (res.data[0].adoptChecked === 0) {
+          //   this.wriStatus = "error"
+          //   this.write = '很遗憾，你没有通过我们的笔试'
+          //   this.wridesp = '';
+          // }
+          // if (res.data[0].adoptChecked == '通过' && res.data[1] && res.data[1].adoptChecked == '未开始' && res.data[1].signChecked == '已预约') {
+          //   this.face1desp = `时间：${res.data[1].time}，地点：${res.data[1].content}`
+          // } else if (res.data[0].adoptChecked == '通过' && res.data[1] && res.data[1].adoptChecked == '未开始' && res.data[1].signChecked == '未预约'){
+          //   this.face1desp = '未预约'
+          // }
 
-          if (res.data[2] && res.data[2].adoptChecked == '通过'){
-            this.face2 = '恭喜你通过了二轮面试'
-            this.activeNum = 4
-            this.face2desp = ''
-          } else if (res.data[2] && res.data[2].adoptChecked == '淘汰') {
-            this.face2Status = "error"
-            this.face2 = '很遗憾，你没有通过二轮面试'
-            this.face2desp = ''
-          }
-          if (res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '已预约') {
-            this.work1desp = `时间：${res.data[3].time}，地点：${res.data[3].content}`
-            // this.work1desp = res.data[3].content
-          } else if(res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '未预约'){
-            this.work1desp = '未预约'
-          }
+          // if (res.data[1] && res.data[1].adoptChecked == '通过'){
+          //   this.face1 = '恭喜你通过了一轮面试'
+          //   this.face1desp = ''
+          //   this.activeNum = 3
+          // } else if (res.data[1] && res.data[1].adoptChecked == '淘汰') {
+          //   this.face1Status = "error"
+          //   this.face1 = '很遗憾，你没有通过一轮面试'
+          //   this.face1desp = ''
+          // }
+          // if (res.data[1].adoptChecked == '通过' && res.data[2] && res.data[2].adoptChecked == '未开始' && res.data[2].signChecked == '已预约') {
+          //   this.face2desp = `时间：${res.data[2].time}，地点：${res.data[2].content}`
+          // } else if(res.data[1].adoptChecked == '通过' && res.data[2] && res.data[2].adoptChecked == '未开始' && res.data[2].signChecked == '未预约'){
+          //   this.face2desp = '未预约'
+          // }
 
-          if (res.data[3] && res.data[3].adoptChecked == '通过'){
-            this.work1 = '恭喜你通过了一轮考核'
-            this.activeNum = 5
-            this.work1desp = ''
-          } else if (res.data[3] && res.data[3].adoptChecked == '淘汰') {
-            this.work1Status = "error"
-            this.work1 = '很遗憾，你没有通过一轮考核'
-            this.work1desp = ''
-          }
-          if (res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '已预约') {
-            this.work2desp = `时间：${res.data[4].time}，地点：${res.data[4].content}`
-            // this.work2desp = res.data[4].content
-          } else if(res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '未预约'){
-            this.work2desp = '未预约'
-          }
+          // if (res.data[2] && res.data[2].adoptChecked == '通过'){
+          //   this.face2 = '恭喜你通过了二轮面试'
+          //   this.activeNum = 4
+          //   this.face2desp = ''
+          // } else if (res.data[2] && res.data[2].adoptChecked == '淘汰') {
+          //   this.face2Status = "error"
+          //   this.face2 = '很遗憾，你没有通过二轮面试'
+          //   this.face2desp = ''
+          // }
+          // if (res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '已预约') {
+          //   this.work1desp = `时间：${res.data[3].time}，地点：${res.data[3].content}`
+          //   // this.work1desp = res.data[3].content
+          // } else if(res.data[2].adoptChecked == '通过' && res.data[3] && res.data[3].adoptChecked == '未开始' && res.data[3].signChecked == '未预约'){
+          //   this.work1desp = '未预约'
+          // }
 
-          if (res.data[4] && res.data[4].adoptChecked == '通过') {
-            this.work2 = '恭喜你通过了 二轮考核'
-            this.activeNum = 6
-            this.work2desp = ''
-          } else if (res.data[4] && res.data[4].adoptChecked == '淘汰') {
-            this.work2Status = "error"
-            this.work2 = '很遗憾，你没有通过二轮考核'
-            this.work2desp = ''
-          }
+          // if (res.data[3] && res.data[3].adoptChecked == '通过'){
+          //   this.work1 = '恭喜你通过了一轮考核'
+          //   this.activeNum = 5
+          //   this.work1desp = ''
+          // } else if (res.data[3] && res.data[3].adoptChecked == '淘汰') {
+          //   this.work1Status = "error"
+          //   this.work1 = '很遗憾，你没有通过一轮考核'
+          //   this.work1desp = ''
+          // }
+          // if (res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '已预约') {
+          //   this.work2desp = `时间：${res.data[4].time}，地点：${res.data[4].content}`
+          //   // this.work2desp = res.data[4].content
+          // } else if(res.data[3].adoptChecked == '通过' && res.data[4] && res.data[4].adoptChecked == '未开始' && res.data[4].signChecked == '未预约'){
+          //   this.work2desp = '未预约'
+          // }
+
+          // if (res.data[4] && res.data[4].adoptChecked == '通过') {
+          //   this.work2 = '恭喜你通过了 二轮考核'
+          //   this.activeNum = 6
+          //   this.work2desp = ''
+          // } else if (res.data[4] && res.data[4].adoptChecked == '淘汰') {
+          //   this.work2Status = "error"
+          //   this.work2 = '很遗憾，你没有通过二轮考核'
+          //   this.work2desp = ''
+          // }
         })
     }
   }
@@ -138,6 +186,10 @@
 
 <style scoped>
   @import url(../../../assets/css/base.css);
+
+  .progress {
+    font-family: 'STXingkai';
+  }
 
   .profai .title {
     padding-top: 10vh;

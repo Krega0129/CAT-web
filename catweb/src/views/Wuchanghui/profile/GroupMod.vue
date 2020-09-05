@@ -30,10 +30,6 @@
 </script>
 
 <style scoped>
-  .GroupMod .pic {
-    background: lightgoldenrodyellow;
-  }
-
   .GroupMod .pic img {
     display: block;
     width: 100%;

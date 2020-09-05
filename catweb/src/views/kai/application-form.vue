@@ -1,9 +1,10 @@
 <template>
   <div id="paper">
+    <div class="goback" @click='goBack()'></div>
     <div class="application-form paper">
       <el-form>
         <el-row>
-          <el-col :span="20" >
+          <el-col :span="20">
             <h2 class="title">CAT报名表</h2>
           </el-col>
         </el-row>
@@ -54,6 +55,7 @@ import Direction from "./FrontOrBack-Switch";
 import Message from "./mainMessage";
 import SubmitBtn from "./submitButton";
 import Head from "./head";
+
 export default {
   name: "application-form",
   components: {
@@ -73,6 +75,9 @@ export default {
     };
   },
   methods: {
+    goBack(){
+      this.$router.go(-1)
+    }
     // submitForm(formName) {
     //   this.$refs[formName].validate((valid) => {
     //     if (valid) {
@@ -105,11 +110,24 @@ export default {
 
 <style lang="scss" scoped>
 @import url(../../assets/sass/fold.scss);
+.goback {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  height: 45px;
+  width: 150px;
+  background-image: url(../../assets/img/goback-pink.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
 .application-form {
   position: relative;
   left: 50%;
   margin-left: -350px;
   width: 700px;
+  margin-top: 20px;
 }
 .el-row:last-child {
   margin-bottom: 0;
@@ -118,7 +136,7 @@ export default {
 .el-col {
   border-radius: 4px;
 }
-.el-row2{
+.el-row2 {
   height: 200px;
 }
 .el-switch {

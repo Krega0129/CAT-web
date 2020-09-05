@@ -1,9 +1,9 @@
 <template>
   <div class="userInfo">
-    <div v-if="!isSign" class="userInfoFai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="userInfoFai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看个人信息</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
     <div v-else class="UserInfoSuc pos-re full">
@@ -38,7 +38,8 @@
             <tr>
               <td>个人介绍：</td>
               <td class="pos-re">
-                <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea>
+                <!-- <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea> -->
+                <div class="selfIntro pos-ab mt-5 ">{{introduce}}</div>
               </td>
             </tr>
           </tbody>
@@ -55,7 +56,7 @@
     name: 'UserInfo',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         userName: '',
         stuNum: '',
         collage: '',
@@ -72,7 +73,12 @@
       }
     },
     created() {
-      getUserInfo().then(res => {
+        getUserInfo().then(res => {
+        if(res.data) {
+          this.isSign = true;
+        } else {
+          this.isSign = false
+        }
         this.userName = res.data.name
         this.stuNum = res.data.stuNumber
         this.collage = res.data.collage
@@ -86,8 +92,8 @@
           this.direction = '未报名'
         }
         this.introduce = res.data.introduce
-      })
-    }
+        })
+      }
   }
 </script>
 
@@ -111,11 +117,12 @@
   }
 
   .userInfo {
+    font-family: 'STXingkai';
     margin-top: 0;
   }
 
   .userInfo .UserInfoSuc {
-    font-size: 3vh;
+    font-size: 2.5vh;
   }
 
   .userInfo .UserInfoSuc .title {
@@ -130,14 +137,15 @@
   }
 
   .userInfo .UserInfoSuc table tr {
-    border-left: .5vw solid lightskyblue;
+    border-left: .5vw solid white;
+    border-radius: .5vw;
   }
 
   .userInfo .UserInfoSuc table td {
     padding: 2vh 1vw;
   }
 
-  .userInfo .UserInfoSuc table textarea {
+  /* .userInfo .UserInfoSuc table textarea {
     top: 1vh;
     border-radius: 1vh;
     outline: none;
@@ -147,10 +155,21 @@
     vertical-align: top;
     resize: none;
     padding-left: .5vw;
+  } */
+
+  .userInfo .UserInfoSuc table .selfIntro {
+    top: 1vh;
+    border-radius: 1vh;
+    line-height: 5vh;
+    height: 15vh;
+    width: 30vw;
+    background: white;
+    vertical-align: top;
+    padding-left: .5vw;
   }
 
-  .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{
+  /* .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{
     display: none;
-  }
+  } */
 
 </style>

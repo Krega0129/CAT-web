@@ -31,6 +31,8 @@ export default {
         message: "上传成功",
         type: "success",
       });
+      console.log(res.data)
+      this.$bus.$emit("showHead", res.data);
     },
     beforeAvatarUpload(upload) {
       const isJPG = upload.type === "image/jpeg";

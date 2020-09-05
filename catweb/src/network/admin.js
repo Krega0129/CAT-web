@@ -1,11 +1,14 @@
 import axios from './axios.js'
 
+let managerToken = localStorage.getItem('managerToken');
+
 export function getSearch(data) {
     return axios({
         method: 'post',
         url: '/cat_registration_war_exploded/manager/selectUser', //根据学号或名字
         data: data,
         headers: {
+            'managerToken':managerToken,
             'Content-Type': 'application/x-www-form-urlencoded',
             //'Content-Type': 'application/json',
         }

@@ -1,10 +1,13 @@
 <template>
   <div class="MeetingAppoint">
-    <div v-if="!isSign" class="appointfai t-al-cent pos-re full">
+    <div v-if="isSign === false" class="appointfai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看预约进度</h2>
       <div class="signBtn pos-ab">
-        <router-link to="/loginReg" class="dp-bk full">我要报名</router-link>
+        <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
+    </div>
+    <div v-else-if="!canAppoint" class="appointfai t-al-cent pos-re full">
+      <h2 class="title">当前阶段不可预约</h2>
     </div>
     <div v-else class="appointSuc pos-re full t-al-cent">
       <h2 class="title">预约面试：{{appointOption}}</h2>
@@ -62,7 +65,7 @@
     name: 'MeetingAppoint',
     data() {
       return {
-        isSign: sessionStorage.getItem('sign'),
+        isSign: '',
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -77,7 +80,9 @@
         /* 当前选择的日期 */
         selDate: null,
         /* 是否展示报名人数 */
-        isShowPeoNum: false
+        isShowPeoNum: false,
+        /* 当前阶段是否能预约 */
+        canAppoint: false
       }
     },
     methods: {
@@ -140,9 +145,9 @@
               /* 最新阶段 */
               let LastedStage = res.data.length - 1;
               if(res.data[LastedStage].dateNumbers[this.appointDate] != null) {
-                console.log('ok');
                 this.peoNum = res.data[LastedStage].dateNumbers[this.appointDate]
               }
+              
               this.$message({
                 message: '取消预约成功',
                 type: 'success'
@@ -166,11 +171,27 @@
         })
       }
     },
-    mounted() {
+    created() {
       seeAppointTime({}).then(res => {
+        if(res.code === 0) {
+          this.isSign = true;
+        } else {
+          this.isSign = false
+        }
+
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
+
+        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') && res.data[LastedStage].adoptChecked === 2) {
+          this.canAppoint = true;
+        } else {
+          this.canAppoint = false
+        }
+
+        this.$bus.$on('out', () => {
+          this.canAppoint = false;
+        })
         
         /* 获取可选日期 */
         for(let st in res.data[LastedStage].dateNumbers) {
@@ -193,6 +214,10 @@
 </script>
 
 <style scoped>
+  .MeetingAppoint {
+    font-family: 'STXingkai';
+  }
+
   .appointfai .title {
     padding-top: 10vh;
     font-size: 4vh;
