@@ -135,7 +135,7 @@ const router = new VueRouter({
     })
     //权限判断
     /* router.beforeEach((to, from, next) => {
-        const token = sessionStorage.getItem("data")
+        const token = localStorage.getItem("data")
         if (to.meta.requireAuth == true) {
             if (!token) {
                 next({ path: '/loginReg' })

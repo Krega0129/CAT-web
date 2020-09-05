@@ -31,8 +31,8 @@ export default {
       const data = {password:this.password,username:this.account}
       adminLogin(data).then(res=>{
         if(res.code == 1204){
-          const code = res.code
-          localStorage.setItem("code",code);
+          const managerToken = res.data.managerToken
+          localStorage.setItem("managerToken",managerToken);
           this.$router.push('/backEnd')
         }else if(res.code == 1506){
            this.$alert('账号或密码不正确', '', {
