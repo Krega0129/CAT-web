@@ -183,11 +183,13 @@
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
-        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') && res.data[LastedStage].adoptChecked === 2) {
-          this.canAppoint = true;
-        } else {
-          this.canAppoint = false
-        }
+        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
+          if(res.data[LastedStage - 1].adoptChecked === 2) {
+            this.canAppoint = false;
+          } else {
+            this.canAppoint = true
+          }
+        } 
 
         this.$bus.$on('out', () => {
           this.canAppoint = false;

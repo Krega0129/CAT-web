@@ -79,7 +79,6 @@
       picClick(ev, path) {
         const e = ev || window.event;
         const target = e.target;
-        console.log(target, this.imgs[this.index]);
         if(target === this.imgs[this.index]) {
           this.rList = [2500];
           this.Wid = '500vw'
