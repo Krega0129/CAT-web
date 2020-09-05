@@ -6,8 +6,12 @@
       <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
       <img src="../../../assets/images/front-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
       <img src="../../../assets/images/back-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')">
-      <div class="pos-ab t-al-cent btn lBtn" @click="pre">◀</div>
-      <div class="pos-ab t-al-cent btn rBtn" @click="after">▶</div>
+      <div class="pos-ab lBtnBox">
+        <div class="pos-ab t-al-cent lBtn" @click="pre">◀</div>
+      </div>
+      <div class="pos-ab rBtnBox">
+        <div class="pos-ab t-al-cent rBtn" @click="after">▶</div>
+      </div>
     </div>
     <!-- 工作室logo -->
     <div class="pos-ab logoBox">
@@ -72,7 +76,6 @@
       circleScale,
     },
     methods: {
-      /* 点击模块后向中间移动，2s后跳转 */
       picClick(ev, path) {
         const e = ev || window.event;
         const target = e.target;
@@ -195,7 +198,7 @@
   .home .banner .pic {
     border-radius: 50%;
     overflow: hidden;
-    top: 20vh;
+    top: 18vh;
     width: 8.5vh;
     height: 8.5vh;
   }
@@ -384,18 +387,42 @@
     z-index: 2;
   }
 
+  .home div[class$="BtnBox"] {
+    width: 30vw;
+    height: 80vh;
+    top: -20vh;
+    z-index: 4;
+  }
+
+  .home .lBtnBox {
+    left: 0;
+    &:hover .lBtn  {
+      display: block;
+    }
+  }
+
+  .home .rBtnBox {
+    right: 0;
+    &:hover .rBtn  {
+      display: block;
+    }
+  }
+
   .home div[class$="Btn"] {
-    width: 5vw;
-    height: 8vh;
-    font-size: 4vh;
+    width: 6vh;
+    height: 6vh;
+    font-size: 3vh;
+    top: 25vh;
+    display: none;
+    background: rgba(0,0,0,0.3);
     border-radius: 50%;
-    line-height: 8vh;
+    line-height: 6vh;
   }
 
   .home .lBtn {
-    left: 5vw;
+    left: 15vw;
   }
   .home .rBtn {
-    right: 5vw;
+    right: 15vw;
   }
 </style>
