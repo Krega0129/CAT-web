@@ -129,13 +129,8 @@
               message: '预约成功',
               type: 'success'
             })
-            console.log(this.peoNum);
             this.timeChange(this.appointDate)
           })
-
-        seeAppointTime({}).then(res => {
-          console.log(res);
-        })
       },
       cancelAppoint() {
         /* 取消预约 */
@@ -184,6 +179,7 @@
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
+        /* 判断能否预约 */
         checkPro().then(result => {
           if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
             if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
@@ -194,7 +190,7 @@
           } 
         })
         
-
+        /* 接收淘汰 */
         this.$bus.$on('out', () => {
           this.canAppoint = false;
         })
