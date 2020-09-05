@@ -20,8 +20,8 @@ export default {
     asideMenu
   },
   beforeRouteEnter: (to, from, next) => {
-    const data = localStorage.getItem("code");
-    if (data == 1204) {
+    const managerToken = localStorage.getItem("managerToken");
+    if (managerToken) {
       next();
     } else {
       alert('请先登录')
