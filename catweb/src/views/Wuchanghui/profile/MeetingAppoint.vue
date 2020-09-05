@@ -60,6 +60,7 @@
 
 <script>
   import {seeAppointTime, appointTime, cancelAppointTime, hadAppointTime} from '../../../network/appointTime'
+  import {checkPro} from '../../../network/progress'
 
   export default {
     name: 'MeetingAppoint',
@@ -173,7 +174,7 @@
     },
     created() {
       seeAppointTime({}).then(res => {
-        if(res.code === 0) {
+        if(res.data[0]) {
           this.isSign = true;
         } else {
           this.isSign = false
@@ -183,13 +184,16 @@
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
-        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
-          if(res.data[LastedStage - 1] && res.data[LastedStage - 1].adoptChecked === 2) {
-            this.canAppoint = false;
-          } else {
-            this.canAppoint = true
-          }
-        } 
+        checkPro().then(result => {
+          if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
+            if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
+              this.canAppoint = false;
+            } else {
+              this.canAppoint = true
+            }
+          } 
+        })
+        
 
         this.$bus.$on('out', () => {
           this.canAppoint = false;

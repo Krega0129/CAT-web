@@ -48,6 +48,7 @@
         userName: 'C.A.T',
         userImgURL: '',
         // imgUrl: '',
+        index: 0,
       }
     },
     components: {
@@ -68,6 +69,7 @@
       },
       liClick(index) {
         const funcLis = document.getElementsByClassName('funcList')[0].getElementsByTagName('li');
+        this.index = index;
         for (let i = 0; i < funcLis.length; i++) {
           // funcLis[i].style.background = 'transparent';
           funcLis[i].style.borderLeft = 'none';
@@ -78,7 +80,13 @@
     },
     mounted() {
       /* 获取用户信息 */
-      this.liClick(0);
+      switch(this.$router.history.current.path) {
+        case '/profile/userInfo': this.index = 0; break;
+        case '/profile/progress': this.index = 1; break;
+        case '/profile/meetingAppoint': this.index = 2; break;
+        case '/profile/groups': this.index = 3; break;
+      }
+      this.liClick(this.index)
       getUserInfo().then(res => {
         if(res.data && res.data.head) {
           this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
