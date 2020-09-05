@@ -65,25 +65,25 @@
     },
     methods: {
       showPro(res, index, sucMessage, failMessage) {
-        if (res.data[index] && res.data[index].adoptChecked === '通过') {
+        if (res.data[index] && res.data[index].adoptChecked === 1) {
           this.proTitle[index] = sucMessage
           this.activeNum = index + 2
           this.msg[index] = '';
         /* 淘汰 */
-        } else if (res.data[index] && res.data[index].adoptChecked === '淘汰') {
+        } else if (res.data[index] && res.data[index].adoptChecked === 2) {
           this.$bus.$emit('out');
           console.log(2);
           this.proStatus[index] = "error"
           this.proTitle[index] = failMessage
           this.msg[index] = '';
         }
-        if (res.data[index] && res.data[index].adoptChecked === '通过' && res.data[index + 1] && res.data[index + 1].adoptChecked === '未开始' && res.data[index + 1].signChecked === '已预约') {
+        if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 1) {
           if (index === 1 || index === 2) {
             this.msg[index + 1] = `时间：${res.data[index + 1].time}，地点：${res.data[index + 1].content}`
           } else {
             this.msg[index + 1] = res.data[index + 1].content
           }
-        } else if (res.data[index] && res.data[index].adoptChecked === '通过' && res.data[index + 1] && res.data[index + 1].adoptChecked === '未开始' && res.data[index + 1].signChecked === '未预约'){
+        } else if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 0){
           this.msg[index + 1] = '未预约'
         }
       }

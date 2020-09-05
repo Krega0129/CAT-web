@@ -1,33 +1,17 @@
 <template>
   <div class="home full pos-ab">
     <snowBG></snowBG>
-    <!-- 引入模块，L,T,R,B分别为绝对定位的位置，cL,cH,cR,cB分别为svg圆形的位置，cX,cY,cr分别是圆心位置和半径，fillColor为圆的填充颜色 -->
-    <!-- <homeMod L="10vw" T="13vh" cL="-44vw" cT="-129vh" class="t-al-cent pos-re" fillColor="#89e1d3">
-      <img src="../../../assets/images/cat.jpg" slot="pic" alt="" @click="picClick($event, '/intro')">
-      <p slot="title">工作室介绍</p>
-    </homeMod>
-    <homeMod R="12vw" T="13vh" cL="-24vw" cT="-133vh" class="t-al-cent" fillColor="#fbaf51">
-      <img src="../../../assets/images/profile.jpg" slot="pic" alt="" @click="picClick($event, '/profile')" class="special">
-      <p slot="title">个人中心</p>
-    </homeMod>
-    <homeMod L="10vw" B="13vh" cL="-44vw" cT="-20vh" class="t-al-cent" fillColor="#31b9f7">
-      <img src="../../../assets/images/front-end.jpg"  slot="pic" alt="" @click="picClick($event, '/front-end')" class="special">
-      <p slot="title">前端</p>
-    </homeMod>
-    <homeMod R="12vw" B="14vh " cL="-22vw" cT="-21vh" class="t-al-cent" fillColor="lightcoral">
-      <img src="../../../assets/images/back-end.jpg" slot="pic" alt="" @click="picClick($event, '/back-end')">
-      <p slot="title">后台</p>
-    </homeMod> -->
     <div class="banner pos-ab">
-      <img src="../../../assets/images/cat.jpg" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'px'}" @click="picClick($event, '/intro')">
-      <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'px'}" @click="picClick($event, '/profile')">
-      <img src="../../../assets/images/front-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'px'}" @click="picClick($event, '/front-end')">
-      <img src="../../../assets/images/back-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'px'}" @click="picClick($event, '/back-end')">
+      <img src="../../../assets/images/cat.jpg" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'vw'}" @click="picClick($event, '/intro')">
+      <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
+      <img src="../../../assets/images/front-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
+      <img src="../../../assets/images/back-end.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')">
       <div class="pos-ab t-al-cent lBtn" @click="pre">&lt;</div>
       <div class="pos-ab t-al-cent rBtn" @click="after">&gt;</div>
     </div>
     <!-- 工作室logo -->
     <div class="pos-ab logoBox">
+      <circleScale class="scaleBG" :Wid="Wid" :Hei="Hei" :cirX="cirX" :cirY="cirY" transOri="center" :rList="rList" :Left="Left" :Top="Top" fillColor="lightcoral"></circleScale>
       <div class="title pos-ab t-al-cent">
         <h3 v-if="index === 0">工作室介绍</h3>
         <h3 v-else-if="index === 1">个人主页</h3>
@@ -48,12 +32,14 @@
         <ball fillColor="#89e1d3"></ball>
       </div>
     </div>
-    <div @click="loginClick" v-if="!isLogin" class="login pos-ab">登录</div>
+    <div @click="loginClick" v-if="!isLogin" class="login pos-ab t-al-cent">登录</div>
+    <div @click="logOutClick" v-else class="login pos-ab t-al-cent">退出登录</div>
   </div>
 </template>
 
 <script>
   import homeMod from './homeMod'
+  import circleScale from './CircleScale'
   import ball from './ball'
   import {getUserInfo} from '../../../network/getUserInfo'
   import snowBG from '../snowBG'
@@ -63,90 +49,107 @@
     data() {
       return {
         /* 判断登录状态 */
-        isLogin: sessionStorage.getItem('token'),
+        isLogin: localStorage.getItem('token'),
         imgSrc: '',
-        posList: [-100, 100, 900, 1100],
+        posList: [-7.8, 7.8, 70.3, 86],
         isFirst: true,
-        index: null
+        index: null,
+        imgs: null,
+        Wid: '51.1vh',
+        Hei: '51.1vh',
+        cirX: '25.5vh',
+        cirY: '25.5vh',
+        rList: ['20.4vh'],
+        Left: '',
+        Top: ''
       }
     },
     components: {
       homeMod,
       ball,
       snowBG,
+      circleScale,
     },
     methods: {
       /* 点击模块后向中间移动，2s后跳转 */
       picClick(ev, path) {
         const e = ev || window.event;
         const target = e.target;
-      
-        target.style.transition = '2s'
-        target.style.transform = 'scale(10)';
-        setTimeout(() => {
-          if(path === '/profile' && !localStorage.getItem('token')) {
-            this.$router.push('/loginReg')
-          } else {
-            this.$router.push(path)
-          }
-        }, 2000)
+        console.log(target, this.imgs[this.index]);
+        if(target === this.imgs[this.index]) {
+          this.rList = [2500];
+          this.Wid = '500vw'
+          this.Hei = '500vh'
+          this.cirX = '250vw'
+          this.cirY = '250vh'
+          this.Left = '-235vw'
+          this.Top = '-225vh'
+          setTimeout(() => {
+            if(path === '/profile' && !localStorage.getItem('token')) {
+              this.$router.push('/loginReg')
+            } else {
+              this.$router.push(path)
+            }
+          }, 1000)
+        }
       },
       loginClick() {
         this.$router.push('/loginReg')
       },
+      logOutClick() {
+        localStorage.removeItem('token');
+        this.isLogin = false;
+        this.$message ({
+          message: '您已安全退出！',
+          type: 'success'
+        })
+      },
       pre() {
         if(this.isFirst) {
-          this.$refs.logo.style.transform = 'scale(.2) translateY(-850px)'
+          this.$refs.logo.style.transform = 'scale(.2) translateY(-144.8vh)'
           this.$refs.logo.style.boxShadow = '.1vw 0 10vw rgb(164, 241, 237)'
-          this.posList = [200, 500, 800, 1000]
+          this.posList = [15.6, 39, 62.5, 78.1]
           this.$refs.pro.style.transform = 'scale(3)'
           this.index = 1;
           this.isFirst = false
         } else {
-          const imgs = document.getElementsByClassName('home')[0].getElementsByTagName('img')
           if(this.index > 0) {
             this.index--;
-            imgs[this.index].style.transform = 'scale(3)'
-            imgs[this.index + 1].style.transform = 'scale(1)'
+            this.imgs[this.index].style.transform = 'scale(3)'
+            this.imgs[this.index + 1].style.transform = 'scale(1)'
           }
             
           switch(this.index) {
-            case 0: this.posList = [500, 800, 1000, 1200]; break;
-            case 1: this.posList = [200, 500, 800, 1000]; break;
-            case 2: this.posList = [0, 200, 500, 800]; break;
-            // case 3: this.posList = [-200, 0, 200, 500]; break;
+            case 0: this.posList = [39, 62.5, 78.1, 93.75]; break;
+            case 1: this.posList = [15.6, 39, 62.5, 78.1]; break;
+            case 2: this.posList = [0, 15.6, 39, 62.5]; break;
           }
         }
       },
       after() {
         if(this.isFirst) {
-          this.$refs.logo.style.transform = 'scale(.2) translateY(-850px)'
+          this.$refs.logo.style.transform = 'scale(.2) translateY(-144.8vh)'
           this.$refs.logo.style.boxShadow = '.1vw 0 10vw rgb(164, 241, 237)'
-          this.posList = [0, 200, 500, 800]
+          this.posList = [0, 15.6, 39, 62.5]
           this.$refs.front.style.transform = 'scale(3)'
           this.index = 2
           this.isFirst = false;
         } else {
-          const imgs = document.getElementsByClassName('home')[0].getElementsByTagName('img')
           if(this.index < 3) {
             this.index++;
-            imgs[this.index].style.transform = 'scale(3)'
-            imgs[this.index - 1].style.transform = 'scale(1)'
+            this.imgs[this.index].style.transform = 'scale(3)'
+            this.imgs[this.index - 1].style.transform = 'scale(1)'
           }
           switch(this.index) {
-            // case 0: this.posList = [200, 500, 800, 1000]; break;
-            case 1: 
-              this.posList = [200, 500, 800, 1000];
-              break;
-            case 2: 
-              this.posList = [0, 200, 500, 800];
-              break;
-            case 3: this.posList = [-200, 0, 200, 500]; break;
+            case 1: this.posList = [15.6, 39, 62.5, 78.1]; break;
+            case 2: this.posList = [0, 15.6, 39, 62.5]; break;
+            case 3: this.posList = [-15.6, 0, 15.6, 39]; break;
           }
         }
       }
     },
     mounted() {
+      this.imgs = document.getElementsByClassName('home')[0].getElementsByTagName('img')
       getUserInfo().then(res => {
         if(res && res.data && res.data.head){
           this.imgSrc = 'http://192.168.1.106:8080/cat_registration_war_exploded' + res.data.head
@@ -161,35 +164,38 @@
 
   .home {
     overflow: hidden;
-    /* min-width: 800px;
-    min-height: 500px; */
     // background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
   }
 
+  .home .scaleBG {
+    margin: 8.5vh 0 0 5.1vh;
+  }
+
   .home .banner {
     top: 30vh;
-    width: 80vw;
+    width: 81.25vw;
     height: 60vh;
     left: 50%;
-    margin-left: -40.6vw;
+    margin-left: -40.625vw;
   }
 
   .home .banner .pic {
     border-radius: 50%;
     overflow: hidden;
     top: 20vh;
-    width: 50px;
-    height: 50px;
+    width: 8.5vh;
+    height: 8.5vh;
   }
 
   .home div[class$="Btn"] {
+    font-size: 4vh;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 5.1vh;
+    height: 5.1vh;
+    line-height: 5.1vh;
   }
 
   .home .lBtn {
@@ -202,9 +208,10 @@
   /* 四个模块图片的样式 */
   .home img {
     transition: .5s;
+    z-index: 2;
     transform-origin: center;
-    width: 50px;
-    height: 50px;
+    width: 8.5vh;
+    height: 8.5vh;
   }
   
   /* 工作室logo */
@@ -230,12 +237,14 @@
     border-radius: 50%;
     left: 50%;
     top: 50%;
+    background: rgba(255,255,255,.5);
     margin-top: -30vh;
     margin-left: -30vh;
     box-shadow: .1vw 0 1vw rgb(164, 241, 237);
   }
 
   .home .logoBox .title {
+    font-size: 4vh;
     width: 20vw;
     left: 50%;
     margin-left: -10vw;
@@ -342,8 +351,13 @@
   }
 
   .home .login {
-    left: 50%;
-    bottom: 3.4vh;
+    right: 10vw;
+    top: 3.4vh;
+    width: 6vw;
+    height: 5vh;
+    font-size: 3vh;
+    line-height: 5vh;
+    background: lightcoral;
     z-index: 2;
   }
 </style>

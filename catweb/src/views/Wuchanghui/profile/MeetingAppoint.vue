@@ -145,7 +145,6 @@
               /* 最新阶段 */
               let LastedStage = res.data.length - 1;
               if(res.data[LastedStage].dateNumbers[this.appointDate] != null) {
-                console.log('ok');
                 this.peoNum = res.data[LastedStage].dateNumbers[this.appointDate]
               }
               
@@ -180,22 +179,17 @@
           this.isSign = false
         }
 
-        
-
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
-        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') && res.data[LastedStage].adoptChecked === '淘汰') {
+        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试') && res.data[LastedStage].adoptChecked === 2) {
           this.canAppoint = true;
-          console.log(3);
         } else {
           this.canAppoint = false
-          console.log(4);
         }
 
         this.$bus.$on('out', () => {
-          console.log(1);
           this.canAppoint = false;
         })
         

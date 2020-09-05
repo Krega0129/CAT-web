@@ -122,7 +122,7 @@
   }
 
   .userInfo .UserInfoSuc {
-    font-size: 3vh;
+    font-size: 2.5vh;
   }
 
   .userInfo .UserInfoSuc .title {
