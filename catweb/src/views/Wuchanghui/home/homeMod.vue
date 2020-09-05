@@ -1,15 +1,11 @@
 <template>
-  <!-- home页面中的模块 -->
-  <div class="homeMod pos-ab" :style="{left: L, top: T, right: R, bottom: B}">
-    <!-- 每个模块的图片和标题 -->
+  <div class="homeMod pos-ab">
     <div class="pic">
       <slot name="pic"></slot>
-      <slot name="title"></slot>
     </div>
-    <!-- 背景圆 -->
-    <svg xmln="http://www.w3.org/2000/svg" width="500px" height="500px" class="pos-ab" :style="{left: cL, top: cT, right: cR, bottom: cB, opacity: opc}">
-      <circle :cx="cX" :cy="cY" :r="cr" :fill="fillColor" class="circle" :style="{'transform-origin': cX}"></circle>
-    </svg>
+    <p class="title">
+      <slot name="title"></slot>
+    </p>
   </div>
 </template>
 
@@ -17,37 +13,43 @@
   export default {
     name: 'homeMod',
     props: {
+
+
+
       /* homeMod整个模块的位置 */
-      L: String,
-      T: String,
-      R: String,
-      B: String,
+      // L: String,
+      // T: String,
+      // R: String,
+      // B: String,
       /* svg圆形的位置 */
-      cL: String,
-      cT: String,
-      cR: String,
-      cB: String,
+      // cL: String,
+      // cT: String,
+      // cR: String,
+      // cB: String,
       /* svg圆形的圆心坐标和半径 */
-      cX: {
-        type: String,
-        default: '500px'
-      },
-      cY: {
-        type: String,
-        default: '500px'
-      },
-      cr: {
-        type: String,
-        default: '500'
-      },
+      // cX: {
+      //   type: String,
+      //   default: '85vh'
+      // },
+      // cY: {
+      //   type: String,
+      //   default: '85vh'
+      // },
+      // cr: {
+      //   type: String,
+      //   default: '85vh'
+      // },
       /* svg圆的填充色 */
-      fillColor: String,
+      // fillColor: String,
       /* 透明度 */
-      opc: {
-        type: String,
-        default: '0.5'
-      },
-      path: String
+      // opc: {
+      //   type: String,
+      //   default: '0.5'
+      // },
+      // path: String
+    },
+    computed: {
+      
     }
   }
 </script>
@@ -56,20 +58,9 @@
   @import url(../../../assets/css/base.css);
 
   .homeMod {
-    width: 120px;
-    height: 120px;
+    width: 20.4vh;
+    height: 20.4vh;
     z-index: 1;
-  }
-
-  .homeMod svg {
-    width: 1000px;
-    height: 1000px;
-    z-index: -1;
-  }
-
-  .homeMod svg .circle {
-    transition: .5s;
-    transform: scale(0);
   }
 
   .homeMod .pic {
@@ -78,7 +69,7 @@
   }
 
   .homeMod .pic img {
-    margin-bottom: 20px;
+    margin-bottom: 3.4vh;
   }
 
   .homeMod .pic img:hover {
@@ -86,8 +77,7 @@
     transform: scale(1.2);
   }
 
-  /* 鼠标移动到模块上面，背景圆显示出来 */
-  .homeMod .pic:hover  + svg > .circle {
-    transform: scale(1);
+  .homeMod .pic p {
+    font-weight: bold;
   }
 </style>

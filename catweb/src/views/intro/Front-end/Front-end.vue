@@ -91,7 +91,7 @@
 
       <!--下面 固定图标 -->
       <div class="sign">
-        <img src="../../../assets/images/front-end.webp" alt="">
+        <img src="../../../assets/images/frontEnd.webp" alt="">
       </div>
       <returnBtn></returnBtn>
     </div>
