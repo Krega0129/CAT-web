@@ -34,20 +34,30 @@ const profChildren = [{
         path: 'userInfo',
         component: UserInfo,
         meta: {
+            title: '考核进度',
             requireAuth: true
         }
     },
     {
         path: 'progress',
-        component: Progress
+        component: Progress,
+        meta: {
+            title: '考核进度'
+        }
     },
     {
         path: 'meetingAppoint',
-        component: MeetingAppoint
+        component: MeetingAppoint,
+        meta: {
+            title: '预约面试'
+        }
     },
     {
         path: 'groups',
-        component: Groups
+        component: Groups,
+        meta: {
+            title: '我要进群'
+        }
     }
 ]
 
@@ -57,15 +67,24 @@ const routes = [{
     },
     {
         path: '/start',
-        component: Entry
+        component: Entry,
+        meta: {
+            title: 'CAT'
+        }
     },
     {
         path: '/home',
-        component: Home
+        component: Home,
+        meta: {
+            title: '首页'
+        }
     },
     {
         path: '/intro',
-        component: Intro
+        component: Intro,
+        meta: {
+            title: '工作室介绍'
+        }
     },
     {
         path: '/profile',
@@ -77,25 +96,40 @@ const routes = [{
     },
     {
         path: '/front-end',
-        component: FrontEnd
+        component: FrontEnd,
+        meta: {
+            title: '前端'
+        }
     },
     {
         path: '/back-end',
-        component: BackEnd
+        component: BackEnd,
+        meta: {
+            title: '后台'
+        }
     },
     {
         path: '/loginReg',
         name: 'loginReg',
         component: resolve => (require(["../views/login/loginReg.vue"], resolve)),
+        meta: {
+            title: '登录'
+        }
     },
     {
         path: '/backLogin',
         name: 'backLogin',
-        component: resolve => (require(["../views/backEndMGT/backLogin/backLogin.vue"], resolve))
+        component: resolve => (require(["../views/backEndMGT/backLogin/backLogin.vue"], resolve)),
+        meta: {
+            title: '后台管理登录'
+        }
     },
     {
         path: '/app',
-        component: resolve => (require(["../views/kai/application-form.vue"], resolve))
+        component: resolve => (require(["../views/kai/application-form.vue"], resolve)),
+        meta: {
+            title: '我要报名'
+        }
     },
     {
         path: '/backEnd',
@@ -133,19 +167,12 @@ const router = new VueRouter({
         /* mode: 'history', */
         routes
     })
-    //权限判断
-    /* router.beforeEach((to, from, next) => {
-        const token = localStorage.getItem("data")
-        if (to.meta.requireAuth == true) {
-            if (!token) {
-                next({ path: '/loginReg' })
-            } else {
-                return next()
-            }
-        } else {
-            next()
-        }
-    }) */
+    
+const defaultTitle = 'CAT'; 
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title ? to.meta.title : defaultTitle;
+  next();
+});
 
 export default router
 
