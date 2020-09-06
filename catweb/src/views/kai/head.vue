@@ -15,7 +15,7 @@
 <script>
 import { headSubmit } from "../../network/request.js";
 // import { jsToFormData } from "../../assets/js/turnFormData.js";
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 export default {
   data() {
