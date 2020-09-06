@@ -142,17 +142,26 @@ const routes = [{
             {
                 path: 'home',
                 name: 'home',
-                component: resolve => (require(["../views/backEndMGT/home/home.vue"], resolve))
+                component: resolve => (require(["../views/backEndMGT/home/home.vue"], resolve)),
+                meta: {
+                    title: '首页'
+                }
             },
             {
                 path: 'info',
                 name: 'info',
-                component: resolve => (require(["../views/backEndMGT/info/info.vue"], resolve))
+                component: resolve => (require(["../views/backEndMGT/info/info.vue"], resolve)),
+                meta: {
+                    title: '信息管理'
+                }
             },
             {
                 path: 'setTime',
                 name: 'setTime',
-                component: resolve => (require(["../views/backEndMGT/setTime/setTime.vue"], resolve))
+                component: resolve => (require(["../views/backEndMGT/setTime/setTime.vue"], resolve)),
+                meta: {
+                    title: '设置时间'
+                }
             },
             {
                 path: 'detail',

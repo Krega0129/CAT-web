@@ -59,7 +59,7 @@
         }
         if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 1) {
           if (index === 0 || index === 1) {
-            this.msg[index + 1] = `时间：${res.data[index + 1].time}，地点：${res.data[index + 1].content}`
+            this.msg[index + 1] = `时间：${res.data[index + 1].time}，${res.data[index + 1].content}`
           } else {
             this.msg[index + 1] = res.data[index + 1].content
           }
