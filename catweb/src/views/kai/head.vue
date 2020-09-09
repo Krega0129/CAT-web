@@ -1,7 +1,7 @@
 <template>
   <el-upload
     class="avatar-uploader"
-    action="http://192.168.1.106:8080/cat_registration_war_exploded/userInfo/uploadPhoto"
+    action="http://175.24.113.119:8080/cat_registration_war_exploded/userInfo/uploadPhoto"
     :headers="myHeaders"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
@@ -21,12 +21,18 @@ export default {
   data() {
     return {
       imageUrl: "",
-      myHeaders: {token: token},
+      myHeaders: { token: token },
     };
   },
   methods: {
     handleAvatarSuccess(res, upload) {
       this.imageUrl = URL.createObjectURL(upload.raw);
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
+      console.log(res.data)
+      this.$bus.$emit("showHead", res.data);
     },
     beforeAvatarUpload(upload) {
       const isJPG = upload.type === "image/jpeg";
@@ -73,8 +79,7 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style >
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 100%;
@@ -83,7 +88,8 @@ export default {
   position: relative;
   overflow: hidden;
   display: block;
-  width: 100px;
+  width: 198px;
+  background-color: #fff;
 }
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;
@@ -91,15 +97,15 @@ export default {
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
+  width: 198px;
+  height: 198px;
+  line-height: 200px;
   text-align: center;
   border-radius: 100%;
 }
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 198px;
+  height: 198px;
   display: block;
 }
 </style>

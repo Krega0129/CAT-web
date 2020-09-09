@@ -20,7 +20,7 @@ export default function axios(option) {
             // 2.某些请求要求用户必须登录, 判断用户是否有token, 如果没有token跳转到login页面
             const token = localStorage.getItem('token')
             if (token) {
-                config.headers.token = token;
+                config.headers.token = token;       
             } else {
                 config.headers.token = null;
             }
