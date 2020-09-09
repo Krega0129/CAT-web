@@ -67,13 +67,13 @@ export default {
   /* display:inline-block; */
     position: relative;
     width: 100%;
-    height: 450px;
+    height: 60vh;
     background: #fff;
     border-radius: 20px;
     box-shadow: 1px 1px 20px rgba(0,0,0,.5);
-    padding-top: 50px;
+    padding-top: 6.66vh;
     text-align: center;
-    font-size: 13px;
+    font-size: 2vh;
     transition: .5s;
 }
     
@@ -93,7 +93,7 @@ export default {
     /* background: #fff; */  
     color: #013d4a;
     letter-spacing: 2px;
-    line-height: 23px;
+    line-height: 3.06vh;
     box-sizing: border-box;
 }
 
@@ -144,7 +144,7 @@ dl::-webkit-scrollbar {
     height: 100%;
     /* background: #8adecf; */
     border-radius: 15px;
-    padding-top: 80%;
+    padding-top: 40vh;
     font-size: 3em;
     text-align: center;
     box-sizing: border-box;
@@ -155,19 +155,20 @@ dl::-webkit-scrollbar {
     display: grid;
     place-items: center;
     top: 20px;
-    height: 35px;
-    width: 100px;
+    height: 4.66vh;
+    width: 8.8vw;
     border-radius: 8px;
     border: 2px solid #013d4a;
     background: transparent;
     padding: 2px;
-    font-size: 20px;
+    font-size: 2.6vh;
     color: #013d4a;
 }
 
 .face-over .faceimg {
     position: absolute;
-    width: 250px;
+    width: 18vw;
+    height: 37vh;
     transition: .5s;
     transform: translateY(-20%);
 }

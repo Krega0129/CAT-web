@@ -12,19 +12,20 @@ export default {
 <style>
   .returnBtn {
     position: relative;  
-    width: 100px;
-    height: 35px;
+    width: 8vw;
+    height: 4.7vh;
     border-radius: 10px;
     background: #ffd15f;
     box-shadow: 5px 5px #83af9b;
-    font-size: 15px;
+    font-size: 2vh;
     font-weight: bold;
     /* text-transform: uppercase; */
     color: #774f38;
     text-align: center;
-    line-height: 35px;
+    line-height: 4.7vh;
     animation:float 3s ease-in-out infinite
   }
+
   .returnBtn::after{
     content:'.';
     position: absolute;
@@ -40,7 +41,6 @@ export default {
     text-shadow: 5px 5px #83af9b;
   }
   
-
   @keyframes float {
     0% {
       transform: translateY(0px);

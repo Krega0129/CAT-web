@@ -114,7 +114,7 @@ export default {
 .front-end {
     overflow: hidden;
     background: linear-gradient(to bottom right,#ffefba,#ffffff);
-    padding: 0 200px;
+    padding: 0 16vw;
 }
 
 .main {
@@ -122,7 +122,7 @@ export default {
   height: 100%;
   background:  #ffcf5d;
   border-bottom:130px solid #fff;
-  padding:80px 40px 0px;
+  padding:10.6vh 3vw 0px;
   box-shadow: 1px 1px 20px rgba(0,0,0,.09);
 }
 
@@ -130,7 +130,6 @@ export default {
   width:100%;
   height: 100%;
   background:#fff;
-  /* padding:50px 30px; */
   overflow: auto;
 }
 
@@ -150,7 +149,7 @@ header {
 }
 
 header .header-mask {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   background:rgba(255,255,255,0.7);
@@ -159,6 +158,7 @@ header .header-mask {
 
 header .header-mask .header-con {
   background: rgba(0,0,0,0.3);
+  
 }
 
 header .header-mask .header-con .typewrite p { 
@@ -167,8 +167,14 @@ header .header-mask .header-con .typewrite p {
   white-space: nowrap;
   text-align: center;
   letter-spacing:1px;
-  font-size: 16px;
+  font-size: 2.1vh;
+  overflow-x: auto;
   animation: typewrite 4s steps(44) 1s normal both;
+}
+
+.typewrite p::-webkit-scrollbar {
+    /* 隐藏滚动条 */
+    display: none;
 }
 
 /* 打印机动画 */
@@ -187,9 +193,9 @@ header .header-mask .header-con .typewrite p {
 .center .title-sign {
   position: absolute;
   left: 70%;
-  top: 25%;
-  width: 50px;
-  height: 50px;
+  top: 8%;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 
@@ -254,10 +260,8 @@ header .header-mask .header-con .typewrite p {
   width: 100px;
   height: 100px;
   border-radius: 10%;
-  /* background: #ffcf5d; */
   box-shadow: 0 10px 10px 0px rgb(110, 110, 10,.3);
   margin-top:90px;
-  /* box-shadow: ; */
   cursor: pointer;
   animation: jumping 2s infinite cubic-bezier(0.280, 0.840, 0.420, 1);
 }
@@ -269,22 +273,17 @@ height: 100%;
 
 .category .js {
   margin: auto;
-  /* animation: jumping .8s infinite alternate; */
 }
 
 .category .css{
   position: absolute;
   left:20%;
   top:150px;
-  /* box-shadow: 0 10px 10px 0px rgba(110,110,10,.3);
-  box-shadow: 0 10px 10px 0px rgba(110,110,10,.2); */
-  /* animation: jumping 2s infinite cubic-bezier(0.280, 0.840, 0.420, 1); */
 }
 .category .html{
   position: absolute;
   right:20%;
   top:150px;
-  /* animation: jumping .8s infinite alternate; */
 }
 
 /* 文字背景晃动 */
@@ -326,6 +325,7 @@ height: 100%;
   margin-top: 100px;
   background:#ebf4fd;
   overflow: hidden;
+  color: #666666;
 }
 
 .section-prospect .pro-title {
@@ -345,8 +345,10 @@ height: 100%;
   /* width: 100%;
   height: 100%; */
   background: rgba(255,255,255,0.7);
+  font-size:25px;
 }
 .section-prospect .pro-con {
+  width: 80%;
   padding:50px 30px;
   line-height: 50px;
 }
@@ -358,6 +360,7 @@ height: 100%;
   height: 250px;
   border-radius: 45%;
   border: 2px solid #ffcf5d;
+  /* z-index: -1; */
 }
 .section-prospect .pro-con .pro-bg span:nth-child(1) {
   position: absolute;
@@ -383,7 +386,7 @@ height: 100%;
   margin-top: 20px;
 }
 .section-prospect .pro-con .pro-data .data-info {
-  width: 100px;
+  min-width: 100px;
   height: 80px;
   border-right: 2px solid #fff;
   padding-right: 50px;
@@ -480,7 +483,7 @@ footer .text-roll span:nth-child(6){
 /* 返回首页 */
 .returnBtn {
   position: fixed;
-  bottom: 100px;
-  right: 270px;
+  bottom: 13.3vh;
+  right: 19.4vw;
 }
 </style>

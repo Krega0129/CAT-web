@@ -46,13 +46,14 @@ export default {
   width: 35%;
   height: 100%;
   background: url(../../../assets/img/back-end-bg2.jpg);
+  background-size: cover;
   place-items: center;
   
 }
 .left h2 {
   margin: auto;
   color:transparent;
-  font-size: 30px;
+  font-size: 5.3vh;
   letter-spacing: 1em;
   background: url(../../../assets/img/back-end-testbg.jpg) left;
   -webkit-background-clip: text;
@@ -70,8 +71,8 @@ export default {
   position: absolute;
   left: 40%;
   top: 25%;
-  width: 100px;
-  height: 100px;
+  width: 13.4vh;
+  height: 13.4vh;
   border-radius: 50%;
   border: 2px solid #31b1ec;
 }
@@ -81,8 +82,8 @@ export default {
   position: absolute;
   right: 10%;
   bottom: 0;
-  width:120px;
-  height:120px;
+  width:16vh;
+  height:16vh;
   background: #a9edec;
   border-radius: 50%;
   
@@ -105,10 +106,10 @@ export default {
 /* 书本 */
 .book {
     position: absolute;
-    left: 45%;
+    left: 50%;
     top: 50%;
-    width: 400px;
-    height: 400px;
+    width: 53.3vh;
+    height: 53.3vh;
     background: #fff;
     transform: translateY(-50%) perspective(2000px);
     /* 该属性不会继承 */
@@ -171,7 +172,8 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #e9322f
+    color: #e9322f;
+    font-size:4vh
 }
 
 /* 书本内容 */
@@ -179,7 +181,14 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
+
+.book-con::-webkit-scrollbar {
+    /* 隐藏滚动条 */
+    display: none;
+}
+
 
 .book-con p {
     position: absolute;
@@ -193,8 +202,8 @@ export default {
 /* 返回首页 */
 .returnBtn {
   position: fixed;
-  bottom: 100px;
-  right: 270px;
+  bottom: 13.3vh;
+  right: 15.8vw;
 }
 </style>
 
