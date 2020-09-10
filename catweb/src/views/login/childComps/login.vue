@@ -334,8 +334,8 @@ export default {
                 this.changeCode != ""
               ) {
                 const data = {
-                  /* code:this.changePreCode, */
-                  code: "81dc9bdb52d04dc20036dbd8313ed055",
+                  code:this.changePreCode,
+                  /* code: "81dc9bdb52d04dc20036dbd8313ed055", */
                   preCode: this.changeCode,
                 };
                 forgetPassword(data).then((res) => {
@@ -408,7 +408,7 @@ export default {
           password: this.changePassword,
           phone: this.changePhone,
           preCode: this.changeCode,
-          code:'81dc9bdb52d04dc20036dbd8313ed055'/* this.changePreCode */
+          code:this.changePreCode/* '81dc9bdb52d04dc20036dbd8313ed055' */
         };
         changePassword(data).then((res) => {
           if (res.code == 2204) {

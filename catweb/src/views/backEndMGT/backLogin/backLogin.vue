@@ -13,36 +13,35 @@
         <el-button type="success" @click="login">登录</el-button>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import {adminLogin} from '@/network/adminLogin'
+import { adminLogin } from "@/network/adminLogin";
 export default {
-  data(){
+  data() {
     return {
-      account:null,
-      password:null
-    }
+      account: null,
+      password: null,
+    };
   },
-  methods:{
-    login(){
-      const data = {password:this.password,username:this.account}
-      adminLogin(data).then(res=>{
-        if(res.code == 1204){
-          const managerToken = res.data.managerToken
-          localStorage.setItem("managerToken",managerToken);
-          this.$router.push('/backEnd')
-        }else if(res.code == 1506){
-           this.$alert('账号或密码不正确', '', {
-          confirmButtonText: '确定',
-        });
+  methods: {
+    login() {
+      const data = { password: this.password, username: this.account };
+      adminLogin(data).then((res) => {
+        if (res.code == 1204) {
+          const managerToken = res.data.managerToken;
+          localStorage.setItem("managerToken", managerToken);
+          this.$router.push("/backEnd");
+        } else if (res.code == 1506) {
+          this.$alert("账号或密码不正确", "", {
+            confirmButtonText: "确定",
+          });
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -50,7 +49,9 @@ export default {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(37, 39, 73);
+  background: url(".../../../../../assets/img/backlogin.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .loginbox {
   display: flex;
@@ -58,13 +59,13 @@ export default {
   align-items: center;
   margin: 30vh auto;
   width: 30vw;
-  height: 35vh;
-  background-color: #ffffff50;
+  background-color: #00000060;
+  border-radius: 1vh;
 }
 .title {
   margin: 2vh 0;
-  font-size: 2vh;
-  color: black;
+  font-size: 3vh;
+  color: rgb(240, 212, 212);
 }
 .account {
   margin: 2vh 0;
@@ -76,5 +77,24 @@ export default {
 }
 .submit {
   margin-top: 2vh;
+}
+.el-input >>> .el-input__inner {
+  color: #ffffff;
+  border-radius: 0;
+  border: none;
+  border-bottom: #ffffff80 3px solid;
+  background: transparent;
+  font-size: 20px;
+}
+.submit >>> .el-button {
+  border: none;
+  margin-top: 3vh;
+  margin-bottom: 5vh;
+  width: 15vw;
+  background-color: #fee140;
+  background-image: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
+}
+.el-input >>> .el-input__inner::placeholder {
+  font-size: 12px;
 }
 </style>
