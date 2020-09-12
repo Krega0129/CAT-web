@@ -1,9 +1,9 @@
 <template>
   <div class="login">
     <div class="loginbox">
-      <span class="title">登录</span>
+      <span class="title">管理员登录</span>
       <div class="account">
-        <el-input v-model="account" placeholder="请输入内容" style></el-input>
+        <el-input v-model="account" placeholder="请输入账号" style></el-input>
       </div>
       <div class="password">
         <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
@@ -95,6 +95,7 @@ export default {
   background-image: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
 }
 .el-input >>> .el-input__inner::placeholder {
-  font-size: 12px;
+  font-size: 14px;
+  color: #ffffff;
 }
 </style>

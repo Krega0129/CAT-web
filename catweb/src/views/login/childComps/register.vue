@@ -39,7 +39,7 @@
     </div>
     <div class="test">
       <input type="text" class="code" placeholder="验证码" v-model="code" />
-      <div class="send" @click="send" :class="{btndisabled:!btnNoDisabled}">{{sendMessage}}</div>
+      <div class="send" @click="send" :class="{btndisabled:!btnNoDisabled}" @keydown.enter="register">{{sendMessage}}</div>
     </div>
     <div class="cancelReg">
       <div class="cancel" @click="toLogin">返回</div>

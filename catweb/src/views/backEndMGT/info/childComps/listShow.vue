@@ -1,6 +1,6 @@
 <template>
   <div class="listShow">
-    <el-table :data="stuData" stripe style="width: 100%" @selection-change="select">
+    <el-table :data="stuData" stripe style="width: 100%" @selection-change="select" max-height="390">
       <el-table-column type="selection" width="100"></el-table-column>
       <el-table-column prop="stuNumber" label="学号" width="140"></el-table-column>
       <el-table-column prop="name" label="姓名" width="100"></el-table-column>

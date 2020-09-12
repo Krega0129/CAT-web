@@ -29,6 +29,7 @@
           <use xlink:href="#icon-mima2" />
         </svg>
         <input
+          @keydown.enter="judge"
           type="password"
           placeholder="输入密码"
           @blur="Pablur"
@@ -334,7 +335,7 @@ export default {
                 this.changeCode != ""
               ) {
                 const data = {
-                  code:this.changePreCode,
+                  code: this.changePreCode,
                   /* code: "81dc9bdb52d04dc20036dbd8313ed055", */
                   preCode: this.changeCode,
                 };
@@ -346,7 +347,7 @@ export default {
                       duration: 2500,
                       position: "bottom-right",
                     });
-                    this.ischangePasswordOK = true
+                    this.ischangePasswordOK = true;
                     this.fitCodeOK = true;
                     this.title = "输入新密码";
                   } else if (res.code == 2506) {
@@ -408,7 +409,7 @@ export default {
           password: this.changePassword,
           phone: this.changePhone,
           preCode: this.changeCode,
-          code:this.changePreCode/* '81dc9bdb52d04dc20036dbd8313ed055' */
+          code: this.changePreCode /* '81dc9bdb52d04dc20036dbd8313ed055' */,
         };
         changePassword(data).then((res) => {
           if (res.code == 2204) {
@@ -421,14 +422,14 @@ export default {
             setTimeout(() => {
               this.$router.go(0);
             }, 1000);
-          }else if(res.code == 2504||res.code == 2512){
+          } else if (res.code == 2504 || res.code == 2512) {
             this.$notify.error({
-                      title: "警告",
-                      message: "修改失败",
-                      duration: 2500,
-                      position: "bottom-right",
-                    });
-        }
+              title: "警告",
+              message: "修改失败",
+              duration: 2500,
+              position: "bottom-right",
+            });
+          }
         });
       }
     },
