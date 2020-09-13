@@ -1,5 +1,8 @@
 <template>
   <div class="userInfo">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/front-end3.png" alt="">
+    </div>
     <div v-if="isSign === false" class="userInfoFai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看个人信息</h2>
       <div class="signBtn pos-ab">
@@ -74,6 +77,7 @@
     },
     created() {
         getUserInfo().then(res => {
+          console.log(res);
         if(res.data) {
           this.isSign = true;
         } else {
@@ -98,6 +102,13 @@
 </script>
 
 <style scoped>
+  .userInfo .image {
+    width: 40vh;
+    height: 40vh;
+    top: 10vh;
+    right: 0;
+  }
+
   .userInfoFai .title {
     padding-top: 10vh;
     font-size: 4vh;
@@ -137,7 +148,7 @@
   }
 
   .userInfo .UserInfoSuc table tr {
-    border-left: .5vw solid white;
+    border-left: .5vw solid lightslategray;
     border-radius: .5vw;
   }
 
@@ -166,6 +177,7 @@
     background: white;
     vertical-align: top;
     padding-left: .5vw;
+    overflow-y: scroll;
   }
 
   /* .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{

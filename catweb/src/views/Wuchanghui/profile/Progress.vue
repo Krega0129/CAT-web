@@ -1,5 +1,8 @@
 <template>
-  <div class="progress t-al-cent full">
+  <div class="progress pos-re t-al-cent full">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/run3.png" alt="">
+    </div>
     <div v-if="isSign === false" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>
       <div class="signBtn pos-ab">
@@ -93,6 +96,14 @@
 
   .progress {
     font-family: 'STXingkai';
+  }
+
+  .progress .image {
+    width: 30vh;
+    height: 30vh;
+    bottom: 10vh;
+    right: 10vh;
+    overflow: hidden;
   }
 
   .profai .title {

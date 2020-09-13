@@ -10,12 +10,11 @@
         </div>
         <h4 class="userName text-elli">{{userName}}</h4>
         <ul class="funcList">
-          <li @click="liClick(0)"><router-link class="dp-bk" to="/profile/userInfo">个人信息</router-link></li>
-          <li @click="liClick(1)"><router-link class="dp-bk" to="/profile/progress">考核进度</router-link></li>
-          <li @click="liClick(2)"><router-link class="dp-bk" to="/profile/meetingAppoint">预约面试</router-link></li>
-          <li @click="liClick(3)"><router-link class="dp-bk" to="/profile/groups">我要进群</router-link></li>
+          <li v-for="(item, index) in funList" :key="item[1]" class="pos-re" @click="liClick(index, item[0])" ref="funcLis">
+            <i class="bg pos-ab dp-bk" ref="listBg"></i>
+            <p tag="p" class="pos-ab full">{{item[1]}}</p>
+          </li>
         </ul>
-        <div class="logout pos-ab" @click="logOut"></div>
         <!-- <div class="setting pos-ab"></div> -->
       </div>
       <div class="dispInfo">
@@ -49,6 +48,12 @@
         userImgURL: '',
         // imgUrl: '',
         index: 0,
+        funList: [
+          ['/profile/userInfo', '个人信息'],
+          ['/profile/progress', '考核进度'],
+          ['/profile/meetingAppoint', '预约面试'],
+          ['/profile/groups', '我要进群']
+        ]
       }
     },
     components: {
@@ -67,19 +72,19 @@
         })
         this.$router.replace('/home')
       },
-      liClick(index) {
-        const funcLis = document.getElementsByClassName('funcList')[0].getElementsByTagName('li');
+      liClick(index, path) {
+        const funcLis = this.$refs.funcLis;
         this.index = index;
         for (let i = 0; i < funcLis.length; i++) {
-          // funcLis[i].style.background = 'transparent';
-          funcLis[i].style.borderLeft = 'none';
+          this.$refs.listBg[i].style.width = 0;
+          this.$refs.funcLis[i].style.color = '#57676f'
         }
-        // funcLis[index].style.background = 'lightblue';
-        funcLis[index].style.borderLeft = '.6vw solid lightblue';
+        this.$refs.listBg[index].style.width = 30 + 'vw';
+        this.$refs.funcLis[index].style.color = 'black'
+        this.$router.replace(path)
       }
     },
     mounted() {
-      /* 获取用户信息 */
       switch(this.$router.history.current.path) {
         case '/profile/userInfo': this.index = 0; break;
         case '/profile/progress': this.index = 1; break;
@@ -87,9 +92,10 @@
         case '/profile/groups': this.index = 3; break;
       }
       this.liClick(this.index)
+      /* 获取用户信息 */
       getUserInfo().then(res => {
         if(res.data && res.data.head) {
-          this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+          this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
           this.userName = res.data.name
         }
       })
@@ -154,7 +160,6 @@
   }
 
   .profile .userProfile .leftBar .funcList {
-    /* box-sizing: border-box; */
     padding: 0 3vw;
     width: 100%;
     margin-top: 5vh;
@@ -162,29 +167,26 @@
   }
 
   .profile .userProfile .leftBar .funcList li {
-    /* box-sizing: border-box; */
+    overflow: hidden;
     height: 6vh;
     width: 100%;
     line-height: 6vh;
   }
 
-  .profile .userProfile .leftBar .funcList li:hover {
+  .profile .userProfile .leftBar .funcList li .bg {
+    transition: .5s;
+    height: 6vh;
     background: lightblue;
+    opacity: .3;
   }
 
-  .profile .userProfile .leftBar .funcList li a {
-    color: black;
+  /* .profile .userProfile .leftBar .funcList li:hover .bg{
+    width: .6vw !important;
+  } */
+
+  .profile .userProfile .leftBar .funcList li p {
+    z-index: 2;
     font-size: 1.5vw;
-  }
-
-  .profile .userProfile .leftBar .logout {
-    width: 3vh;
-    height: 3vh;
-    bottom: 4vh;
-    left: 4vh;
-    background: url(../../../assets/images/logout.png);
-    background-size: 3vh;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
   }
 
   .profile .userProfile .leftBar .setting {
@@ -200,8 +202,8 @@
   .profile .userProfile .dispInfo {
     width: 50vw;
     height: 100%;
-    background: #f3f3f3;
-    box-shadow: .1vw 0 1vw rgb(164, 241, 237);
+    background: #eef2f5;
+    box-shadow: .1vw 0 1vw gray;
     color: black;
   }
 

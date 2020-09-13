@@ -1,5 +1,8 @@
 <template>
-  <div class="MeetingAppoint">
+  <div class="MeetingAppoint pos-re">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/tietu.jpg" alt="">
+    </div>
     <div v-if="isSign === false" class="appointfai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看预约进度</h2>
       <div class="signBtn pos-ab">
@@ -218,6 +221,14 @@
 <style scoped>
   .MeetingAppoint {
     font-family: 'STXingkai';
+    height: 80vh;
+  }
+
+  .MeetingAppoint .image {
+    width: 52vh;
+    height: 40vh;
+    bottom: 0;
+    right: 0;
   }
 
   .appointfai .title {

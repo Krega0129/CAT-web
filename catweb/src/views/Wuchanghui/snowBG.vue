@@ -134,7 +134,7 @@
     overflow: hidden;
     font-size: 2.7vh;
     height: 100vh;
-    background: radial-gradient(ellipse at bottom, #d8e1e2 0%, #73868f 100%);
+    background: radial-gradient(ellipse at bottom, #d8e1e2 0%, #97c7c3 100%);
     filter: drop-shadow(0 0 10px white);
   }
 
@@ -149,7 +149,7 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #97c7c3;
+    background: white;
     border-radius: 50%;
 
     @for $i from 1 through $total {

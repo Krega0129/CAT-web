@@ -65,6 +65,10 @@ ul, ol {
     float: right;
 }
 
+.link {
+    cursor: url('../../assets/images/cursor-hover.png'), auto;
+}
+
 .pos-re {
     position: relative;
 }
