@@ -16,6 +16,7 @@ export default {
 </script>
 
 <script>
+
 import loginReg from './views/login/loginReg'
 export default {
   name: 'app',
@@ -23,7 +24,9 @@ export default {
     loginReg
   }
 }
+
 </script>
+
 <style scoped>
   @import './assets/css/base.css';
   @import './assets/css/normalize.css';

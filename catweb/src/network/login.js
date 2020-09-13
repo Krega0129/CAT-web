@@ -27,6 +27,7 @@ export function register(data) {
 export function login(data) {
     return axios({
         method: 'post',
+        // url: '/cat-registration/user/login',
         url: '/cat_registration_war_exploded/user/login',
         data: data,
         headers: {
@@ -62,6 +63,28 @@ export function phoneLogin(data) {
         method: 'post',
         url: '/cat_registration_war_exploded/user/loginByPhone',
         data: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+}
+
+export function changePassword(data){
+    return axios({
+        method:'post',
+        url:'/cat_registration_war_exploded/user/doUpdatePassword',
+        data:data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+}
+
+export function forgetPassword(data){
+    return axios({
+        method:'post',
+        url:'/cat_registration_war_exploded/user/forgetPassword',
+        data:data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         }

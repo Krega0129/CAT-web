@@ -1,73 +1,176 @@
 <template>
   <div class="home full pos-ab">
-    <!-- 引入模块，L,T,R,B分别为绝对定位的位置，cL,cH,cR,cB分别为svg圆形的位置，cX,cY,cr分别是圆心位置和半径，fillColor为圆的填充颜色 -->
-    <homeMod L="10vw" T="13vh" cL="-44vw" cT="-129vh" class="t-al-cent pos-re" fillColor="#89e1d3">
-      <img src="../../../assets/images/cat.webp" slot="pic" alt="" @click="picClick($event, '/intro')">
-      <p slot="title">工作室介绍</p>
-    </homeMod>
-    <homeMod R="12vw" T="13vh" cL="-24vw" cT="-133vh" class="t-al-cent" fillColor="#fbaf51">
-      <img src="../../../assets/images/profile.gif" slot="pic" alt="" @click="picClick($event, '/profile')" class="special">
-      <p slot="title">个人中心</p>
-    </homeMod>
-    <homeMod L="10vw" B="13vh" cL="-44vw" cT="-20vh" class="t-al-cent" fillColor="#31b9f7">
-      <img src="../../../assets/images/front-end.webp" slot="pic" alt="" @click="picClick($event, '/front-end')" class="special">
-      <p slot="title">前端</p>
-    </homeMod>
-    <homeMod R="12vw" B="14vh " cL="-22vw" cT="-21vh" class="t-al-cent" fillColor="lightcoral">
-      <img src="../../../assets/images/back-end.gif" slot="pic" alt="" @click="picClick($event, '/back-end')">
-      <p slot="title">后台</p>
-    </homeMod>
+    <snowBG></snowBG>
+    <div class="astron pos-ab"></div>
     <!-- 工作室logo -->
-    <div class="logo pos-ab">
-      <!-- 跳动的小球 -->
-      <div class="balls pos-ab dp-fx ju-btw">
-        <ball fillColor="#89e1d3"></ball>
-        <ball fillColor="#fbaf51"></ball>
-        <ball fillColor="#31b9f7"></ball>
-        <ball fillColor="lightcoral"></ball>
-        <ball fillColor="#31b9f7"></ball>
-        <ball fillColor="#fbaf51"></ball>
-        <ball fillColor="#89e1d3"></ball>
+    <div class="pos-ab logoBox">
+      <circleScale v-show="isShowCir" class="scaleBG" :Wid="Wid" :Hei="Hei" :cirX="cirX" :cirY="cirY" transOri="center" :rList="rList" :Left="Left" :Top="Top" fillColor="steelblue"></circleScale>
+      <svg class="pos-ab cir">
+        <circle cx="31.5vh" cy="31.5vh" r="30vh" class="circleBorder full" fill="none" stroke-width="3vh"></circle>
+      </svg>
+      <div class="title pos-ab t-al-cent">
+        <h3 v-if="index === 0">工作室介绍</h3>
+        <h3 v-else-if="index === 1">个人主页</h3>
+        <h3 v-else-if="index === 3">前端</h3>
+        <h3 v-else-if="index === 4">后台</h3>
+        <h3 v-else></h3>
       </div>
     </div>
-    <div @click="loginClick"  class="login pos-ab">登录</div>
+    <div class="banner pos-ab">
+      <!-- <img src="../../../assets/images/cat.jpg" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'vw'}" @click="picClick($event, '/intro')">
+      <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
+      <img src="../../../assets/images/front-end1.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
+      <img src="../../../assets/images/back-end1.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')"> -->
+      <img src="../../../assets/images/planet1.png" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'vw'}" @click="picClick($event, '/intro')">
+      <img src="../../../assets/images/planet2.png" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
+      <img src="../../../assets/images/planet3.png" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
+      <img src="../../../assets/images/planet4.png" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')">
+      <div class="logo pos-ab" ref="logo">
+        <!-- 跳动的小球 -->
+        <div class="balls pos-ab dp-fx ju-btw">
+          <ball fillColor="#89e1d3"></ball>
+          <ball fillColor="#fbaf51"></ball>
+          <ball fillColor="#31b9f7"></ball>
+          <ball fillColor="lightcoral"></ball>
+          <ball fillColor="#31b9f7"></ball>
+          <ball fillColor="#fbaf51"></ball>
+          <ball fillColor="#89e1d3"></ball>
+        </div>
+      </div>
+      <div class="pos-ab lBtnBox">
+        <div class="pos-ab t-al-cent lBtn" @click="pre">◀</div>
+      </div>
+      <div class="pos-ab rBtnBox">
+        <div class="pos-ab t-al-cent rBtn" @click="after">▶</div>
+      </div>
+    </div>
+    <div @click="loginClick" v-if="!isLogin" class="btn login pos-ab t-al-cent">登录</div>
+    <div @click="logOutClick" v-else class="btn login pos-ab t-al-cent">退出登录</div>
   </div>
 </template>
 
 <script>
-  import homeMod from './homeMod'
+  import circleScale from './CircleScale'
   import ball from './ball'
+  import {getUserInfo} from '../../../network/getUserInfo'
+  import snowBG from '../snowBG'
 
   export default {
     name: 'home',
     data() {
       return {
         /* 判断登录状态 */
-        isLogin: true
+        isLogin: localStorage.getItem('token'),
+        imgSrc: '',
+        posList: [-18, -2.2, 60.3, 75],
+        isShowLogo: true,
+        index: 2,
+        imgIndex: null,
+        imgs: null,
+        Wid: '51.1vh',
+        Hei: '51.1vh',
+        cirX: '25.5vh',
+        cirY: '25.5vh',
+        rList: ['10vh'],
+        Left: '',
+        Top: '',
+        isShowCir: false
       }
     },
     components: {
-      homeMod,
-      ball
+      ball,
+      snowBG,
+      circleScale,
     },
     methods: {
-      /* 点击模块后向中间移动，2s后跳转 */
       picClick(ev, path) {
         const e = ev || window.event;
         const target = e.target;
-        /* 要位移的距离 */
-        const toLeft = (window.innerWidth / 2 - target.parentNode.parentNode.offsetLeft - target.width / 2) + 'px';
-        const toTop = (window.innerHeight / 2 - target.parentNode.parentNode.offsetTop - target.height / 2) + 'px';
-        target.style.transition = '2s'
-        target.style.transform = 'translate(' + toLeft + ',' + toTop + ') scale(1.5)';
-        target.style.borderRadius = '20% 20%'
-        setTimeout(() => {
-          this.$router.push(path)
-        }, 2000)
+        if(target === this.imgs[this.imgIndex]) {
+          this.rList = [2500];
+          this.Wid = '500vw'
+          this.Hei = '500vh'
+          this.cirX = '250vw'
+          this.cirY = '250vh'
+          this.Left = '-235vw'
+          this.Top = '-225vh'
+          setTimeout(() => {
+            if(path === '/profile' && !localStorage.getItem('token')) {
+              this.$router.push('/loginReg')
+            } else {
+              this.$router.push(path)
+            }
+          }, 1000)
+        }
       },
       loginClick() {
         this.$router.push('/loginReg')
+      },
+      logOutClick() {
+        localStorage.removeItem('token');
+        history.go(0)
+      },
+      pre() {
+        this.isShowCir = false
+        if(this.index > 0 && this.index <= 4) this.index--;
+        switch(this.index) {
+          case 0: 
+            this.imgIndex = 0
+            this.posList = [28.7, 52.5, 83.7, 98]; 
+            this.$refs.logo.style.transform = 'translate(40vw, 2vh) scale(.1)'
+            break;
+          case 1: 
+            this.imgIndex = 1
+            this.posList = [5.6, 28.4, 68.1, 83]; 
+            this.$refs.logo.style.transform = 'translate(24vw, 2vh) scale(.1)'
+            break;
+          case 2: 
+            this.$refs.logo.style.boxShadow = 'none'
+            this.posList = [-18, -2.2, 60.3, 75]
+            this.$refs.logo.style.transform = 'translate(0, 0) scale(1)'
+            break
+          case 3: 
+            this.imgIndex = 2
+            this.posList = [-25, -10, 28.7, 52.5]; 
+            this.$refs.logo.style.transform = 'translate(-23vw, 2vh) scale(.1)'
+            break;
+        }
+        setTimeout(() => {
+          this.isShowCir = true
+        }, 500)
+      },
+      after() {
+        this.isShowCir = false;
+        if(this.index >= 0 && this.index < 4) this.index++;
+        switch(this.index) {
+          case 1: 
+            this.imgIndex = 1
+            this.posList = [5.6, 28.7, 68.1, 83];
+            this.$refs.logo.style.transform = 'translate(23vw, 2vh) scale(.1)'
+            break;
+          case 2: 
+            this.$refs.logo.style.transform = 'scale(1) translate(0, 0)'
+            this.$refs.logo.style.boxShadow = 'none'
+            this.posList = [-18, -2.2, 60.3, 75]
+            break;
+          case 3: 
+            this.imgIndex = 2
+            this.posList = [-25, -10, 28.7, 52.5]; 
+            this.$refs.logo.style.transform = 'translate(-23vw, 2vh) scale(.1)'
+            break;
+          case 4: 
+            this.posList = [-41, -25.6, 5.6, 28.7]; 
+            this.imgIndex = 3
+            this.$refs.logo.style.transform = 'translate(-38vw, 2vh) scale(.1)'
+            break;
+        }
+        setTimeout(() => {
+          this.isShowCir = true
+        }, 500)
       }
+    },
+    mounted() {
+      this.imgs = document.getElementsByClassName('home')[0].getElementsByTagName('img')
     }
   }
 </script>
@@ -77,37 +180,144 @@
 
   .home {
     overflow: hidden;
-    background: url(../../../assets/images/bg.jpg);
     background-size: cover;
     color: white;
-    font-size: 2.7vh;
+  }
+
+  .home .scaleBG {
+    margin: 6.5vh 0 0 5.1vh;
+  }
+
+  .home .banner {
+    top: 30vh;
+    width: 81.25vw;
+    height: 60vh;
+    left: 50%;
+    margin-left: -40.625vw;
+  }
+
+  .home .banner .pic {
+    border-radius: 50%;
+    overflow: hidden;
+    top: 17vh;
+    width: 10vh;
+    height: 10vh;
   }
 
   /* 四个模块图片的样式 */
   .home img {
-    width: 10vw;
-    height: 10vw;
-    border-radius: 50% 20%;
-  }
-  
-  /* 第二和第三个模块样式不同 */
-  .home .special {
-    border-radius: 20% 50%;
+    margin-top: -10vw;
+    box-sizing: content-box;
+    z-index: 2;
+    width: 10vh;
+    height: 10vh;
+    animation: imgMove 3s infinite linear;
+    transition: .5s;
+    cursor: pointer;
+    border: 10vw solid transparent;
   }
 
+  @keyframes imgMove {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-1vh);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(1vh);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
   /* 工作室logo */
   .home .logo {
-    width: 85vh;
-    height: 85vh;
+    box-sizing: border-box;
+    transition: .5s;
+    transform-origin: center;
+    width: 80vh;
+    height: 80vh;
     border-radius: 50%;
     border: 4vh solid lightblue;
     overflow: hidden;
     left: 50%;
     top: 50%;
-    margin-top: -42.5vh;
-    margin-left: -42.5vh;
+    margin-top: -50vh;
+    margin-left: -40vh;
     background: url(../../../assets/images/logo.png);
     background-size: 100% 100%;
+  }
+
+  .home .imgMove {
+    animation: imgMove 3s infinite linear;
+  }
+
+  /* 宇航员 */
+  .home .astron {
+    width: 30vh;
+    height: 30vh;
+    background: url(../../../assets/images/astronaut.png) no-repeat;
+    background-size: 100%;
+    top: 5vh;
+    left: 5vw;
+  }
+
+  .home .logoBox {
+    width: 60vh;
+    height: 60vh;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    background: rgba(255,255,255,.5);
+    margin-top: -30vh;
+    margin-left: -30vh;
+    box-shadow: .1vw 0 1vw rgb(164, 241, 237);
+  }
+
+  .home .cir {
+    width: 63vh;
+    height: 63vh;
+    top: -1.5vh;
+    left: -1.5vh;
+    stroke: steelblue;
+    animation: rotate 2s linear infinite;
+  }
+
+  .home .cir .circleBorder {
+    transform-origin: center;
+    stroke-linecap: round;
+    stroke-dasharray: 200vh;
+    stroke-dashoffset: 200vh;
+    animation: animate 4s linear infinite;
+  }
+
+  @keyframes animate {
+    0% {
+      stroke-dashoffset: 200vh;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    50.01% {
+      stroke-dashoffset: 400vh;
+    }
+    100% {
+      stroke-dashoffset: 200vh;
+    }
+  }
+
+  .home .logoBox .title {
+    color: lightseagreen;
+    font-size: 4vh;
+    width: 20vw;
+    left: 50%;
+    margin-left: -10vw;
+    bottom: -10vh;
   }
 
   .home .logo img {
@@ -158,8 +368,117 @@
     }
   }
 
-  .home .login {
-    left: 50%;
-    bottom: 3.4vh;
+  /* 登录/退出登录按钮 */
+  @import url("https://fonts.googleapis.com/css?family=Rubik:700&display=swap");
+  * {
+    box-sizing: border-box;
   }
-</style>>
+  *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  .home .btn {
+    vertical-align: middle;
+    font-weight: 600;
+    color: rgb(15, 206, 231);
+    background: #f0f7ff;
+    border: 0.3vh solid #859cb1;
+    border-radius: 0.75em;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  .home .btn::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #c4dff9;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0.3vh #8598b1, .3em 0.325em 10px 0 #212325;
+    -webkit-transform: translate3d(0, 0.75em, -1em);
+            transform: translate3d(0, 0.75em, -1em);
+    -webkit-transition: box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  .home .btn:hover {
+    background: #e9f4ff;
+    -webkit-transform: translate(0, 0.25em);
+            transform: translate(0, 0.25em);
+  }
+  .home .btn:hover::before {
+    box-shadow: 0 0 0 0.3vh #8598b1, .2em 0.2em 5px 0 #1f2122;
+    -webkit-transform: translate3d(0, 0.5em, -1em);
+            transform: translate3d(0, 0.5em, -1em);
+  }
+  .home .btn:active {
+    background: #e9f3ff;
+    -webkit-transform: translate(0em, 0.75em);
+            transform: translate(0em, 0.75em);
+  }
+  .home .btn:active::before {
+    box-shadow: 0 0 0 0.3vh #8599b1, 0 0 #54575a;
+    -webkit-transform: translate3d(0, 0, -1em);
+            transform: translate3d(0, 0, -1em);
+  }
+
+  .home .login {
+    right: 10vw;
+    top: 3.4vh;
+    width: 8vw;
+    height: 8vh;
+    font-size: 3vh;
+    line-height: 8vh;
+    z-index: 2;
+  }
+
+  .home div[class$="BtnBox"] {
+    width: 40vw;
+    height: 80vh;
+    top: -20vh;
+    z-index: 4;
+  }
+
+  .home .lBtnBox {
+    left: -10vw;
+  }
+
+  .home .lBtnBox:hover .lBtn  {
+      display: block;
+    }
+
+  .home .rBtnBox {
+    right: -10vw;
+  }
+
+  .home .rBtnBox:hover .rBtn  {
+      display: block;
+    }
+
+  .home div[class$="Btn"] {
+    width: 10vh;
+    height: 10vh;
+    font-size: 5vh;
+    top: 25vh;
+    display: none;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    line-height: 10vh;
+  }
+
+  .home .lBtn {
+    left: 10vw;
+  }
+  .home .rBtn {
+    right: 10vw;
+  }
+</style>

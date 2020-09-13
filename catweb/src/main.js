@@ -11,17 +11,35 @@ import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import axios from 'axios'
 import echarts from 'echarts'
+import { message } from './assets/js/resetMessage';
+
+
 Vue.prototype.$echarts = echarts
 Vue.prototype.$bus = Bus;
 Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.config.productionTip = false
+
+
 Vue.use(ElementUI);
+
+Vue.prototype.$message = message;
+
+
 new Vue({
     router,
     store,
     render: h => h(App)
 }).$mount('#app')
+
+// axios.interceptors.request.use(config => {
+//     if(sessionStorage.getItem('token')) {
+//         config.headers.Authorization = sessionStorage.getItem('token');
+//     }
+//     return config;
+// }, err => {
+//     console.log(err);
+// })
 
 window.addEventListener('resize', () => {
     document.body.style.width = 100 + 'vw'

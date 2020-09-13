@@ -5,7 +5,9 @@
 }
 
 body {
-    background: #777;
+    background-image: url(../images/app-bg.png);
+    background-size: cover;
+    background-position: center;
 }
 
 #page-wrap {
@@ -38,7 +40,7 @@ body {
     height: 150px;
 }
 
-.paper .el-row:nth-child(odd) {
+.paper .el-row:nth-child(even) {
     background: -moz-linear-gradient(-45deg, #e9eae5 0%, rgba(244, 245, 240, 0) 100%);
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #e9eae5), color-stop(100%, rgba(244, 245, 240, 0)));
     background: -webkit-linear-gradient(-45deg, #e9eae5 0%, rgba(244, 245, 240, 0) 100%);

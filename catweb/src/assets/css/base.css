@@ -30,14 +30,11 @@ body {
     /* rem vw/vh */
     /* width: 100vw; */
     /* height: 100vh; */
-    cursor: url(../images/cursor.png), auto;
 }
 
 a {
     color: var(--color-text);
     text-decoration: none;
-    /* 自定义鼠标样式 */
-    cursor: url('../../assets/images/cursor-hover.png'), auto;
 }
 
 ul, ol {

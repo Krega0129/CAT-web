@@ -32,14 +32,14 @@ export default {
 <style lang="scss" scoped>
 .header {
   padding-left: 5vh;
-  width: 87vw;
+  width: 89vw;
   height: 5vh;
   line-height: 5vh;
   background-color: #ffffff;
 }
 .mainBox {
-  min-width: 1024px;
-  max-width:1600px;
+  // min-width: 1024px;
+  // max-width:1600px;
   display: flex;
   flex-wrap: wrap;
   padding: 2vh;

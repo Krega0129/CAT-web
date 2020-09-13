@@ -32,5 +32,15 @@ module.exports = {
                 path.resolve(__dirname, 'src/styles/_variables.scss'),
             ]
         }
-    }
+    },
+    pwa: {
+        iconPaths: {
+            favicon32: 'favicon.ico',
+            favicon16: 'favicon.ico',
+            appleTouchIcon: 'favicon.ico',
+            maskIcon: 'favicon.ico',
+            msTileImage: 'favicon.ico'
+        }
+    },
+    publicPath: './'
 }

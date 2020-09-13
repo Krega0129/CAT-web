@@ -104,14 +104,22 @@ export default {
           });
       }
     },
+    deleteTableData(data){
+      for(let i = 0;i<this.tableData.length;i++){
+        if(this.tableData[i].date == data.date&&this.tableData[i].stage == data.stage){
+          this.tableData.splice(i,1)
+        }
+      }
+    },
     deleteOldTime(date, stage) {
+      const data = { date, stage };
       this.$confirm("将删除已设置时间, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          const data = { date, stage };
+          this.deleteTableData(data)
           deleteTime(data);
         })
         .then(() => {
@@ -119,10 +127,6 @@ export default {
             type: "success",
             message: "删除成功!",
           });
-        })
-        .then(() => {
-          this.tableData = [];
-          this.getTime();
         })
         .catch(() => {
           this.$message({
@@ -155,7 +159,7 @@ export default {
 .header {
   margin-bottom: 2vh;
   padding-left: 5vh;
-  width: 87vw;
+  width: 90vw;
   height: 5vh;
   line-height: 5vh;
   background-color: #ffffff;
@@ -164,7 +168,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 85vw;
-  height: 80vh;
+  height: 93vh;
   margin: 0 auto;
   padding: 2vh;
   background-color: rgb(177, 194, 195);

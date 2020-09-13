@@ -1,29 +1,23 @@
 <template>
   <div id="paper">
+    <div class="goback" @click='goBack()'></div>
     <div class="application-form paper">
       <el-form>
         <el-row>
-          <el-col :span="20" style="height:20px">
+          <el-col :span="20">
             <h2 class="title">CAT报名表</h2>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="20" >
+        <el-row class="el-row2">
+          <el-col :span="12">
             <h4 class="profession-selectName headName">头像</h4>
             <Head></Head>
           </el-col>
-          <div class="clearfloat"></div>
-        </el-row>
-        <el-row>
           <el-col :span="8">
             <InputName></InputName>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple-light"></div>
-          </el-col>
-          <el-col :span="8">
             <InputId></InputId>
           </el-col>
+          <div class="clearfloat"></div>
         </el-row>
         <el-row>
           <el-col :span="24">
@@ -61,6 +55,7 @@ import Direction from "./FrontOrBack-Switch";
 import Message from "./mainMessage";
 import SubmitBtn from "./submitButton";
 import Head from "./head";
+
 export default {
   name: "application-form",
   components: {
@@ -80,6 +75,9 @@ export default {
     };
   },
   methods: {
+    goBack(){
+      this.$router.go(-1)
+    }
     // submitForm(formName) {
     //   this.$refs[formName].validate((valid) => {
     //     if (valid) {
@@ -112,25 +110,39 @@ export default {
 
 <style lang="scss" scoped>
 @import url(../../assets/sass/fold.scss);
+.goback {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  height: 45px;
+  width: 150px;
+  background-image: url(../../assets/img/goback-pink.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
 .application-form {
   position: relative;
   left: 50%;
   margin-left: -350px;
   width: 700px;
+  margin-top: 20px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
 
-}
-.el-row {
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
 .el-col {
   border-radius: 4px;
+}
+.el-row2 {
+  height: 200px;
 }
 .el-switch {
   top: 30px;
 }
-// .bg-purple-dark {
+/* // .bg-purple-dark {
 //   background: #99a9bf;
 // }
 // .bg-purple {
@@ -138,7 +150,7 @@ export default {
 // }
 // .bg-purple-light {
 //   background: #e5e9f2;
-// }
+// } */
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
@@ -149,7 +161,7 @@ export default {
 }
 .title {
   text-align: center;
-  line-height: 60px;
+  line-height: 100px;
 }
 .profession-selectName,
 .direction-switchName {
@@ -160,8 +172,9 @@ export default {
   font-size: 14px;
   color: #ed9521;
 }
-.headName{
-  margin-right: 30px;
+.headName {
+  margin-right: 20px;
+  line-height: 200px;
 }
 .direction-switchName {
   color: #24aae1;
@@ -176,5 +189,4 @@ export default {
   clear: both;
   height: 0;
 }
-
 </style>

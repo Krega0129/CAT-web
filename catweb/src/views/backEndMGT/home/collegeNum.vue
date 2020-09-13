@@ -18,7 +18,9 @@ export default {
     return { list: this.$store.state.list };
   },
   mounted() {
-    this.drawLine();
+    this.$nextTick(() => {
+      this.drawLine();
+    });
     
   },
   methods: {
@@ -41,7 +43,7 @@ export default {
           },
           legend: {
             // orient: "vertical",
-            bottom: "15",
+            bottom: "5%",
             // itemWidth:"15",
             // itemHeight:"15",
             // fontSize:"16",

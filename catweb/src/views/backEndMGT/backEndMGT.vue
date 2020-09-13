@@ -1,8 +1,8 @@
 <template>
   <div class="backEndMGT">
     <asideMenu></asideMenu>
-    <keep-alive exclude="detail">
-      <router-view></router-view>
+    <keep-alive exclude="detail" class="keep">
+      <router-view ></router-view>
     </keep-alive>
   </div>
 </template>
@@ -12,29 +12,37 @@ import asideMenu from "./asideMenu/asideMenu";
 
 export default {
   name: "backEndMGT",
+  data(){
+    return {
+    }
+  },
   components: {
     asideMenu
   },
   beforeRouteEnter: (to, from, next) => {
-    const data = localStorage.getItem("code");
-    if (data == 1204) {
+    const managerToken = localStorage.getItem("managerToken");
+    if (managerToken) {
       next();
     } else {
-      alert('请先登录')
       setTimeout(() => {
-        next({ path: "/backLogin" });
-      }, 1500);
+        
+        next(vm=>{
+          vm.$router.push('/backLogin')
+        });
+      }, 1000);
     }
-    /* console.log(to);
-    console.log(from);
-    console.log(next); */
-  }
+  },
+  methods: {
+    
+  },
+  
 };
 </script>
   
 <style scoped>
 @import ".../../../../assets/css/base.css";
 .backEndMGT {
+  /* overflow: hidden; */
   display: flex;
 }
 </style>
