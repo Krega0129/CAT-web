@@ -82,6 +82,7 @@
         this.isSign = true;
       } else {
         this.isSign = false
+        return ;
       }
       this.userName = res.data.name
       this.stuNum = res.data.stuNumber
