@@ -6,7 +6,6 @@
         <div class="userImg pos-re">
           <img v-if="!userImgURL" src="../../../assets/images/userImg.jpg" alt="" class="dp-bk full">
           <img v-else :src="userImgURL" alt="" class="dp-bk full">
-          <!-- <i class="setUserImg dp-bk pos-ab" @click="isSetUserImg = true"></i> -->
         </div>
         <h4 class="userName text-elli">{{userName}}</h4>
         <ul class="funcList">
@@ -15,17 +14,9 @@
             <p tag="p" class="pos-ab full">{{item[1]}}</p>
           </li>
         </ul>
-        <!-- <div class="setting pos-ab"></div> -->
       </div>
       <div class="dispInfo">
-        <!-- 引入各个功能页面 -->
         <router-view></router-view>
-      </div>
-      <div class="setUserImgBox pos-ab" v-if="isSetUserImg">
-        <input type="file" class="uploadFile" accept="image/jpg, image/png" name="" id="" @change="changeUserImg($event)">
-        <input type="submit" value="提交" @click="changeUserImg($event)">
-        <!-- <img class="viewImg dp-bk" :src="imgUrl" alt=""> -->
-        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
       </div>
     </div>
     <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">☚</router-link>
@@ -42,11 +33,8 @@
     name: 'profile',
     data() {
       return {
-        // isSign: true,
-        isSetUserImg: false,
-        userName: 'C.A.T',
+        userName: '',
         userImgURL: '',
-        // imgUrl: '',
         index: 0,
         funList: [
           ['/profile/userInfo', '个人信息'],
@@ -60,18 +48,7 @@
       snowBG
     },
     methods: {
-      // changeUserImg(ev) {
-      //   // this.imgUrl = ev.target.value
-      //   console.log(ev.target.value);
-      // },
-      logOut() {
-        localStorage.removeItem('token');
-        this.$message({
-          message: '您已安全退出',
-          type: 'success'
-        })
-        this.$router.replace('/home')
-      },
+      /* 点击跳转 */
       liClick(index, path) {
         const funcLis = this.$refs.funcLis;
         this.index = index;
@@ -91,8 +68,9 @@
         case '/profile/meetingAppoint': this.index = 2; break;
         case '/profile/groups': this.index = 3; break;
       }
+      /* 刷新跳转重定向 */
       this.liClick(this.index)
-      /* 获取用户信息 */
+      /* 获取用户姓名头像 */
       getUserInfo().then(res => {
         if(res.data && res.data.head) {
           this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
@@ -105,13 +83,6 @@
 
 <style scoped>
   @import url(../../../assets/css/base.css);
-
-  /* .profile {
-    height: 100vh;
-    overflow: hidden;
-    background: url(../../../assets/images/bg.jpg) no-repeat;
-    background-size: cover;
-  } */
 
   .profile .userProfile {
     top: 10vh;
@@ -142,18 +113,6 @@
     border-radius: 50%;
   }
 
-  .profile .userProfile .leftBar .userImg .setUserImg {
-    background: url(../../../assets/images/setUserImg.png) no-repeat white center center;
-    background-size: 3vh;
-    width: 4vh;
-    height: 4vh;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
-  }
-
   .profile .userProfile .leftBar .userName {
     font-size: 3vh;
     line-height: 10vh;
@@ -180,23 +139,9 @@
     opacity: .3;
   }
 
-  /* .profile .userProfile .leftBar .funcList li:hover .bg{
-    width: .6vw !important;
-  } */
-
   .profile .userProfile .leftBar .funcList li p {
     z-index: 2;
     font-size: 1.5vw;
-  }
-
-  .profile .userProfile .leftBar .setting {
-    width: 5vh;
-    height: 5vh;
-    bottom: 4vh;
-    right: 4vh;
-    background: url(../../../assets/images/settings.png);
-    background-size: 5vh;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
   }
 
   .profile .userProfile .dispInfo {

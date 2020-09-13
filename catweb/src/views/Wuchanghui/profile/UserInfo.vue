@@ -41,7 +41,6 @@
             <tr>
               <td>个人介绍：</td>
               <td class="pos-re">
-                <!-- <textarea name="" class="dp-bk pos-ab" id="" cols="30" rows="10" v-model="introduce"></textarea> -->
                 <div class="selfIntro pos-ab mt-5 ">{{introduce}}</div>
               </td>
             </tr>
@@ -76,28 +75,29 @@
       }
     },
     created() {
-        getUserInfo().then(res => {
-          console.log(res);
-        if(res.data) {
-          this.isSign = true;
-        } else {
-          this.isSign = false
-        }
-        this.userName = res.data.name
-        this.stuNum = res.data.stuNumber
-        this.collage = res.data.collage
-        this.major = res.data.major
-        this.clazz = res.data.clazz
-        if(this.isSign) {
-          this.signDetail = '已报名'
-          this.direction = res.data.direction
-        } else {
-          this.signDetail = '未报名'
-          this.direction = '未报名'
-        }
-        this.introduce = res.data.introduce
-        })
+      /* 获取用户信息 */
+      getUserInfo().then(res => {
+        console.log(res);
+      if(res.data) {
+        this.isSign = true;
+      } else {
+        this.isSign = false
       }
+      this.userName = res.data.name
+      this.stuNum = res.data.stuNumber
+      this.collage = res.data.collage
+      this.major = res.data.major
+      this.clazz = res.data.clazz
+      if(this.isSign) {
+        this.signDetail = '已报名'
+        this.direction = res.data.direction
+      } else {
+        this.signDetail = '未报名'
+        this.direction = '未报名'
+      }
+      this.introduce = res.data.introduce
+      })
+    }
   }
 </script>
 
@@ -156,18 +156,6 @@
     padding: 2vh 1vw;
   }
 
-  /* .userInfo .UserInfoSuc table textarea {
-    top: 1vh;
-    border-radius: 1vh;
-    outline: none;
-    line-height: 5vh;
-    height: 15vh;
-    width: 30vw;
-    vertical-align: top;
-    resize: none;
-    padding-left: .5vw;
-  } */
-
   .userInfo .UserInfoSuc table .selfIntro {
     top: 1vh;
     border-radius: 1vh;
@@ -179,9 +167,4 @@
     padding-left: .5vw;
     overflow-y: scroll;
   }
-
-  /* .userInfo .UserInfoSuc table textarea::-webkit-scrollbar{
-    display: none;
-  } */
-
 </style>

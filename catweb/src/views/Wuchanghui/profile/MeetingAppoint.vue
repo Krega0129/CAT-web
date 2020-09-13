@@ -70,6 +70,7 @@
     data() {
       return {
         isSign: '',
+        /* 是否已预约 */
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -289,14 +290,9 @@
   .MeetingAppoint .appointSuc .tab {
     width: 36vw;
     height: 35vh;
-    /* overflow-y: scroll; */
     font-size: 1.3vw;
     margin: 5vh auto;
   }
-
- /*  .MeetingAppoint .appointSuc .tab::-webkit-scrollbar {
-    display: none;
-  } */
 
   .MeetingAppoint .appointSuc .tab .dataTable {
     width: 36vw;

@@ -44,17 +44,17 @@
 
       setTimeout(() => {
         this.$refs.entry.style.opacity = 0
-      },7800)
+      },5800)
       setTimeout(() => {
         // this.isShow = true
         clearInterval(timer);
         this.$router.push('/home');
-      },8000)
+      },6000)
 
       const timer = setInterval(() => {
         let w =  parseInt(this.$refs.em.style.width);
         this.$refs.em.style.width = (w + 1) + '%'
-      }, 73);
+      }, 53);
     }
   }
 </script>
@@ -84,27 +84,27 @@
   }
 
   @keyframes logostyle {
-    0%, 100% {
+    0%{
       transform: translateY(-300px) rotate(120deg);
       opacity: 0;
     }
-    20%, 80% {
+    20%, 100% {
       transform: translateY(0) rotate(0);
       opacity: 1;
     }
   }
 
   @keyframes logo-dot-style {
-    0%, 100% {
+    0% {
       transform: translate(-50vw,3.4vh) rotate(-1200deg);
     }
-    20%, 80% {
+    20%, 100% {
       transform: translate(0, 3.4vh) rotate(0);
     }
   }
 
   @keyframes logo-rect-style {
-    0%, 100% {
+    0% {
       transform: translate(50vw,-24.3vh);
     }
     16%{
@@ -122,7 +122,7 @@
       width: 6vh;
       height: 6vh;
     }
-    80% {
+    100% {
       transform: translate(1.4vh,-24.3vh);
     }
   }
@@ -131,7 +131,7 @@
   .logo-words{
     transform: translateY(-300px);
     opacity: 0;
-    animation: logostyle 8s;
+    animation: logostyle 6s;
   }
 
   .logo-c {
@@ -156,7 +156,7 @@
     width: 6vh;
     height: 6vh;
     transform: translate(-50vw,20px);
-    animation: logo-dot-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
+    animation: logo-dot-style 6s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的小正方形 */
@@ -164,7 +164,7 @@
     width: 6vh;
     height: 6vh;
     transform: translate(50vw,-24.4vh);
-    animation: logo-rect-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
+    animation: logo-rect-style 6s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的studio */
@@ -174,15 +174,15 @@
     bottom: -5vh;
     right: 2vh;
     opacity: 0;
-    animation: studioDisp 6s 2s;
+    animation: studioDisp 4s 2s;
   }
 
   @keyframes studioDisp {
-    0%, 90% {
+    0% {
       opacity: 0;
       transform: translateY(3.4vh);
     }
-    40%, 60% {
+    40%, 100% {
       opacity: 1;
       transform: translateY(0);
     }

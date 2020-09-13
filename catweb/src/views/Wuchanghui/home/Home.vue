@@ -212,6 +212,7 @@
     height: 10vh;
     animation: imgMove 3s infinite linear;
     transition: .5s;
+    cursor: pointer;
   }
 
   @keyframes imgMove {
@@ -365,6 +366,7 @@
     }
   }
 
+  /* 登录/退出登录按钮 */
   @import url("https://fonts.googleapis.com/css?family=Rubik:700&display=swap");
   * {
     box-sizing: border-box;
@@ -438,14 +440,14 @@
   }
 
   .home div[class$="BtnBox"] {
-    width: 30vw;
+    width: 40vw;
     height: 80vh;
     top: -20vh;
     z-index: 4;
   }
 
   .home .lBtnBox {
-    left: 0;
+    left: -10vw;
   }
 
   .home .lBtnBox:hover .lBtn  {
@@ -453,7 +455,7 @@
     }
 
   .home .rBtnBox {
-    right: 0;
+    right: -10vw;
   }
 
   .home .rBtnBox:hover .rBtn  {
