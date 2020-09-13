@@ -173,10 +173,11 @@
     },
     created() {
       seeAppointTime({}).then(res => {
-        if(res.data[0]) {
+        if(res.data && res.data[0]) {
           this.isSign = true;
         } else {
           this.isSign = false
+          return ;
         }
 
         /* 最新阶段 */
@@ -221,7 +222,6 @@
 
 <style scoped>
   .MeetingAppoint {
-    font-family: 'STXingkai';
     height: 80vh;
   }
 

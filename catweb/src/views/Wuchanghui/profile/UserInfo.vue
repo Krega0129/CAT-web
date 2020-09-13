@@ -129,7 +129,6 @@
   }
 
   .userInfo {
-    font-family: 'STXingkai';
     margin-top: 0;
   }
 

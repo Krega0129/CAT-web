@@ -72,9 +72,11 @@
       this.liClick(this.index)
       /* 获取用户姓名头像 */
       getUserInfo().then(res => {
-        if(res.data && res.data.head) {
-          this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
+        if(res.data) {
           this.userName = res.data.name
+          if(res.data.head) {
+            this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
+          }
         }
       })
     }
@@ -85,6 +87,7 @@
   @import url(../../../assets/css/base.css);
 
   .profile .userProfile {
+    font-family: 'STXingkai';
     top: 10vh;
     left: 15vw;
     width: 70vw;
@@ -92,7 +95,7 @@
   }
 
   .profile .userProfile .leftBar{
-    font-family: 'FZShuTi';
+    font-family: 'FZShuTi', 'STXingkai', 'cursive';
     background: white;
     color: black;
     width: 20vw;

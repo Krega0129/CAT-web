@@ -83,6 +83,7 @@
             this.isSign = true;
           } else {
             this.isSign = false;
+            return ;
           }
           this.msg[0] = res.data[0].content
           /* 通过 */
@@ -96,10 +97,6 @@
 
 <style scoped>
   @import url(../../../assets/css/base.css);
-
-  .progress {
-    font-family: 'STXingkai';
-  }
 
   .progress .image {
     width: 30vh;
