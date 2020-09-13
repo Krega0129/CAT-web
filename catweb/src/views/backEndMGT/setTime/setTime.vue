@@ -168,7 +168,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 85vw;
-  height: 80vh;
+  height: 93vh;
   margin: 0 auto;
   padding: 2vh;
   background-color: rgb(177, 194, 195);
