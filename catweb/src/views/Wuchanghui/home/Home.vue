@@ -6,7 +6,7 @@
     <div class="pos-ab logoBox">
       <circleScale v-show="isShowCir" class="scaleBG" :Wid="Wid" :Hei="Hei" :cirX="cirX" :cirY="cirY" transOri="center" :rList="rList" :Left="Left" :Top="Top" fillColor="steelblue"></circleScale>
       <svg class="pos-ab cir">
-        <circle cx="30vh" cy="30vh" r="30vh" class="full" fill="none" stroke-width="3vh"></circle>
+        <circle cx="31.5vh" cy="31.5vh" r="30vh" class="circleBorder full" fill="none" stroke-width="3vh"></circle>
       </svg>
       <div class="title pos-ab t-al-cent">
         <h3 v-if="index === 0">工作室介绍</h3>
@@ -62,7 +62,7 @@
         /* 判断登录状态 */
         isLogin: localStorage.getItem('token'),
         imgSrc: '',
-        posList: [-8, 7.8, 70.3, 85],
+        posList: [-18, -2.2, 60.3, 75],
         isShowLogo: true,
         index: 2,
         imgIndex: null,
@@ -116,22 +116,22 @@
         switch(this.index) {
           case 0: 
             this.imgIndex = 0
-            this.posList = [38.7, 62.5, 93.7, 108]; 
+            this.posList = [28.7, 52.5, 83.7, 98]; 
             this.$refs.logo.style.transform = 'translate(40vw, 2vh) scale(.1)'
             break;
           case 1: 
             this.imgIndex = 1
-            this.posList = [15.6, 38.4, 78.1, 93]; 
+            this.posList = [5.6, 28.4, 68.1, 83]; 
             this.$refs.logo.style.transform = 'translate(24vw, 2vh) scale(.1)'
             break;
           case 2: 
             this.$refs.logo.style.boxShadow = 'none'
-            this.posList = [-8, 7.8, 70.3, 85]
+            this.posList = [-18, -2.2, 60.3, 75]
             this.$refs.logo.style.transform = 'translate(0, 0) scale(1)'
             break
           case 3: 
             this.imgIndex = 2
-            this.posList = [-15, 0, 38.7, 62.5]; 
+            this.posList = [-25, -10, 28.7, 52.5]; 
             this.$refs.logo.style.transform = 'translate(-23vw, 2vh) scale(.1)'
             break;
         }
@@ -145,21 +145,21 @@
         switch(this.index) {
           case 1: 
             this.imgIndex = 1
-            this.posList = [15.6, 38.7, 78.1, 93];
+            this.posList = [5.6, 28.7, 68.1, 83];
             this.$refs.logo.style.transform = 'translate(23vw, 2vh) scale(.1)'
             break;
           case 2: 
             this.$refs.logo.style.transform = 'scale(1) translate(0, 0)'
             this.$refs.logo.style.boxShadow = 'none'
-            this.posList = [-8, 7.8, 70.3, 85]
+            this.posList = [-18, -2.2, 60.3, 75]
             break;
           case 3: 
             this.imgIndex = 2
-            this.posList = [-15, 0, 38.7, 62.5]; 
+            this.posList = [-25, -10, 28.7, 52.5]; 
             this.$refs.logo.style.transform = 'translate(-23vw, 2vh) scale(.1)'
             break;
           case 4: 
-            this.posList = [-31, -15.6, 15.6, 38.7]; 
+            this.posList = [-41, -25.6, 5.6, 28.7]; 
             this.imgIndex = 3
             this.$refs.logo.style.transform = 'translate(-38vw, 2vh) scale(.1)'
             break;
@@ -206,13 +206,15 @@
 
   /* 四个模块图片的样式 */
   .home img {
+    margin-top: -10vw;
+    box-sizing: content-box;
     z-index: 2;
-    transform-origin: center;
     width: 10vh;
     height: 10vh;
     animation: imgMove 3s infinite linear;
     transition: .5s;
     cursor: pointer;
+    border: 10vw solid transparent;
   }
 
   @keyframes imgMove {
@@ -278,17 +280,17 @@
   }
 
   .home .cir {
-    width: 70vh;
-    height: 70vh;
-    top: -5vh;
-    left: -5vh;
+    width: 63vh;
+    height: 63vh;
+    top: -1.5vh;
+    left: -1.5vh;
     stroke: steelblue;
     animation: rotate 2s linear infinite;
   }
 
-  .home .cir circle {
+  .home .cir .circleBorder {
+    transform-origin: center;
     stroke-linecap: round;
-    transform: translate(5vh, 5vh);
     stroke-dasharray: 200vh;
     stroke-dashoffset: 200vh;
     animation: animate 4s linear infinite;
@@ -380,7 +382,7 @@
     font-weight: 600;
     color: rgb(15, 206, 231);
     background: #f0f7ff;
-    border: 2px solid #859cb1;
+    border: 0.3vh solid #859cb1;
     border-radius: 0.75em;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
@@ -400,7 +402,7 @@
     bottom: 0;
     background: #c4dff9;
     border-radius: inherit;
-    box-shadow: 0 0 0 2px #8598b1, .3em 0.325em 10px 0 #212325;
+    box-shadow: 0 0 0 0.3vh #8598b1, .3em 0.325em 10px 0 #212325;
     -webkit-transform: translate3d(0, 0.75em, -1em);
             transform: translate3d(0, 0.75em, -1em);
     -webkit-transition: box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
@@ -414,7 +416,7 @@
             transform: translate(0, 0.25em);
   }
   .home .btn:hover::before {
-    box-shadow: 0 0 0 2px #8598b1, .2em 0.2em 5px 0 #1f2122;
+    box-shadow: 0 0 0 0.3vh #8598b1, .2em 0.2em 5px 0 #1f2122;
     -webkit-transform: translate3d(0, 0.5em, -1em);
             transform: translate3d(0, 0.5em, -1em);
   }
@@ -424,7 +426,7 @@
             transform: translate(0em, 0.75em);
   }
   .home .btn:active::before {
-    box-shadow: 0 0 0 2px #8599b1, 0 0 #54575a;
+    box-shadow: 0 0 0 0.3vh #8599b1, 0 0 #54575a;
     -webkit-transform: translate3d(0, 0, -1em);
             transform: translate3d(0, 0, -1em);
   }

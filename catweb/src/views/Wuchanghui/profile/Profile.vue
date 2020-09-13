@@ -33,7 +33,7 @@
     name: 'profile',
     data() {
       return {
-        userName: '',
+        userName: 'C.A.T',
         userImgURL: '',
         index: 0,
         funList: [
