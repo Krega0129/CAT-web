@@ -97,7 +97,7 @@ export default {
         },
       ],
       directionValue: "",
-      stageValue: "第一轮面试",
+      stageValue: "笔试",
       searchNumber: null,
       searchName: "",
       myCheckData: [],

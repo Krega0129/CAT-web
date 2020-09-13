@@ -43,8 +43,8 @@
           <td>{{stuData.appointTime}}</td>
           <td class="column">是否服从安排</td>
           <td>
-            <span v-if="stuData.isObey == 0">不服从</span>
-            <span v-else-if="stuData.isObey == 1">服从</span>
+            <span v-if="stuData.isObey == 1">不服从</span>
+            <span v-else-if="stuData.isObey == 0">服从</span>
           </td>
         </tr>
       </table>

@@ -6,27 +6,17 @@
         <div class="userImg pos-re">
           <img v-if="!userImgURL" src="../../../assets/images/userImg.jpg" alt="" class="dp-bk full">
           <img v-else :src="userImgURL" alt="" class="dp-bk full">
-          <!-- <i class="setUserImg dp-bk pos-ab" @click="isSetUserImg = true"></i> -->
         </div>
         <h4 class="userName text-elli">{{userName}}</h4>
         <ul class="funcList">
-          <li @click="liClick(0)"><router-link class="dp-bk" to="/profile/userInfo">个人信息</router-link></li>
-          <li @click="liClick(1)"><router-link class="dp-bk" to="/profile/progress">考核进度</router-link></li>
-          <li @click="liClick(2)"><router-link class="dp-bk" to="/profile/meetingAppoint">预约面试</router-link></li>
-          <li @click="liClick(3)"><router-link class="dp-bk" to="/profile/groups">我要进群</router-link></li>
+          <li v-for="(item, index) in funList" :key="item[1]" class="pos-re" @click="liClick(index, item[0])" ref="funcLis">
+            <i class="bg pos-ab dp-bk" ref="listBg"></i>
+            <p tag="p" class="pos-ab full">{{item[1]}}</p>
+          </li>
         </ul>
-        <div class="logout pos-ab" @click="logOut"></div>
-        <!-- <div class="setting pos-ab"></div> -->
       </div>
       <div class="dispInfo">
-        <!-- 引入各个功能页面 -->
         <router-view></router-view>
-      </div>
-      <div class="setUserImgBox pos-ab" v-if="isSetUserImg">
-        <input type="file" class="uploadFile" accept="image/jpg, image/png" name="" id="" @change="changeUserImg($event)">
-        <input type="submit" value="提交" @click="changeUserImg($event)">
-        <!-- <img class="viewImg dp-bk" :src="imgUrl" alt=""> -->
-        <span class="setUserImgClose pos-ab t-al-cent" @click="isSetUserImg = false">X</span>
       </div>
     </div>
     <router-link to="/home" :style="{'font-size': '3vh'}" class="closeProfile pos-ab dp-bk t-al-cent">☚</router-link>
@@ -43,53 +33,47 @@
     name: 'profile',
     data() {
       return {
-        // isSign: true,
-        isSetUserImg: false,
         userName: 'C.A.T',
         userImgURL: '',
-        // imgUrl: '',
         index: 0,
+        funList: [
+          ['/profile/userInfo', '个人信息'],
+          ['/profile/progress', '考核进度'],
+          ['/profile/meetingAppoint', '预约面试'],
+          ['/profile/groups', '我要进群']
+        ]
       }
     },
     components: {
       snowBG
     },
     methods: {
-      // changeUserImg(ev) {
-      //   // this.imgUrl = ev.target.value
-      //   console.log(ev.target.value);
-      // },
-      logOut() {
-        localStorage.removeItem('token');
-        this.$message({
-          message: '您已安全退出',
-          type: 'success'
-        })
-        this.$router.replace('/home')
-      },
-      liClick(index) {
-        const funcLis = document.getElementsByClassName('funcList')[0].getElementsByTagName('li');
+      /* 点击跳转 */
+      liClick(index, path) {
+        const funcLis = this.$refs.funcLis;
         this.index = index;
         for (let i = 0; i < funcLis.length; i++) {
-          // funcLis[i].style.background = 'transparent';
-          funcLis[i].style.borderLeft = 'none';
+          this.$refs.listBg[i].style.width = 0;
+          this.$refs.funcLis[i].style.color = '#57676f'
         }
-        // funcLis[index].style.background = 'lightblue';
-        funcLis[index].style.borderLeft = '.6vw solid lightblue';
+        this.$refs.listBg[index].style.width = 30 + 'vw';
+        this.$refs.funcLis[index].style.color = 'black'
+        this.$router.replace(path)
       }
     },
     mounted() {
-      /* 获取用户信息 */
       switch(this.$router.history.current.path) {
         case '/profile/userInfo': this.index = 0; break;
         case '/profile/progress': this.index = 1; break;
         case '/profile/meetingAppoint': this.index = 2; break;
         case '/profile/groups': this.index = 3; break;
       }
+      /* 刷新跳转重定向 */
       this.liClick(this.index)
+      /* 获取用户姓名头像 */
       getUserInfo().then(res => {
         if(res.data && res.data.head) {
-          this.userImgURL = 'http://192.168.1.106:8080/cat_registration_war_exploded/' + res.data.head
+          this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
           this.userName = res.data.name
         }
       })
@@ -99,13 +83,6 @@
 
 <style scoped>
   @import url(../../../assets/css/base.css);
-
-  /* .profile {
-    height: 100vh;
-    overflow: hidden;
-    background: url(../../../assets/images/bg.jpg) no-repeat;
-    background-size: cover;
-  } */
 
   .profile .userProfile {
     top: 10vh;
@@ -136,25 +113,12 @@
     border-radius: 50%;
   }
 
-  .profile .userProfile .leftBar .userImg .setUserImg {
-    background: url(../../../assets/images/setUserImg.png) no-repeat white center center;
-    background-size: 3vh;
-    width: 4vh;
-    height: 4vh;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
-  }
-
   .profile .userProfile .leftBar .userName {
     font-size: 3vh;
     line-height: 10vh;
   }
 
   .profile .userProfile .leftBar .funcList {
-    /* box-sizing: border-box; */
     padding: 0 3vw;
     width: 100%;
     margin-top: 5vh;
@@ -162,46 +126,29 @@
   }
 
   .profile .userProfile .leftBar .funcList li {
-    /* box-sizing: border-box; */
+    overflow: hidden;
     height: 6vh;
     width: 100%;
     line-height: 6vh;
   }
 
-  .profile .userProfile .leftBar .funcList li:hover {
+  .profile .userProfile .leftBar .funcList li .bg {
+    transition: .5s;
+    height: 6vh;
     background: lightblue;
+    opacity: .3;
   }
 
-  .profile .userProfile .leftBar .funcList li a {
-    color: black;
+  .profile .userProfile .leftBar .funcList li p {
+    z-index: 2;
     font-size: 1.5vw;
-  }
-
-  .profile .userProfile .leftBar .logout {
-    width: 3vh;
-    height: 3vh;
-    bottom: 4vh;
-    left: 4vh;
-    background: url(../../../assets/images/logout.png);
-    background-size: 3vh;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
-  }
-
-  .profile .userProfile .leftBar .setting {
-    width: 5vh;
-    height: 5vh;
-    bottom: 4vh;
-    right: 4vh;
-    background: url(../../../assets/images/settings.png);
-    background-size: 5vh;
-    cursor: url('../../../assets/images/cursor-hover.png'), auto;
   }
 
   .profile .userProfile .dispInfo {
     width: 50vw;
     height: 100%;
-    background: #f3f3f3;
-    box-shadow: .1vw 0 1vw rgb(164, 241, 237);
+    background: #eef2f5;
+    box-shadow: .1vw 0 1vw gray;
     color: black;
   }
 

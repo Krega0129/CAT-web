@@ -45,6 +45,7 @@ export default {
 <style scoped>
 .asideMenu {
   width: 10vw;
+  height: 100vh;
   background-color: #24344b;
 }
 .admin {

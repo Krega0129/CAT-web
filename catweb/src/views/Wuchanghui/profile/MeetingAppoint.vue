@@ -1,5 +1,8 @@
 <template>
-  <div class="MeetingAppoint">
+  <div class="MeetingAppoint pos-re">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/tietu.jpg" alt="">
+    </div>
     <div v-if="isSign === false" class="appointfai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看预约进度</h2>
       <div class="signBtn pos-ab">
@@ -67,6 +70,7 @@
     data() {
       return {
         isSign: '',
+        /* 是否已预约 */
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -129,13 +133,8 @@
               message: '预约成功',
               type: 'success'
             })
-            console.log(this.peoNum);
             this.timeChange(this.appointDate)
           })
-
-        seeAppointTime({}).then(res => {
-          console.log(res);
-        })
       },
       cancelAppoint() {
         /* 取消预约 */
@@ -184,6 +183,7 @@
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
 
+        /* 判断能否预约 */
         checkPro().then(result => {
           if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
             if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
@@ -194,7 +194,7 @@
           } 
         })
         
-
+        /* 接收淘汰 */
         this.$bus.$on('out', () => {
           this.canAppoint = false;
         })
@@ -222,6 +222,14 @@
 <style scoped>
   .MeetingAppoint {
     font-family: 'STXingkai';
+    height: 80vh;
+  }
+
+  .MeetingAppoint .image {
+    width: 52vh;
+    height: 40vh;
+    bottom: 0;
+    right: 0;
   }
 
   .appointfai .title {
@@ -282,14 +290,9 @@
   .MeetingAppoint .appointSuc .tab {
     width: 36vw;
     height: 35vh;
-    /* overflow-y: scroll; */
     font-size: 1.3vw;
     margin: 5vh auto;
   }
-
- /*  .MeetingAppoint .appointSuc .tab::-webkit-scrollbar {
-    display: none;
-  } */
 
   .MeetingAppoint .appointSuc .tab .dataTable {
     width: 36vw;

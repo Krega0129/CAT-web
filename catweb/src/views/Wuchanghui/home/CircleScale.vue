@@ -52,7 +52,6 @@
   .svg .circle {
     opacity: .2;
     animation: circleScale 2s linear infinite;
-    /* transform-origin: 85vh 85vh; */
   }
 
   .svg:nth-of-type(2) .circle {
