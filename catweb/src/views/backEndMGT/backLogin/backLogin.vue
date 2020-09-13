@@ -41,6 +41,15 @@ export default {
       });
     },
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm=>{
+      if(from.fullPath.indexOf('/backEnd/') == 0){
+        vm.$alert('请先登录', '提示', {
+          confirmButtonText: '确定',
+        });
+      }
+    })
+  }
 };
 </script>
 

@@ -117,7 +117,7 @@ export default {
   },
   async mounted() {
     const data = await {
-      stage: "第一轮面试",
+      stage: "笔试",
       currentPage: 1,
       rows: this.RequestRows
     };
