@@ -11,13 +11,19 @@ import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import axios from 'axios'
 import echarts from 'echarts'
+import { message } from './assets/js/resetMessage';
+
 
 Vue.prototype.$echarts = echarts
 Vue.prototype.$bus = Bus;
 Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.config.productionTip = false
+
+
 Vue.use(ElementUI);
+
+Vue.prototype.$message = message;
 
 
 new Vue({

@@ -1,5 +1,8 @@
 <template>
-  <div class="MeetingAppoint">
+  <div class="MeetingAppoint pos-re">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/tietu.jpg" alt="">
+    </div>
     <div v-if="isSign === false" class="appointfai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看预约进度</h2>
       <div class="signBtn pos-ab">
@@ -67,6 +70,7 @@
     data() {
       return {
         isSign: '',
+        /* 是否已预约 */
         isAppoint: false,
         /* 预约阶段 */
         appointOption: '',
@@ -169,10 +173,11 @@
     },
     created() {
       seeAppointTime({}).then(res => {
-        if(res.data[0]) {
+        if(res.data && res.data[0]) {
           this.isSign = true;
         } else {
           this.isSign = false
+          return ;
         }
 
         /* 最新阶段 */
@@ -217,7 +222,14 @@
 
 <style scoped>
   .MeetingAppoint {
-    font-family: 'STXingkai';
+    height: 80vh;
+  }
+
+  .MeetingAppoint .image {
+    width: 52vh;
+    height: 40vh;
+    bottom: 0;
+    right: 0;
   }
 
   .appointfai .title {
@@ -278,14 +290,9 @@
   .MeetingAppoint .appointSuc .tab {
     width: 36vw;
     height: 35vh;
-    /* overflow-y: scroll; */
     font-size: 1.3vw;
     margin: 5vh auto;
   }
-
- /*  .MeetingAppoint .appointSuc .tab::-webkit-scrollbar {
-    display: none;
-  } */
 
   .MeetingAppoint .appointSuc .tab .dataTable {
     width: 36vw;

@@ -1,5 +1,5 @@
 <template>
-  <div class="entry pos-re full">
+  <div class="entry pos-re full"  ref="entry">
     <CircleScale Left="-20vw" Top="-50vh" fillColor="#89e1d3" :rList="rList"></CircleScale>
     <CircleScale Left="10vw" Top="0vh" fillColor="#fbaf51" :rList="rList"></CircleScale>
     <CircleScale Left="50vw" Top="-20vh" fillColor="#31b9f7" :rList="rList"></CircleScale>
@@ -11,21 +11,8 @@
       <img src="../../assets/images/logo-t.png" alt="" class="logo-t logo-words">
       <img src="../../assets/images/logo-studio.png" alt="" class="logo-studio dp-bk logo-words pos-ab">
     </div>
-    <div class="words t-al-cent" v-if="isShow">
-      <h2>想要变强吗</h2>
-      <h3>想要变强吗</h3>
-      <h3>想要变强吗</h3>
-      <h3>想要变强吗</h3>
-      <h3>想要变强吗</h3>
-      <h3>想要变强吗</h3>
-      <h3>想要变强吗</h3>
-      <h2>想要变强吗</h2>
-    </div>
-    <div class="startBtn pos-ab" v-if="isShow">
-      <router-link to='/home' class="dp-bk">
-        START
-      </router-link>
-      <img class="pos-ab" src="../../assets/images/hand.png" alt="">
+    <div class="loader pos-ab" ref="loader">
+      <em style="width: 1%" ref="em"></em>
     </div>
     <router-link to="/home" style="z-index: 10" class="pos-ab">跳过动画</router-link>
   </div>
@@ -38,7 +25,7 @@
     name: 'entry',
     data() {
       return {
-        isShow: false,
+        // isShow: false,
         rList: ['8.5vh','25.5vh','42.6vh','59.6vh','76.7vh']
       }
     },
@@ -53,12 +40,21 @@
     },
     mounted() {
       // 页面高度与窗口高度相同
-      document.getElementsByTagName("body")[0].style.height  = window.innerHeight+"px"
+      document.getElementsByTagName("body")[0].style.height  = window.innerHeight + "px"
 
-      // 7秒后显示 start 按钮
       setTimeout(() => {
-        this.isShow = true
-      },7000)
+        this.$refs.entry.style.opacity = 0
+      },5800)
+      setTimeout(() => {
+        // this.isShow = true
+        clearInterval(timer);
+        this.$router.push('/home');
+      },6000)
+
+      const timer = setInterval(() => {
+        let w =  parseInt(this.$refs.em.style.width);
+        this.$refs.em.style.width = (w + 1) + '%'
+      }, 53);
     }
   }
 </script>
@@ -67,6 +63,7 @@
   @import url(../../assets/css/base.css);
 
   .entry {
+    transition: .2s;
     overflow: hidden;
     background: #f1f4fd;
   }
@@ -87,27 +84,27 @@
   }
 
   @keyframes logostyle {
-    0%, 100% {
+    0%{
       transform: translateY(-300px) rotate(120deg);
       opacity: 0;
     }
-    20%, 80% {
+    20%, 100% {
       transform: translateY(0) rotate(0);
       opacity: 1;
     }
   }
 
   @keyframes logo-dot-style {
-    0%, 100% {
+    0% {
       transform: translate(-50vw,3.4vh) rotate(-1200deg);
     }
-    20%, 80% {
+    20%, 100% {
       transform: translate(0, 3.4vh) rotate(0);
     }
   }
 
   @keyframes logo-rect-style {
-    0%, 100% {
+    0% {
       transform: translate(50vw,-24.3vh);
     }
     16%{
@@ -125,7 +122,7 @@
       width: 6vh;
       height: 6vh;
     }
-    80% {
+    100% {
       transform: translate(1.4vh,-24.3vh);
     }
   }
@@ -134,7 +131,7 @@
   .logo-words{
     transform: translateY(-300px);
     opacity: 0;
-    animation: logostyle 8s;
+    animation: logostyle 6s;
   }
 
   .logo-c {
@@ -159,7 +156,7 @@
     width: 6vh;
     height: 6vh;
     transform: translate(-50vw,20px);
-    animation: logo-dot-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
+    animation: logo-dot-style 6s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的小正方形 */
@@ -167,7 +164,7 @@
     width: 6vh;
     height: 6vh;
     transform: translate(50vw,-24.4vh);
-    animation: logo-rect-style 8s cubic-bezier(.53,.51,.56,1.21) .5s;
+    animation: logo-rect-style 6s cubic-bezier(.53,.51,.56,1.21) .5s;
   }
 
   /* logo中的studio */
@@ -177,77 +174,37 @@
     bottom: -5vh;
     right: 2vh;
     opacity: 0;
-    animation: studioDisp 6s 2s;
+    animation: studioDisp 4s 2s;
   }
 
   @keyframes studioDisp {
-    0%, 90% {
+    0% {
       opacity: 0;
       transform: translateY(3.4vh);
     }
-    40%, 60% {
+    40%, 100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  /* 开始按钮 */
-  .entry .startBtn {
-    width: 20.4vh;
-    height: 8.5vh;
-    text-align: center;
-    line-height: 8.5vh;
-    font-size: 3.4vh;
-    background: #87ddd0;
-    color: white;
-    left: 50%;
-    margin-left: -10.2vh;
-    bottom: 17vh;
+  /* 进度条 */
+  .loader {
+    display: inline-block;
+    padding: .5vh;
+    width: 50vw;
+    /* border-bottom: .1vh solid linear-gradient(to right, #35bbf8, #fab142, #90e0da); */
+    border-radius: 4px;
+    bottom: 20vh;
+    left: 25vw;
   }
 
-  /* 开始按钮旁的手 */
-  .entry .startBtn img {
-    width: 8.5vh;
-    height: 8.5vh;
-    transform: rotate(-80deg);
-    left: -8.5vh;
-    top: -3.4vh;
-    animation: handMove 6s infinite;
-  }
-
-  @keyframes handMove {
-    0%, 40%, 60%, 75%, 85%, 100% {
-      transform: translate(0,0);
-    }
-    20%, 50%, 70%, 80%, 90%{
-      transform: translate(-50px, -50px);
-    }
-  }
-
-  /* 按钮字体白色 */
-  .entry .startBtn a {
-    color: white;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* 聚焦按钮产生阴影 */
-  .entry .startBtn:hover {
-    box-shadow: 3px 3px yellow;
-  }
-
-  /* 介绍语句 */
-  .words {
-    font-size: 2.7vh;
-    animation: showWords 8s -2s forwards;
-  }
-
-  @keyframes showWords {
-    0%{
-      transform: translateY(50vh);
-    }
-    100%{
-      transform: translateY(20vh);
-    }
+  .loader > em {
+    display: block;
+    height: .5vh;
+    background: #295188;
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, .2);
+    transition: all .5s;
   }
 </style>
