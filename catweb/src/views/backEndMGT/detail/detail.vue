@@ -6,7 +6,7 @@
       <span class="fontDetailed">个人信息详情</span>
     </div>
     <div class="mainInfo">
-      <img src alt class="avatar" />
+      <img :src="defaultHead" alt class="avatar" />
       <table class="detailed">
         <tr>
           <td class="column">姓名</td>
@@ -79,6 +79,15 @@ export default {
       this.$router.go(-1);
     },
   },
+  computed:{
+    defaultHead(){
+      if(this.stuData.head){
+        return this.stuData.head
+      }else{
+        return require("../../../assets/images/userImg.jpg")
+      }
+    }
+  },
   created() {
     this.$bus.$on("outputStuNum", (stuNum) => {
       const data = {
@@ -132,7 +141,6 @@ export default {
   margin-bottom: 3vw;
   width: 7vw;
   height: 7vw;
-  background-color: rgb(59, 17, 98);
 }
 .detailed {
   border-collapse: collapse;

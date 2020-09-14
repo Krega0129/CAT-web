@@ -5,8 +5,8 @@
       <div class="account">
         <el-input v-model="account" placeholder="请输入账号" style></el-input>
       </div>
-      <div class="password">
-        <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
+      <div class="password" @keydown.enter="login">
+        <el-input placeholder="请输入密码" v-model="password" show-password ></el-input>
       </div>
 
       <div class="submit">

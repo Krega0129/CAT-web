@@ -28,7 +28,9 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-mima2" />
         </svg>
+        <i class="el-icon-view" @click="showPassword"></i>
         <input
+        ref="password"
           @keydown.enter="judge"
           type="password"
           placeholder="输入密码"
@@ -167,6 +169,7 @@ export default {
       fitCodeOK: false,
       ischangePasswordOK: false,
       existPhoneCode: null,
+      isShowPassword:false
     };
   },
   methods: {
@@ -450,6 +453,15 @@ export default {
         });
       }
     },
+    showPassword(){
+      if(this.isShowPassword){
+        this.$refs.password.setAttribute('type','password')
+        this.isShowPassword = !this.isShowPassword
+      }else{
+        this.$refs.password.setAttribute('type','text')
+        this.isShowPassword = !this.isShowPassword
+      }
+    }
   },
 };
 </script>
@@ -519,6 +531,12 @@ export default {
 }
 .password {
   position: relative;
+}
+.password >>> .el-icon-view{
+  position: absolute;
+  bottom: 1vh;
+  right: 0.5vw;
+  font-size: 2vw;
 }
 .code {
   display: flex;
