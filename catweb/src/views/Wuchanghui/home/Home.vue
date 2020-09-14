@@ -100,6 +100,13 @@
             } else {
               this.$router.push(path)
             }
+            this.Wid = '51.1vh'
+            this.Hei = '51.1vh'
+            this.cirX = '25.5vh'
+            this.cirY = '25.5vh'
+            this.rList = ['10vh']
+            this.Left = '0'
+            this.Top = '0'
           }, 1000)
         }
       },
