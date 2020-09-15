@@ -7,17 +7,7 @@
       </div>
     </div>
     <div class="right">
-      <div class="book">
-        <!-- 书本封面 -->
-        <div class="book-cover">
-            <img src="../../../assets/img/back-end-cover.jpg" alt="">
-            <h2>后台介绍</h2>
-        </div>
-        <!-- 书本内容 -->
-        <div class="book-con">
-          <p>后台开发，通常也称服务器端开发。在实际项目开发的过程中是最重要的一环，为web网页、移动app、小程序等提供服务。主要负责与前端交互时的数据传输和处理以及数据库的设计和增删查改等。</p>
-        </div>
-      </div>
+      <backEndBg></backEndBg>    
     </div>
     <!-- <h2>后台</h2>
     <p>后台开发，通常也称服务器端开发。主要负责业务逻辑功能模块，工作中处理前端的请求，进行逻辑处理和数据交互，现阶段的Web端、移动端等都需要后台技术的支持。C.A.T工作室后台组基于Java语言开发，如果你具备基本的C语言基础，对Java编程感兴趣，有出色的学习能力以及良好的团队协作能力，那么后台组绝对是你的不二选择。</p> -->
@@ -28,11 +18,13 @@
 <script>
 
 import returnBtn from '@/views/intro/return-btn'
+import backEndBg from './Back-end-bg'
 
 export default {
   name: 'back-end',
   components:{
-    returnBtn
+    returnBtn,
+    backEndBg
   }
 }
 
@@ -103,6 +95,16 @@ export default {
   background: #ffffff;
 }
 
+/* 背景 */
+.backEndBg {
+  background: red;
+  position: absolute;
+  width:100%;
+  height: 100%;
+  z-index: 20;
+  overflow: hidden;
+}
+
 /* 书本 */
 .book {
     position: absolute;
@@ -116,6 +118,7 @@ export default {
     transform-style: preserve-3d;
     transition: 1s;
     box-shadow: 0 20px 150px rgba(0, 0, 0, .4), inset 200px 0 50px rgba(0, 0, 0, .4);
+    z-index: 50;
 }
 
 .book:hover {
@@ -203,7 +206,7 @@ export default {
 .returnBtn {
   position: fixed;
   bottom: 13.3vh;
-  right: 15.8vw;
+  right: 13.8vw;
 }
 </style>
 

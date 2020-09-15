@@ -121,7 +121,7 @@ export default {
   width: 100%;
   height: 100%;
   background:  #ffcf5d;
-  border-bottom:130px solid #fff;
+  border-bottom:17.3vh solid #fff;
   padding:10.6vh 3vw 0px;
   box-shadow: 1px 1px 20px rgba(0,0,0,.09);
 }
@@ -142,7 +142,7 @@ export default {
 header {
   position:relative;
   width:100%;
-  height:90%;
+  height:500px;
   background:url(../../../assets/img/front-end-bg.jpg) no-repeat center;
   background-size:cover;
   box-shadow:1px 1px 20px rgba(0,0,0,.01)
@@ -157,8 +157,67 @@ header .header-mask {
 }
 
 header .header-mask .header-con {
+  height: 350px;
   background: rgba(0,0,0,0.3);
-  
+}
+
+header .header-mask .header-con .header-title {
+  padding-top: 5px;
+}
+
+header .header-mask .header-con .header-title h1 {
+  position:relative;
+  letter-spacing:1em;
+  font-size:8em;
+  text-align:center;
+}
+
+header .header-mask .header-con .header-title h1::before {
+  content: '前端';
+  position: absolute;
+  top:0;
+  left:0;
+  bottom: 0;
+  /* right: 0; */
+  width: 0%;
+  color: black;
+  /* text-align: center; */
+  padding-left: 200px;
+  overflow: hidden;
+  transition: 1s ease-in;
+}
+
+header .header-mask .header-con .header-title h1:hover::before {
+  width: 100%;
+}
+
+/* 右上角图标 */
+.center .title-sign {
+  position: absolute;
+  left: 70%;
+  top: 15%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.center .title-sign::before {
+  content: '';
+  position: absolute;
+  right: -2px;
+  bottom: 5px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: rgba(145, 23, 23, 0.01);
+}
+
+.center .title-sign img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 50;
 }
 
 header .header-mask .header-con .typewrite p { 
@@ -189,41 +248,12 @@ header .header-mask .header-con .typewrite p {
   }
 }
 
-/* 右上角图标 */
-.center .title-sign {
-  position: absolute;
-  left: 70%;
-  top: 8%;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-}
-
-.center .title-sign::before {
-  content: '';
-  position: absolute;
-  right: -2px;
-  bottom: 5px;
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  background: rgba(145, 23, 23, 0.01);
-}
-
-.center .title-sign img{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  z-index: 50;
-}
-
-.center h1{
+/* .center h1{
   position:relative;
   letter-spacing:1em;
   font-size:8em;
   text-align:center;
-}
+} */
 
 /* w3c标准 */
 .section-categroy {
@@ -345,11 +375,11 @@ height: 100%;
   /* width: 100%;
   height: 100%; */
   background: rgba(255,255,255,0.7);
-  font-size:25px;
+  font-size:3.3vh;
 }
 .section-prospect .pro-con {
   width: 80%;
-  padding:50px 30px;
+  padding:5.66vh 2vw;
   line-height: 50px;
 }
 .section-prospect .pro-con .pro-bg {
@@ -395,9 +425,11 @@ height: 100%;
   transform: skewX(-20deg);
   box-sizing:content-box
 }
+
 .section-prospect .pro-con .pro-data .data-info:nth-child(3) {
   border-right: none;
 }
+
 .section-prospect .pro-con .pro-data .data-info span {
   display: block;
   /* 保证文字不倾斜 */

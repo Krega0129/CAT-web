@@ -1,5 +1,5 @@
 <template>
-  <div class="cardRotate">
+  <div id="cardRotate">
       <!-- 正面 -->
     <div class="front">
         <h1>C.A.T工作室介绍</h1>
@@ -27,25 +27,40 @@ import ball from '@/views/Wuchanghui/home/ball'
 
 export default {
   name: 'cardRotate',
-   components: {
+  components: {
       ball
-    }
+    },
+  methods:{
+    // rotate(class_name){
+    //   let a=document.getElementById("cardRotate");     
+    //   a.className = class_name;    
+    // }
+  }
 }
 </script>
 
 <style scoped>
 @import url(../../../assets/css/base.css);
 
-.cardRotate {
+#cardRotate {
   position: relative;
   height: 60vh;
   transform-style: preserve-3d;
-  animation: rotate-reverse 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
+  transform: rotateY(0deg);
 }
 
+/* .rot1 {
+  animation: rotate-reverse 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
+} */
+
 .cardRotate:hover{
-    animation: rotate 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
+  /* animation: rotate 1s cubic-bezier(.76,-0.51,.29,1.5) forwards; */
+  transform:rotateY(180deg)
 }
+
+/* .rot2 {
+   animation: rotate 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
+} */
 
 .front,
 .back {  
@@ -111,11 +126,11 @@ export default {
 }
 
 @keyframes rotate-reverse {
-  100%{
-    transform:rotateY(0deg)
-  }
   0%{
     transform:rotateY(180deg)
+  }
+  100%{
+    transform:rotateY(0deg)
   }
 }
 
@@ -124,7 +139,7 @@ export default {
   position: absolute;
   width: 146px;
   left: 50%;
-  margin-left: -6.3vw;
+  margin-left: -5.5vw;
   bottom:12vh;
 }
 
