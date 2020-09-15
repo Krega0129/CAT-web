@@ -173,13 +173,6 @@
     },
     created() {
       seeAppointTime({}).then(res => {
-        if(res.data && res.data[0]) {
-          this.isSign = true;
-        } else {
-          this.isSign = false
-          return ;
-        }
-
         /* 最新阶段 */
         let LastedStage = res.data.length - 1;
         this.appointOption = res.data[LastedStage].stage;
@@ -216,6 +209,13 @@
             }
           })
       })
+
+      if(res.data && res.data[0]) {
+        this.isSign = true;
+      } else {
+        this.isSign = false
+        throw ''
+      }
     }
   }
 </script>

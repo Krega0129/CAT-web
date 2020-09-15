@@ -17,10 +17,6 @@
       </div>
     </div>
     <div class="banner pos-ab">
-      <!-- <img src="../../../assets/images/cat.jpg" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'vw'}" @click="picClick($event, '/intro')">
-      <img src="../../../assets/images/profile.jpg" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
-      <img src="../../../assets/images/front-end1.jpg" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
-      <img src="../../../assets/images/back-end1.jpg" class="pic pos-ab" slot="pic" alt="" ref="back" :style="{left: posList[3] + 'vw'}" @click="picClick($event, '/back-end')"> -->
       <img src="../../../assets/images/planet1.png" class="pic pos-ab" slot="pic" alt="" ref="cat" :style="{left: posList[0] + 'vw'}" @click="picClick($event, '/intro')">
       <img src="../../../assets/images/planet2.png" class="pic pos-ab" slot="pic" alt="" ref="pro" :style="{left: posList[1] + 'vw'}" @click="picClick($event, '/profile')">
       <img src="../../../assets/images/planet3.png" class="pic pos-ab" slot="pic" alt="" ref="front" :style="{left: posList[2] + 'vw'}" @click="picClick($event, '/front-end')">
@@ -100,13 +96,6 @@
             } else {
               this.$router.push(path)
             }
-            this.Wid = '51.1vh'
-            this.Hei = '51.1vh'
-            this.cirX = '25.5vh'
-            this.cirY = '25.5vh'
-            this.rList = ['10vh']
-            this.Left = '0'
-            this.Top = '0'
           }, 1000)
         }
       },

@@ -51,6 +51,7 @@
     methods: {
       /* 更新进度条 */
       showPro(res, index, sucMessage, failMessage) {
+        console.log(res);
         /* 通过 */
         if (res.data[index] && res.data[index].adoptChecked === 1) {
           this.proTitle[index] = sucMessage
