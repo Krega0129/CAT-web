@@ -1,7 +1,7 @@
 <template>
   <div class="progress pos-re t-al-cent full">
     <div class="image pos-ab">
-      <img class="dp-bk full" src="../../../assets/images/run3.png" alt="">
+      <img class="dp-bk full" src="../../../assets/images/rungif.gif" alt="">
     </div>
     <div v-if="isSign === false" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>

@@ -1,5 +1,5 @@
 <template>
-  <div class="cardMobile" @click="cardClick">
+  <div class="cardMobile">
 
       <!-- 里层 -->
       <div class="face face-nex">
