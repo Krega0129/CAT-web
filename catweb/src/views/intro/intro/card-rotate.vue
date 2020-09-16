@@ -44,7 +44,7 @@ export default {
 
 .cardRotate {
   position: relative;
-  height: 450px;
+  height: 60.5vh;
   perspective: 5000px;
 }
 
