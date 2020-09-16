@@ -1,6 +1,6 @@
 <template>
   <div class="item button-parrot">
-    <button @click="submitMessage()">
+    <button type="button" @click="submitMessage()">
       Submit!
       <div class="parrot parrot1"></div>
       <div class="parrot parrot3"></div>
@@ -94,11 +94,10 @@ export default {
   methods: {
     submitMessage() {
       let userInfo = JSON.stringify(this.userInfo);
-      console.log(userInfo);
       getSubmit(userInfo).then((res) => {
-        if (res.code === 3507) {
+        if (res.code === 3502) {
           this.$message.error("报名表不能为空！！！");
-        } else if (res.code === 3511) {
+        } else if (res.code === 3501) {
           this.$message.error("请勿重复提交！！");
         } else if (res.code === 0) {
           this.$router.push("/home");

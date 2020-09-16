@@ -1,5 +1,11 @@
 <template>
-  <div id="cardRotate">
+  <div class="cardRotate">
+    <!-- 背面 -->
+    <div class="back">
+        <div class="content">
+            <p>C.A.T工作室，成立于2017年，指导老师为梁祖红老师，分为前端和后台两个小组，致力于政府及企业级的大型项目开发，团队与玉兰集团、南方电网等公司建立了长期合作关系，近年来研发过广东省专家匹配系统、智能塑料回收瓶箱（与羊城通合作）等，同时组队参与App、小程序大赛并获得奖项，已有毕业师兄就职于一线互联网大厂。</p>
+        </div>      
+    </div>
       <!-- 正面 -->
     <div class="front">
         <h1>C.A.T工作室介绍</h1>
@@ -12,12 +18,6 @@
             <ball fillColor="#fbaf51"></ball>
             <ball fillColor="#89e1d3"></ball>
         </div>
-    </div>
-    <!-- 背面 -->
-    <div class="back">
-        <div class="content">
-            <p>C.A.T工作室，成立于2017年，指导老师为梁祖红教授，分为前端和后台两个小组，致力于政府及企业级的大型项目开发，团队与玉兰集团、南方电网等公司建立了长期合作关系，近年来研发过广东省专家匹配系统、智能塑料回收瓶箱（与羊城通合作）等，同时组队参与App、小程序大赛并获得奖项，已有毕业师兄就职于一线互联网大厂。</p>
-        </div>      
     </div>
   </div>
 </template>
@@ -42,20 +42,10 @@ export default {
 <style scoped>
 @import url(../../../assets/css/base.css);
 
-#cardRotate {
+.cardRotate {
   position: relative;
-  height: 60vh;
-  transform-style: preserve-3d;
-  transform: rotateY(0deg);
-}
-
-/* .rot1 {
-  animation: rotate-reverse 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
-} */
-
-.cardRotate:hover{
-  /* animation: rotate 1s cubic-bezier(.76,-0.51,.29,1.5) forwards; */
-  transform:rotateY(180deg)
+  height: 450px;
+  perspective: 5000px;
 }
 
 /* .rot2 {
@@ -64,11 +54,22 @@ export default {
 
 .front,
 .back {  
-    width: 100%;
-    height: 100%;
-    background: #f1f4fd;
-    border-radius: 20px;
-    box-shadow: 1px 1px 20px rgba(0,0,0,.25);
+  transition: 1s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #f1f4fd;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  box-shadow: 1px 1px 20px rgba(0,0,0,.25);
+}
+
+.back:hover + .front .balls{
+  display: none;
+}
+
+.front:hover .balls{
+  display: none;
 }
 
 .front {
@@ -77,6 +78,11 @@ export default {
   background-size:100%;
   padding-top: 6.66vh;
   text-align: center;
+  transform: rotateY(0deg);
+}
+
+.cardRotate:hover .front{
+  transform: rotateY(180deg);
 }
 
 .front h1 {
@@ -87,7 +93,11 @@ export default {
   padding: 2.66vh 1.76vw;
   transform-style:preserve-3d;
   /* 背面翻转180deg */
-  transform:rotateY(180deg)
+  transform:rotateY(-180deg)
+}
+
+.cardRotate:hover .back{
+  transform:rotateY(0deg)
 }
 
 .back .content {
@@ -100,7 +110,7 @@ export default {
     height: 100%;
     padding: 4vh 0.88vw 0px;
     border: #8bdccf solid 2px;
-    box-shadow: 1px 1px 20px rgba(0,0,0,.09);
+    /* box-shadow: 1px 1px 20px rgba(0,0,0,.09); */
     /* 段前间隔两个字 */
     font-size: 2vh;
     text-indent:2em;
@@ -108,30 +118,6 @@ export default {
     line-height:3.066vh;
     overflow: auto;
     transform: translate(2%,1%);
-}
-
-.back .content p::-webkit-scrollbar {
-    /* 隐藏滚动条 */
-    display: none;
-}
-
-/* 图片翻转动画 */
-@keyframes rotate {
-  0%{
-    transform:rotateY(0deg)
-  }
-  100%{
-    transform:rotateY(180deg)
-  }
-}
-
-@keyframes rotate-reverse {
-  0%{
-    transform:rotateY(180deg)
-  }
-  100%{
-    transform:rotateY(0deg)
-  }
 }
 
 /* 跳动的小球 */
@@ -143,35 +129,33 @@ export default {
   bottom:12vh;
 }
 
-.ball{
-  animation: ballMove 1.2s cubic-bezier(.14,1.74,.78,-0.45) infinite;
-}
-.ball:nth-child(2) {
-  animation-delay: .2s;
-}
-.ball:nth-child(3) {
-  animation-delay: .4s;
-}
-.ball:nth-child(4) {
-  animation-delay: .6s;
-}
-.ball:nth-child(5) {
-  animation-delay: .8s;
-}
-.ball:nth-child(6) {
-  animation-delay: 1s;
-}
-.ball:nth-child(7) {
-  animation-delay: 1.2s;
-}
-
-@keyframes ballMove {
+  .ball{
+    animation: ballMove 1.2s cubic-bezier(.14,1.74,.78,-0.45) infinite;
+  }
+  .ball:nth-child(2) {
+    animation-delay: -.2s;
+  }
+  .ball:nth-child(3) {
+    animation-delay: -.4s;
+  }
+  .ball:nth-child(4) {
+    animation-delay: -.6s;
+  }
+  .ball:nth-child(5) {
+    animation-delay: -.8s;
+  }
+  .ball:nth-child(6) {
+    animation-delay: -1s;
+  }
+  .ball:nth-child(7) {
+    animation-delay: -1.2s;
+  }
+  @keyframes ballMove {
   0% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-30px);
-  }
+    transform: translateY(-30px);}
   100% {
     transform: translateY(0);
   }

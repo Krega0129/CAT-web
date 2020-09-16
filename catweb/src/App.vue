@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- <loginReg></loginReg> -->
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 <script>
@@ -33,5 +32,6 @@ export default {
   #app{
     width: 100%;
     height: 100%;
+overflow-x: hidden;
   }
 </style>

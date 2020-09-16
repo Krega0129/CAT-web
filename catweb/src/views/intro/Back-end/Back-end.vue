@@ -1,13 +1,46 @@
 <template>
   <div class="back-end full pos-ab">
     <div class="left">
-      <h2>后台</h2>
-      <div class="left-sign">
-          <img src="../../../assets/images/logo.png" alt="">
+      <div class="left-sign pos-ab">
+          <img src="../../../assets/img/java.png" alt="">
+          <div class="bg pos-ab"></div>
       </div>
     </div>
+    <barBox Wid="26vw" Color="lightblue" Bottom="30vh" zIndex="5">
+      <span slot="title">Java基础</span>
+      <i slot="num">1</i>
+    </barBox>
+    <barBox Wid="20vw" Color="lightsteelblue" Bottom="25vh" zIndex="4">
+      <span slot="title">数据库</span>
+      <i slot="num">2</i>
+    </barBox>
+    <barBox Wid="28vw" Color="lightcoral" Bottom="20vh" zIndex="3">
+      <span slot="title">前端技术</span>
+      <i slot="num">3</i>
+    </barBox>
+    <barBox Wid="22vw" Color="lightgreen" Bottom="15vh" zIndex="2">
+      <span slot="title">动态网页</span>
+      <i slot="num">4</i>
+    </barBox>
+    <barBox Wid="30vw" Color="lightsalmon" Bottom="10vh" zIndex="1">
+      <span slot="title">编程强化</span>
+      <i slot="num">5</i>
+    </barBox>
     <div class="right">
-      <backEndBg></backEndBg>    
+      <div class="book">
+        <!-- 书本封面 -->
+        <div class="book-cover t-al-cent">
+            <img src="../../../assets/img/book.jpg" alt="">
+            <div class="bookName pos-ab">
+              <h2>Java</h2>
+              <h2>Development</h2>
+            </div>
+        </div>
+        <!-- 书本内容 -->
+        <div class="book-con">
+          <p>后台开发，通常也称服务器端开发。在实际项目开发的过程中是最重要的一环，为web网页、移动app、小程序等提供服务。主要负责与前端交互时的数据传输和处理以及数据库的设计和增删查改等。</p>
+        </div>
+      </div>
     </div>
     <!-- <h2>后台</h2>
     <p>后台开发，通常也称服务器端开发。主要负责业务逻辑功能模块，工作中处理前端的请求，进行逻辑处理和数据交互，现阶段的Web端、移动端等都需要后台技术的支持。C.A.T工作室后台组基于Java语言开发，如果你具备基本的C语言基础，对Java编程感兴趣，有出色的学习能力以及良好的团队协作能力，那么后台组绝对是你的不二选择。</p> -->
@@ -18,18 +51,18 @@
 <script>
 
 import returnBtn from '@/views/intro/return-btn'
-import backEndBg from './Back-end-bg'
+import barBox from './bar'
 
 export default {
   name: 'back-end',
   components:{
     returnBtn,
-    backEndBg
+    barBox,
   }
 }
 
 </script>
-<style>
+<style scoped>
 @import url(../../../assets/css/base.css);
 /* 左边 */
 .left {
@@ -37,62 +70,44 @@ export default {
   display:flex;
   width: 35%;
   height: 100%;
-  background: url(../../../assets/img/back-end-bg2.jpg);
-  background-size: cover;
+  background:#F25E44;
   place-items: center;
-  
-}
-.left h2 {
-  margin: auto;
-  color:transparent;
-  font-size: 5.3vh;
-  letter-spacing: 1em;
-  background: url(../../../assets/img/back-end-testbg.jpg) left;
-  -webkit-background-clip: text;
-  animation: move 20s linear alternate infinite;
-}
-
-@keyframes move {
-  to {
-    background-position: top right;
-  }
+  overflow: hidden;
 }
 
 /* 左边图标 */
  .left .left-sign {
   position: absolute;
-  left: 40%;
-  top: 25%;
-  width: 13.4vh;
-  height: 13.4vh;
-  border-radius: 50%;
-  border: 2px solid #31b1ec;
-}
-
-.left .left-sign::before {
-  content:'';
-  position: absolute;
-  right: 10%;
-  bottom: 0;
-  width:16vh;
-  height:16vh;
-  background: #a9edec;
-  border-radius: 50%;
-  
+  left: 50%;
+  top: 10%;
+  margin-left: -20vh;
+  width: 40vh;
+  height: 40vh;
 }
 
 .left .left-sign img{
   position: absolute;
+  opacity: .9;
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  z-index: 2;
+}
+
+.left .left-sign .bg {
+  width: 60vw;
+  height: 30vh;
+  transform: rotate(45deg);
+  left: -25vw;
+  top: 50vh;
+  background: #e93827;
 }
 
 /* 右边 */
 .right {
   width: 65%;
   height: 100%;
-  background: #ffffff;
+  background: url(../../../assets/img/rightBg.jpg);
 }
 
 /* 背景 */
@@ -110,8 +125,8 @@ export default {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 53.3vh;
-    height: 53.3vh;
+    width: 60vh;
+    height: 70vh;
     background: #fff;
     transform: translateY(-50%) perspective(2000px);
     /* 该属性不会继承 */
@@ -170,13 +185,17 @@ export default {
     height: 100%;
 }
 
+.book-cover .bookName {
+  width: 30vh;
+  height: 30vh;
+  top: 30vh;
+  left: 50%; 
+}
+
 .book-cover h2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    font-size: 4vh;
     transform: translate(-50%, -50%);
-    color: #e9322f;
-    font-size:4vh
+    color: #605d9e
 }
 
 /* 书本内容 */

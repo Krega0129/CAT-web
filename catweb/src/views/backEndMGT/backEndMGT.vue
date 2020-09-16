@@ -24,10 +24,12 @@ export default {
     if (managerToken) {
       next();
     } else {
-      alert('请先登录')
       setTimeout(() => {
-        next({ path: "/backLogin" });
-      }, 1500);
+        
+        next(vm=>{
+          vm.$router.push('/backLogin')
+        });
+      }, 1000);
     }
   },
   methods: {
@@ -40,7 +42,7 @@ export default {
 <style scoped>
 @import ".../../../../assets/css/base.css";
 .backEndMGT {
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
 }
 </style>

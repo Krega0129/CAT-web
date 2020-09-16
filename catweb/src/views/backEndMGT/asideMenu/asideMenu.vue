@@ -45,10 +45,11 @@ export default {
 <style scoped>
 .asideMenu {
   width: 10vw;
+  height: 100vh;
   background-color: #24344b;
 }
 .admin {
-  padding: 4vw 2vw 0 2vw;
+  padding: 4vw 3vw 0 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

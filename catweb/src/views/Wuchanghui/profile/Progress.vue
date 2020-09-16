@@ -1,5 +1,8 @@
 <template>
-  <div class="progress t-al-cent full">
+  <div class="progress pos-re t-al-cent full">
+    <div class="image pos-ab">
+      <img class="dp-bk full" src="../../../assets/images/rungif.gif" alt="">
+    </div>
     <div v-if="isSign === false" class="profai t-al-cent pos-re full">
       <h2 class="title">你还未报名，点击下方按钮报名后即可查看考核进度</h2>
       <div class="signBtn pos-ab">
@@ -29,6 +32,7 @@
     name: 'Progress',
     data() {
       return {
+        /* 报名状态 */
         isSign: '',
         /* 当前进度 */
         activeNum: 1,
@@ -40,12 +44,15 @@
         proStatus: ['', '', '', '', ''],
         /* 进度条成功信息 */
         sucMsg: ['恭喜你通过了笔试', '恭喜你通过了一轮面试', '恭喜你通过了二轮面试', '恭喜你通过了一轮考核', '恭喜你通过了 二轮考核'],
-        /* 进度条失败 */
+        /* 进度条失败信息 */
         failMsg: ['很遗憾，你没有通过我们的笔试', '很遗憾，你没有通过一轮面试', '很遗憾，你没有通过二轮面试', '很遗憾，你没有通过一轮考核', '很遗憾，你没有通过二轮考核']
       }
     },
     methods: {
+      /* 更新进度条 */
       showPro(res, index, sucMessage, failMessage) {
+        console.log(res);
+        /* 通过 */
         if (res.data[index] && res.data[index].adoptChecked === 1) {
           this.proTitle[index] = sucMessage
           this.activeNum = index + 2
@@ -57,6 +64,7 @@
           this.proTitle[index] = failMessage
           this.msg[index] = '';
         }
+        /* 显示备注信息 */
         if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 1) {
           if (index === 0 || index === 1) {
             this.msg[index + 1] = `时间：${res.data[index + 1].time}，${res.data[index + 1].content}`
@@ -72,11 +80,11 @@
       checkPro()
         .then(res => {
           /* 显示进度 */
-          console.log(res);
           if(res.data) {
             this.isSign = true;
           } else {
             this.isSign = false;
+            return ;
           }
           this.msg[0] = res.data[0].content
           /* 通过 */
@@ -91,8 +99,12 @@
 <style scoped>
   @import url(../../../assets/css/base.css);
 
-  .progress {
-    font-family: 'STXingkai';
+  .progress .image {
+    width: 30vh;
+    height: 30vh;
+    bottom: 10vh;
+    right: 10vh;
+    overflow: hidden;
   }
 
   .profai .title {

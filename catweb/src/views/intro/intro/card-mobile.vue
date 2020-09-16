@@ -95,6 +95,7 @@ export default {
     letter-spacing: 2px;
     line-height: 3.06vh;
     box-sizing: border-box;
+    max-height: 58.8vh;
 }
 
 /* 里层上面遮挡层 */
