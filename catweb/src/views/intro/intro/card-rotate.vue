@@ -27,9 +27,15 @@ import ball from '@/views/Wuchanghui/home/ball'
 
 export default {
   name: 'cardRotate',
-   components: {
+  components: {
       ball
-    }
+    },
+  methods:{
+    // rotate(class_name){
+    //   let a=document.getElementById("cardRotate");     
+    //   a.className = class_name;    
+    // }
+  }
 }
 </script>
 
@@ -38,9 +44,13 @@ export default {
 
 .cardRotate {
   position: relative;
-  height: 450px;
+  height: 60.5vh;
   perspective: 5000px;
 }
+
+/* .rot2 {
+   animation: rotate 1s cubic-bezier(.76,-0.51,.29,1.5) forwards;
+} */
 
 .front,
 .back {  
@@ -51,7 +61,7 @@ export default {
   background: #f1f4fd;
   border-radius: 20px;
   backface-visibility: hidden;
-  /* box-shadow: 1px 1px 20px rgba(0,0,0,.25); */
+  box-shadow: 1px 1px 20px rgba(0,0,0,.25);
 }
 
 .back:hover + .front .balls{
@@ -65,8 +75,8 @@ export default {
 .front {
   position:absolute;
   background:url(../../../assets/images/logo.png) #f1f4fd center 50px no-repeat;
-  background-size:100% 73%;
-  padding-top: 50px;
+  background-size:100%;
+  padding-top: 6.66vh;
   text-align: center;
   transform: rotateY(0deg);
 }
@@ -75,8 +85,12 @@ export default {
   transform: rotateY(180deg);
 }
 
+.front h1 {
+  font-size: 4.5vh;
+}
+
 .back {
-  padding: 20px;
+  padding: 2.66vh 1.76vw;
   transform-style:preserve-3d;
   /* 背面翻转180deg */
   transform:rotateY(-180deg)
@@ -89,29 +103,31 @@ export default {
 .back .content {
     height: 100%;
     border: #8bdccf solid 2px;
-    background: url(../../../assets/img/cat.gif) no-repeat right bottom;
+    background: url(../../../assets/img/cat.gif) no-repeat 9vw 33.33vh;
 }
 
 .back .content p {
     height: 100%;
-    padding: 30px 10px 0px;
+    padding: 4vh 0.88vw 0px;
     border: #8bdccf solid 2px;
     /* box-shadow: 1px 1px 20px rgba(0,0,0,.09); */
     /* 段前间隔两个字 */
+    font-size: 2vh;
     text-indent:2em;
     letter-spacing:2px;
-    line-height:23px;
+    line-height:3.066vh;
+    overflow: auto;
     transform: translate(2%,1%);
 }
 
 /* 跳动的小球 */
-  .balls {
-    width: 180px;
-    height: 20px;
-    left: 50%;
-    margin-left: -90px;
-    bottom: 100px;
-  }
+.balls {
+  position: absolute;
+  width: 146px;
+  left: 50%;
+  margin-left: -5.5vw;
+  bottom:12vh;
+}
 
   .ball{
     animation: ballMove 1.2s cubic-bezier(.14,1.74,.78,-0.45) infinite;
@@ -134,7 +150,6 @@ export default {
   .ball:nth-child(7) {
     animation-delay: -1.2s;
   }
-
   @keyframes ballMove { 
     0% {
       transform: translateY(0);

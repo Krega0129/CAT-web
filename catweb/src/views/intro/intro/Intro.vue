@@ -104,7 +104,7 @@
 .main {
   width: 100%;
   height: 100%;
-  padding: 100px 30px;
+  padding: 10% 2%;
   background:  radial-gradient(#a1ffce,#faffd1);
   box-shadow: 1px 1px 20px rgba(0,0,0,.09);
 }
@@ -118,8 +118,8 @@
 /* 返回首页 */
 .returnBtn {
   position: fixed;
-  bottom: 140px;
-  right: 220px;
+  bottom: 15.6vh;
+  right: 15.3vw;
 }
 
 /* 左下动态图标 */

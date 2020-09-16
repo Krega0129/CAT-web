@@ -38,7 +38,9 @@
         </div>
         <!-- 书本内容 -->
         <div class="book-con">
-          <p>后台开发，通常也称服务器端开发。在实际项目开发的过程中是最重要的一环，为web网页、移动app、小程序等提供服务。主要负责与前端交互时的数据传输和处理以及数据库的设计和增删查改等。</p>
+          <p>CAT后台小组一直致力于JavaWeb开发，专注于各种前沿的Java技术学习和实践能力的结合。后台开发与前端相辅相成，无论是小程序还是网页端，都需要后台技术的支持，只有和服务器进行沟通，才能成为一个完整的产品。
+
+如果你具备基本的C语言基础、对Java编程感兴趣，出色的学习能力以及良好的团队协作精神，想学习数据库和服务器，那么CAT后台组是你的不二选择。</p>
         </div>
       </div>
     </div>
@@ -65,6 +67,9 @@ export default {
 <style scoped>
 @import url(../../../assets/css/base.css);
 /* 左边 */
+.back-end{
+  overflow: hidden;
+}
 .left {
   position: relative;
   display:flex;
@@ -107,13 +112,24 @@ export default {
 .right {
   width: 65%;
   height: 100%;
-  background: url(../../../assets/img/rightBg.jpg);
+  background: url(../../../assets/img/rightBg.jpg) no-repeat;
+  background-size: cover;
+}
+
+/* 背景 */
+.backEndBg {
+  background: red;
+  position: absolute;
+  width:100%;
+  height: 100%;
+  z-index: 20;
+  overflow: hidden;
 }
 
 /* 书本 */
 .book {
     position: absolute;
-    left: 45%;
+    left: 50%;
     top: 50%;
     width: 60vh;
     height: 70vh;
@@ -190,9 +206,17 @@ export default {
 /* 书本内容 */
 .book-con {
     position: absolute;
+    padding: 1vh 2vh;
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
+
+.book-con::-webkit-scrollbar {
+    /* 隐藏滚动条 */
+    display: none;
+}
+
 
 .book-con p {
     font-size: 3vh;
@@ -203,6 +227,8 @@ export default {
     letter-spacing: .01vh;
     line-height: 4vh;
     z-index: -1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #556983;
 }
 /* 返回首页 */
 .returnBtn {

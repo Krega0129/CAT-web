@@ -113,15 +113,15 @@ export default {
 .front-end {
     overflow: hidden;
     background: linear-gradient(to bottom right,#ffefba,#ffffff);
-    padding: 0 200px;
+    padding: 0 16vw;
 }
 
 .main {
   width: 100%;
   height: 100%;
   background:  #ffcf5d;
-  border-bottom:130px solid #fff;
-  padding:80px 40px 0px;
+  border-bottom:17.3vh solid #fff;
+  padding:10.6vh 3vw 0px;
   box-shadow: 1px 1px 20px rgba(0,0,0,.09);
 }
 
@@ -129,7 +129,6 @@ export default {
   width:100%;
   height: 100%;
   background:#fff;
-  /* padding:50px 30px; */
   overflow: auto;
 }
 
@@ -142,14 +141,14 @@ export default {
 header {
   position:relative;
   width:100%;
-  height:90%;
+  height:90vh;
   background:url(../../../assets/img/front-end-bg.jpg) no-repeat center;
   background-size:cover;
   box-shadow:1px 1px 20px rgba(0,0,0,.01)
 }
 
 header .header-mask {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   background:rgba(255,255,255,0.7);
@@ -157,38 +156,47 @@ header .header-mask {
 }
 
 header .header-mask .header-con {
+  height: 55vh;
   background: rgba(0,0,0,0.3);
 }
 
-header .header-mask .header-con .typewrite p { 
-  overflow: hidden;
-  margin: auto;
-  white-space: nowrap;
-  text-align: center;
-  letter-spacing:1px;
-  font-size: 16px;
-  animation: typewrite 4s steps(44) 1s normal both;
+header .header-mask .header-con .header-title {
+  padding-top: .5vh;
 }
 
-/* 打印机动画 */
-@keyframes typewrite {
-  from {
-    width:0;
-    border-right:2px solid #eee;
-  }
-  to {
-    width:100%;
-    border-right:none
-  }
+header .header-mask .header-con .header-title h1 {
+  position:relative;
+  letter-spacing:20vh;
+  font-size: 20vh;
+  text-align:center;
+}
+
+header .header-mask .header-con .header-title h1::before {
+  content: '前端';
+  position: absolute;
+  top:0;
+  left:0;
+  bottom: 0;
+  /* right: 0; */
+  width: 0%;
+  color: black;
+  /* text-align: center; */
+  padding-left: 40vh;
+  overflow: hidden;
+  transition: 1s ease-in;
+}
+
+header .header-mask .header-con .header-title h1:hover::before {
+  width: 100%;
 }
 
 /* 右上角图标 */
 .center .title-sign {
   position: absolute;
-  left: 70%;
-  top: 25%;
-  width: 50px;
-  height: 50px;
+  right: 10%;
+  top: 15%;
+  width: 10vh;
+  height: 10vh;
   border-radius: 50%;
 }
 
@@ -211,12 +219,40 @@ header .header-mask .header-con .typewrite p {
   z-index: 50;
 }
 
-.center h1{
+header .header-mask .header-con .typewrite p { 
+  overflow: hidden;
+  margin: auto;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing:1px;
+  font-size: 2.1vh;
+  overflow-x: auto;
+  animation: typewrite 4s steps(44) 1s normal both;
+}
+
+.typewrite p::-webkit-scrollbar {
+    /* 隐藏滚动条 */
+    display: none;
+}
+
+/* 打印机动画 */
+@keyframes typewrite {
+  from {
+    width:0;
+    border-right:2px solid #eee;
+  }
+  to {
+    width:100%;
+    border-right:none
+  }
+}
+
+/* .center h1{
   position:relative;
   letter-spacing:1em;
   font-size:8em;
   text-align:center;
-}
+} */
 
 /* w3c标准 */
 .section-categroy {
@@ -253,10 +289,8 @@ header .header-mask .header-con .typewrite p {
   width: 20vh;
   height: 20vh;
   border-radius: 10%;
-  /* background: #ffcf5d; */
   box-shadow: 0 10px 10px 0px rgb(110, 110, 10,.3);
   margin-top:90px;
-  /* box-shadow: ; */
   cursor: pointer;
   animation: jumping 2s infinite cubic-bezier(0.280, 0.840, 0.420, 1);
 }
@@ -274,15 +308,11 @@ height: 100%;
   position: absolute;
   left:20%;
   top:150px;
-  /* box-shadow: 0 10px 10px 0px rgba(110,110,10,.3);
-  box-shadow: 0 10px 10px 0px rgba(110,110,10,.2); */
-  /* animation: jumping 2s infinite cubic-bezier(0.280, 0.840, 0.420, 1); */
 }
 .category .html{
   position: absolute;
   right:20%;
   top:150px;
-  /* animation: jumping .8s infinite alternate; */
 }
 
 /* 文字背景晃动 */
@@ -324,6 +354,7 @@ height: 100%;
   margin-top: 100px;
   background:#ebf4fd;
   overflow: hidden;
+  color: #666666;
 }
 
 .section-prospect .pro-title {
@@ -343,9 +374,11 @@ height: 100%;
   /* width: 100%;
   height: 100%; */
   background: rgba(255,255,255,0.7);
+  font-size:3.3vh;
 }
 .section-prospect .pro-con {
-  padding:50px 30px;
+  width: 80%;
+  padding:5.66vh 2vw;
   line-height: 50px;
 }
 .section-prospect .pro-con .pro-bg {
@@ -356,6 +389,7 @@ height: 100%;
   height: 250px;
   border-radius: 45%;
   border: 2px solid #ffcf5d;
+  /* z-index: -1; */
 }
 .section-prospect .pro-con .pro-bg span:nth-child(1) {
   position: absolute;
@@ -381,7 +415,7 @@ height: 100%;
   margin-top: 20px;
 }
 .section-prospect .pro-con .pro-data .data-info {
-  width: 100px;
+  min-width: 100px;
   height: 80px;
   border-right: 2px solid #fff;
   padding-right: 50px;
@@ -390,9 +424,11 @@ height: 100%;
   transform: skewX(-20deg);
   box-sizing:content-box
 }
+
 .section-prospect .pro-con .pro-data .data-info:nth-child(3) {
   border-right: none;
 }
+
 .section-prospect .pro-con .pro-data .data-info span {
   display: block;
   /* 保证文字不倾斜 */
@@ -463,9 +499,9 @@ footer .text-roll span:nth-child(6){
 /* 左下动态图标 */
 .sign{
   position: fixed;
-  bottom: 18px;
-  width: 100px;
-  height: 100px;
+  bottom: 5vh;
+  width: 16vh;
+  height: 16vh;
   border-radius: 50%;
   border: 2px solid #9aa15a;
   overflow: hidden;
@@ -478,7 +514,7 @@ footer .text-roll span:nth-child(6){
 /* 返回首页 */
 .returnBtn {
   position: fixed;
-  bottom: 100px;
-  right: 270px;
+  bottom: 11.3vh;
+  right: 19.4vw;
 }
 </style>

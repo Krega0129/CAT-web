@@ -25,6 +25,7 @@ export default {
     line-height: 8vh;
     animation:float 3s ease-in-out infinite
   }
+
   .returnBtn::after{
     content:'.';
     position: absolute;
@@ -39,7 +40,6 @@ export default {
     font-weight: 700;
     text-shadow: 5px 5px #83af9b;
   }
-
   @keyframes float {
     0% {
       transform: translateY(0px);
