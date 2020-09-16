@@ -12,17 +12,17 @@ export default {
 <style>
   .returnBtn {
     position: relative;  
-    width: 100px;
-    height: 35px;
+    width: 20vh;
+    height: 8vh;
     border-radius: 10px;
     background: #ffd15f;
-    box-shadow: 5px 5px #83af9b;
-    font-size: 15px;
+    box-shadow: .1vh .1vh #83af9b;
+    font-size: 3vh;
     font-weight: bold;
     /* text-transform: uppercase; */
     color: #774f38;
     text-align: center;
-    line-height: 35px;
+    line-height: 8vh;
     animation:float 3s ease-in-out infinite
   }
   .returnBtn::after{
@@ -39,7 +39,6 @@ export default {
     font-weight: 700;
     text-shadow: 5px 5px #83af9b;
   }
-  
 
   @keyframes float {
     0% {

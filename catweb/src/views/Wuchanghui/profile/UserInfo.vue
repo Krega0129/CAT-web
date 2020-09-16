@@ -58,7 +58,7 @@
     name: 'UserInfo',
     data() {
       return {
-        isSign: '',
+        isSign: false,
         userName: '',
         stuNum: '',
         collage: '',
@@ -77,7 +77,6 @@
     created() {
       /* 获取用户信息 */
       getUserInfo().then(res => {
-        console.log(res);
       if(res.data) {
         this.isSign = true;
       } else {

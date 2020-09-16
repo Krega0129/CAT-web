@@ -2,7 +2,6 @@
   <div class="front-end full pos-ab">
     <div class="main">
       <div class="center">
-        
         <header>
           <div class="header-mask">
             <div class="header-con">
@@ -251,8 +250,8 @@ header .header-mask .header-con .typewrite p {
 }
 
 .category div{
-  width: 100px;
-  height: 100px;
+  width: 20vh;
+  height: 20vh;
   border-radius: 10%;
   /* background: #ffcf5d; */
   box-shadow: 0 10px 10px 0px rgb(110, 110, 10,.3);
@@ -269,7 +268,6 @@ height: 100%;
 
 .category .js {
   margin: auto;
-  /* animation: jumping .8s infinite alternate; */
 }
 
 .category .css{

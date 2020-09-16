@@ -135,7 +135,7 @@ export default {
     animation-delay: -1.2s;
   }
 
-  @keyframes ballMove {
+  @keyframes ballMove { 
     0% {
       transform: translateY(0);
     }

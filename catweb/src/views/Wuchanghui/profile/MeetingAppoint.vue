@@ -69,7 +69,7 @@
     name: 'MeetingAppoint',
     data() {
       return {
-        isSign: '',
+        isSign: false,
         /* 是否已预约 */
         isAppoint: false,
         /* 预约阶段 */
@@ -174,28 +174,30 @@
     created() {
       seeAppointTime({}).then(res => {
         /* 最新阶段 */
-        let LastedStage = res.data.length - 1;
-        this.appointOption = res.data[LastedStage].stage;
-
-        /* 判断能否预约 */
-        checkPro().then(result => {
-          if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
-            if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
-              this.canAppoint = false;
-            } else {
-              this.canAppoint = true
-            }
-          } 
-        })
+        if(res.data) {
+          let LastedStage = res.data.length - 1;
+          this.appointOption = res.data[LastedStage].stage;
         
-        /* 接收淘汰 */
-        this.$bus.$on('out', () => {
-          this.canAppoint = false;
-        })
-        
-        /* 获取可选日期 */
-        for(let st in res.data[LastedStage].dateNumbers) {
-          this.selectApointTime.push(st);
+          /* 判断能否预约 */
+          checkPro().then(result => {
+            if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
+              if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
+                this.canAppoint = false;
+              } else {
+                this.canAppoint = true
+              }
+            } 
+          })
+          
+          /* 接收淘汰 */
+          this.$bus.$on('out', () => {
+            this.canAppoint = false;
+          })
+          
+          /* 获取可选日期 */
+          for(let st in res.data[LastedStage].dateNumbers) {
+            this.selectApointTime.push(st);
+          }
         }
 
         /* 获取预约过的时间 */
@@ -208,14 +210,14 @@
               this.appointDate = res.data
             }
           })
-      })
 
-      if(res.data && res.data[0]) {
-        this.isSign = true;
-      } else {
-        this.isSign = false
-        throw ''
-      }
+        if(res.data) {
+          this.isSign = true;
+        } else {
+          this.isSign = false
+          return 
+        }
+      })
     }
   }
 </script>

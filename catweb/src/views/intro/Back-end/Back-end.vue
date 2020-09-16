@@ -122,12 +122,12 @@ export default {
     /* 该属性不会继承 */
     transform-style: preserve-3d;
     transition: 1s;
-    box-shadow: 0 20px 150px rgba(0, 0, 0, .4), inset 200px 0 50px rgba(0, 0, 0, .4);
+    box-shadow: 0 .2vh 12vh rgba(0, 0, 0, .4), inset 40vh 0 10vh rgba(0, 0, 0, .4);
 }
 
 .book:hover {
     transform: translateY(-50%) perspective(2000px) rotate(-5deg);
-    box-shadow: 0 10px 100px rgba(0, 0, 0, .4), inset 20px 0 50px rgba(0, 0, 0, .4)
+    box-shadow: 0 .1vh 10vh rgba(0, 0, 0, .4), inset .2vh 0 .5vh rgba(0, 0, 0, .4)
 }
 
 /* 制造书本的厚度 */
@@ -195,19 +195,20 @@ export default {
 }
 
 .book-con p {
+    font-size: 3vh;
     position: absolute;
-    padding: 20px 30px;
+    padding: 6vh 8px;
     box-sizing: border-box;
     text-indent: 2em;
-    letter-spacing: 2px;
-    line-height: 28px;
+    letter-spacing: .01vh;
+    line-height: 4vh;
     z-index: -1;
 }
 /* 返回首页 */
 .returnBtn {
   position: fixed;
-  bottom: 100px;
-  right: 270px;
+  bottom: 10vh;
+  right: 5vw;
 }
 </style>
 
