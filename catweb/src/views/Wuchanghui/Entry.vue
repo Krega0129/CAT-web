@@ -14,7 +14,7 @@
     <div class="loader pos-ab" ref="loader">
       <em style="width: 1%" ref="em"></em>
     </div>
-    <router-link to="/home" style="z-index: 10" class="pos-ab">跳过动画</router-link>
+    <div @click="pass" style="z-index: 10" class="pos-ab">跳过动画</div>
   </div>
 </template>
 
@@ -26,6 +26,9 @@
     data() {
       return {
         // isShow: false,
+        t: null,
+        timer: null,
+        tim: null,
         rList: ['8.5vh','25.5vh','42.6vh','59.6vh','76.7vh']
       }
     },
@@ -33,7 +36,12 @@
       CircleScale,
     },
     methods: {
-
+      async pass() {
+        await clearInterval(this.timer);
+        await clearTimeout(this.tim);
+        await clearTimeout(this.t);
+        this.$router.replace('/home')
+      }
     },
     computed: {
       
@@ -42,16 +50,16 @@
       // 页面高度与窗口高度相同
       document.getElementsByTagName("body")[0].style.height  = window.innerHeight + "px"
 
-      setTimeout(() => {
+      this.t = setTimeout(() => {
         this.$refs.entry.style.opacity = 0
       },5800)
-      setTimeout(() => {
+      this.tim = setTimeout(() => {
         // this.isShow = true
-        clearInterval(timer);
+        clearInterval(this.timer);
         this.$router.push('/home');
       },6000)
 
-      const timer = setInterval(() => {
+      this.timer = setInterval(() => {
         let w =  parseInt(this.$refs.em.style.width);
         this.$refs.em.style.width = (w + 1) + '%'
       }, 53);
