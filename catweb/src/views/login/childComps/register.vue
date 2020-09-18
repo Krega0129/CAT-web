@@ -202,8 +202,8 @@ export default {
       btnNoDisabled: true,
       sendTime: 60,
       sendMessage: "发送",
-      haveExistAccount: false,
-      haveExistPhone: false,
+      haveExistAccount: true,
+      haveExistPhone: true,
       preCode:null
     };
   },

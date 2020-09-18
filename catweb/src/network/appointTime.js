@@ -2,7 +2,7 @@ import axios from './axios.js'
 
 export function seeAppointTime(data) {
     return axios({
-        method: 'get',
+        method: 'post',
         url: '/cat_registration_war_exploded/appointTime/selectTime',
         data: data,
         headers: {

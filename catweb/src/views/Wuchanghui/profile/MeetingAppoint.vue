@@ -12,7 +12,7 @@
     <div v-else-if="!canAppoint" class="appointfai t-al-cent pos-re full">
       <h2 class="title">当前阶段不可预约</h2>
     </div>
-    <div v-else class="appointSuc pos-re full t-al-cent">
+    <div v-else-if="canAppoint" class="appointSuc pos-re full t-al-cent">
       <h2 class="title">预约面试：{{appointOption}}</h2>
       <div class="date">
         <select class="chooseDate" name="" id="" @change="timeChange($event.target.value)">
@@ -69,7 +69,7 @@
     name: 'MeetingAppoint',
     data() {
       return {
-        isSign: false,
+        isSign: '',
         /* 是否已预约 */
         isAppoint: false,
         /* 预约阶段 */
@@ -77,7 +77,7 @@
         /* 用户预约的时间 */
         appointDate: '',
         /* 预约人数 */
-        peoNum: null,
+        peoNum: 0,
         /* 最多可预约人数 */
         peoMaxNum: 5,
         /* 用户可选时间 */
@@ -108,13 +108,7 @@
             type: 'error'
           })
           return;
-        }else if(this.appointDate == '') {
-          this.appointDate = this.selDate
-          /* 判断之前有没有预约 */
-          if(!this.isAppoint) {
-            this.isAppoint = true
-          }
-        } else {
+        }else if(this.appointDate) {
           this.$message({
             message: '你已经预约过面试',
             type: 'error'
@@ -128,12 +122,28 @@
           isObey: document.getElementById('isObey').checked ? '0' : '1'
         })
           .then(res => {
-            console.log(res);
-            this.$message({
-              message: '预约成功',
-              type: 'success'
-            })
-            this.timeChange(this.appointDate)
+            if(res.code === 1503) {
+              this.$message({
+                message: '当前预约时间已过',
+                type: 'error'
+              })
+            } else {
+              this.$message({
+                message: '预约成功',
+                type: 'success'
+              })
+              /* 更新表格 */
+              if(this.appointDate == '') {
+                this.appointDate = this.selDate
+                /* 显示人数 */
+                this.timeChange(this.appointDate)
+                /* 判断之前有没有预约 */
+                if(!this.isAppoint) {
+                  this.isAppoint = true
+                }
+              }
+              
+            }
           })
       },
       cancelAppoint() {
@@ -141,19 +151,23 @@
         cancelAppointTime({
           stage: this.appointOption
         }).then(res => {
-            seeAppointTime({}).then(res => {
+            seeAppointTime({
+              stage: this.appointOption
+            }).then(result => {
               /* 最新阶段 */
-              let LastedStage = res.data.length - 1;
-              if(res.data[LastedStage].dateNumbers[this.appointDate] != null) {
-                this.peoNum = res.data[LastedStage].dateNumbers[this.appointDate]
+              let LastedStage = result.data.length - 1;
+              if(result.data[LastedStage].dateNumbers[this.appointDate] != null) {
+                this.peoNum = result.data[LastedStage].dateNumbers[this.appointDate]
               }
               
-              this.$message({
-                message: '取消预约成功',
-                type: 'success'
-              })
-              this.appointDate = ''
-              this.isAppoint = false;
+              if(res.code === 1206) {
+                this.$message({
+                  message: '取消预约成功',
+                  type: 'success'
+                })
+                this.appointDate = ''
+                this.isAppoint = false;
+              }
             })
           })
       },
@@ -162,61 +176,61 @@
         this.isShowPeoNum = true
 
         /* 获取当前选中的时间的人数 */
-        seeAppointTime({}).then(res => {
+        seeAppointTime({
+          stage: this.appointOption
+        }).then(res => {
+          console.log(this.selDate);
+          console.log(res);
           /* 最新阶段 */
-          let LastedStage = res.data.length - 1;
-          if(res.data[LastedStage].dateNumbers[this.selDate] != null) {
-            this.peoNum = res.data[LastedStage].dateNumbers[this.selDate]
+          if(res.data[0].dateNumbers[this.selDate] != null) {
+            this.peoNum = res.data[0].dateNumbers[this.selDate]
           }
         })
       }
     },
     created() {
-      seeAppointTime({}).then(res => {
-        /* 最新阶段 */
-        if(res.data) {
-          let LastedStage = res.data.length - 1;
-          this.appointOption = res.data[LastedStage].stage;
-        
-          /* 判断能否预约 */
-          checkPro().then(result => {
-            if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
-              if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
-                this.canAppoint = false;
-              } else {
-                this.canAppoint = true
-              }
-            } 
-          })
-          
-          /* 接收淘汰 */
-          this.$bus.$on('out', () => {
+      /* 判断 是否报名 + 能否预约 */
+      checkPro().then(result => {
+        if(result && result.data && result.data[0]) {
+          this.isSign = true;
+        } else {
+          this.isSign = false;
+          return ;
+        }
+        let LastedStage = result.data.length - 1;
+        this.appointOption = result.data[LastedStage].stage;
+        if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
+          if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
             this.canAppoint = false;
-          })
-          
-          /* 获取可选日期 */
-          for(let st in res.data[LastedStage].dateNumbers) {
-            this.selectApointTime.push(st);
+          } else {
+            this.canAppoint = true
           }
         }
 
+        seeAppointTime({
+          stage: this.appointOption
+        }).then(res => {
+          if(res.data) {
+            for(let st in res.data[0].dateNumbers) {
+              this.selectApointTime.push(st);
+            }
+          }
         /* 获取预约过的时间 */
         hadAppointTime({
           stage: this.appointOption
         })
-          .then(res => {
-            if(res.data) {
+          .then(result => {
+            if(result.data) {
               this.isAppoint = true;
-              this.appointDate = res.data
+              this.appointDate = result.data
             }
           })
+        })
+      })
 
-        if(res.data) {
-          this.isSign = true;
-        } else {
-          this.isSign = false
-          return 
-        }
+      /* 接收淘汰 */
+      this.$bus.$on('out', () => {
+        this.canAppoint = false;
       })
     }
   }

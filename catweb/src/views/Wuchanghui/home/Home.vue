@@ -1,5 +1,5 @@
 <template>
-  <div class="home full pos-ab">
+  <div class="home pos-ab">
     <snowBG></snowBG>
     <div class="astron pos-ab"></div>
     <!-- 工作室logo -->
@@ -175,6 +175,8 @@
   @import url(../../../assets/css/base.css);
 
   .home {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     background-size: cover;
     color: white;
@@ -477,4 +479,61 @@
   .home .rBtn {
     right: 10vw;
   }
+
+  /* @media screen and (max-width: 1100px), (max-height: 500px){
+    .home {
+      min-width: 1100px;
+      height: 500px;
+      overflow: visible;
+    }
+
+    .home .banner .pic {
+      border-radius: 50%;
+      overflow: hidden;
+      top: 100px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .home img {
+      margin-top: -60px;
+      box-sizing: content-box;
+      z-index: 2;
+      width: 60px;
+      height: 60px;
+      animation: imgMove 3s infinite linear;
+      transition: .5s;
+      cursor: pointer;
+      border: 60px solid transparent;
+    }
+
+    .home .logo {
+      box-sizing: border-box;
+      transition: .5s;
+      transform-origin: center;
+      width: 470px;
+      height: 470px;
+      border-radius: 50%;
+      border: 23px solid lightblue;
+      overflow: hidden;
+      left: 50%;
+      top: 50%;
+      margin-top: -295px;
+      margin-left: -235px;
+      background: url(../../../assets/images/logo.png);
+      background-size: 100% 100%;
+    }
+
+    .home .logoBox {
+      width: 352px;
+      height: 352px;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      background: rgba(255,255,255,.5);
+      margin-top: -176px;
+      margin-left: -176px;
+      box-shadow: 2px 0 2px rgb(164, 241, 237);
+    }
+  } */
 </style>

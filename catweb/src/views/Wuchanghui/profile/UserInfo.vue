@@ -9,7 +9,7 @@
         <router-link to="/app" class="dp-bk full">我要报名</router-link>
       </div>
     </div>
-    <div v-else class="UserInfoSuc pos-re full">
+    <div v-else-if="isSign === true" class="UserInfoSuc pos-re full">
       <h2 class="title t-al-cent">个人信息</h2>
       <form action="">
         <table>
@@ -58,7 +58,7 @@
     name: 'UserInfo',
     data() {
       return {
-        isSign: false,
+        isSign: '',
         userName: '',
         stuNum: '',
         collage: '',
@@ -79,6 +79,7 @@
       getUserInfo().then(res => {
       if(res.data) {
         this.isSign = true;
+        this.$bus.$emit('signed');
       } else {
         this.isSign = false
         return ;
