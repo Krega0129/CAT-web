@@ -115,13 +115,15 @@
           })
           return;
         }
-
+        this.appointDate = this.selDate;
         /* 预约时间 */
         appointTime({
           date: this.appointDate,
           isObey: document.getElementById('isObey').checked ? '0' : '1'
         })
           .then(res => {
+            console.log(this.appointDate);
+            console.log(res);
             if(res.code === 1503) {
               this.$message({
                 message: '当前预约时间已过',
@@ -133,8 +135,7 @@
                 type: 'success'
               })
               /* 更新表格 */
-              if(this.appointDate == '') {
-                this.appointDate = this.selDate
+              if(this.appointDate) {
                 /* 显示人数 */
                 this.timeChange(this.appointDate)
                 /* 判断之前有没有预约 */
@@ -155,9 +156,8 @@
               stage: this.appointOption
             }).then(result => {
               /* 最新阶段 */
-              let LastedStage = result.data.length - 1;
-              if(result.data[LastedStage].dateNumbers[this.appointDate] != null) {
-                this.peoNum = result.data[LastedStage].dateNumbers[this.appointDate]
+              if(result.data[0].dateNumbers[this.appointDate] != null) {
+                this.peoNum = result.data[0].dateNumbers[this.appointDate]
               }
               
               if(res.code === 1206) {
