@@ -101,20 +101,6 @@
           return;
         }
 
-        /* 能否在 appointList 中找到该场面试 */
-        if(this.peoNum >= this.peoMaxNum) {
-          this.$message({
-            message: '此场人数已饱和，请选择其他场次预约！',
-            type: 'error'
-          })
-          return;
-        }else if(this.appointDate) {
-          this.$message({
-            message: '你已经预约过面试',
-            type: 'error'
-          })
-          return;
-        }
         this.appointDate = this.selDate;
         /* 预约时间 */
         appointTime({
@@ -122,13 +108,26 @@
           isObey: document.getElementById('isObey').checked ? '0' : '1'
         })
           .then(res => {
-            console.log(this.appointDate);
             console.log(res);
             if(res.code === 1503) {
               this.$message({
                 message: '当前预约时间已过',
                 type: 'error'
               })
+            } else if(res.code === 1508) {
+              this.$message({
+                message: '此场人数已饱和，请选择其他场次预约！',
+                type: 'error'
+              })
+              this.timeChange(this.appointDate);
+              return;
+            } else if(res.code === 1502) {
+              /* 能否在 appointList 中找到该场面试 */
+                this.$message({
+                  message: '你已经预约过面试',
+                  type: 'error'
+                })
+                return;
             } else {
               this.$message({
                 message: '预约成功',
