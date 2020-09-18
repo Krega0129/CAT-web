@@ -20,7 +20,13 @@
       <div class="addList">
         <span>新增预约时间</span>
         <div class="addShow" v-for="(item,index) in newSet" :key="index">
-          <el-date-picker v-model="item.date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">></el-date-picker>
+          <el-date-picker
+            v-model="item.date"
+            type="date"
+            placeholder="选择日期"
+            format="yyyy 年 MM 月 dd 日"
+            value-format="yyyy-MM-dd"
+          >></el-date-picker>
           <el-select v-model="item.stage" placeholder="请选择">
             <el-option v-for="sta in stages" :key="sta.value" :label="sta.label" :value="sta.value"></el-option>
           </el-select>
@@ -104,10 +110,13 @@ export default {
           });
       }
     },
-    deleteTableData(data){
-      for(let i = 0;i<this.tableData.length;i++){
-        if(this.tableData[i].date == data.date&&this.tableData[i].stage == data.stage){
-          this.tableData.splice(i,1)
+    deleteTableData(data) {
+      for (let i = 0; i < this.tableData.length; i++) {
+        if (
+          this.tableData[i].date == data.date &&
+          this.tableData[i].stage == data.stage
+        ) {
+          this.tableData.splice(i, 1);
         }
       }
     },
@@ -119,13 +128,22 @@ export default {
         type: "warning",
       })
         .then(() => {
-          this.deleteTableData(data)
-          deleteTime(data);
-        })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
+          deleteTime(data).then((res) => {
+            if (res.code == 1507) {
+              this.$notify.error({
+                title: "警告",
+                message: "当前时间段已被预约，不可删除",
+                duration: 2500,
+                position: "bottom-right",
+              });
+              return new Promise(()=>{})
+            } else if (res.code == 1207) {
+              this.deleteTableData(data);
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+              });
+            }
           });
         })
         .catch(() => {
