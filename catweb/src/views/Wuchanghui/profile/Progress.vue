@@ -11,7 +11,7 @@
     </div>
     <div v-else-if="isSign" class="proSuc t-al-cent pos-re full">
       <h2 class="title">考核进度</h2>
-      <div style="height: 60vh; width: 50vw" class="proBar pos-ab">
+      <div style="height: 60vh; width: 30vw" class="proBar pos-ab">
         <el-steps direction="vertical" :active="activeNum" finish-status="success">
           <el-step title="报名成功，准备笔试" ></el-step>
           <el-step class="step" :title="proTitle[0]" :description="msg[0]" :status="proStatus[0]"></el-step>
@@ -69,7 +69,7 @@
           } else {
             this.msg[index + 1] = res.data[index + 1].content
           }
-        } else if (index === 2 || index === 3) {
+        } else if ((index === 2 || index === 3) && res.data[index + 1]) {
             this.msg[index + 1] = res.data[index + 1].content
         } else if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 0){
           if(index === 0 || index === 1) {
@@ -98,7 +98,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   @import url(../../../assets/css/base.css);
 
   .progress .image {
@@ -132,14 +132,22 @@
     padding-top: 5vh;
   }
 
-  /deep/ .el-step__title {
-    font-size: 3vh;
+  .el-step {
+    ::v-deep {
+      .el-step__title {
+        font-size: 3vh;
+      }
+      .el-step__description {
+          &.is-process {
+            width: 23vw;
+            word-break: break-all;
+          }
+        padding-top: 1vh;
+        font-size: 2vh;
+      }
+    }
   }
 
-  /deep/ .el-step__description {
-    padding-top: 2vh;
-    font-size: 2vh;
-  }
 
   .proSuc .proBar {
     top: 12vh;
