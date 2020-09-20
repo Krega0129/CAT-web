@@ -75,7 +75,7 @@
         if(res.data) {
           this.userName = res.data.name
           if(res.data.head) {
-            this.userImgURL = 'http://175.24.113.119:8080/cat_registration_war_exploded/' + res.data.head
+            this.userImgURL = 'http://175.24.113.119:8080/' + res.data.head
           }
         }
       })

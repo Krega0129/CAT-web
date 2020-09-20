@@ -58,7 +58,6 @@
           this.msg[index] = '';
         /* 淘汰 */
         } else if (res.data[index] && res.data[index].adoptChecked === 2) {
-          this.$bus.$emit('out');
           this.proStatus[index] = "error"
           this.proTitle[index] = failMessage
           this.msg[index] = '';
@@ -70,8 +69,12 @@
           } else {
             this.msg[index + 1] = res.data[index + 1].content
           }
+        } else if (index === 2 || index === 3) {
+            this.msg[index + 1] = res.data[index + 1].content
         } else if (res.data[index] && res.data[index].adoptChecked === 1 && res.data[index + 1] && res.data[index + 1].adoptChecked === 0 && res.data[index + 1].signChecked === 0){
-          this.msg[index + 1] = '未预约'
+          if(index === 0 || index === 1) {
+            this.msg[index + 1] = '未预约'
+          }
         }
       }
     },
@@ -125,8 +128,17 @@
   }
 
   .proSuc .title {
-    padding-top: 5vh;
     font-size: 4vh;
+    padding-top: 5vh;
+  }
+
+  /deep/ .el-step__title {
+    font-size: 3vh;
+  }
+
+  /deep/ .el-step__description {
+    padding-top: 2vh;
+    font-size: 2vh;
   }
 
   .proSuc .proBar {

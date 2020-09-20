@@ -87,7 +87,7 @@
         /* 是否展示报名人数 */
         isShowPeoNum: false,
         /* 当前阶段是否能预约 */
-        canAppoint: false
+        canAppoint: ''
       }
     },
     methods: {
@@ -199,7 +199,7 @@
         let LastedStage = result.data.length - 1;
         this.appointOption = result.data[LastedStage].stage;
         if((this.appointOption === '第一轮面试' || this.appointOption === '第二轮面试')) {
-          if(result.data[LastedStage + 1] && result.data[LastedStage + 1].adoptChecked === 2) {
+          if(result.data[LastedStage] && result.data[LastedStage].adoptChecked === 2) {
             this.canAppoint = false;
           } else {
             this.canAppoint = true
@@ -227,10 +227,6 @@
         })
       })
 
-      /* 接收淘汰 */
-      this.$bus.$on('out', () => {
-        this.canAppoint = false;
-      })
     }
   }
 </script>

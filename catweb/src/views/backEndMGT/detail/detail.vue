@@ -82,7 +82,7 @@ export default {
   computed:{
     defaultHead(){
       if(this.stuData.head){
-        return this.stuData.head
+        return 'http://175.24.113.119:8080/' + this.stuData.head
       }else{
         return require("../../../assets/images/userImg.jpg")
       }
